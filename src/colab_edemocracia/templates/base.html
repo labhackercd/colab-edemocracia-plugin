@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load compress %}
+{% load static from staticfiles %}
+
+{% block html %}
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+			<title>
+				{%block title %}
+					{% block pagetitle %}E-Democracia{% endblock pagetitle %} 
+				{% endblock title %}
+			</title>
+
+			<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+				
+			{# Styles #}
+			
+			<link rel="stylesheet" href="{% static 'bower_components/fontastic-labhacker/styles.css' %}" />
+			
+			{% compress css %}
+				<link rel="stylesheet" href="{% static 'scss/app.scss' %}" type="text/x-scss" />
+			{% endcompress %}
+			
+		</head>
+
+		<body>
+			
+			{# Messages #}
+			
+
+			{# Main Content #}
+
+			{# Scripts #}
+			
+			{% block foot_js %}
+				<script type="text/javascript" src="{% static 'bower_components/jquery/jquery.min.js' %}"></script>
+			{% endblock foot_js %}
+
+			{% block extra_js %}
+				
+			{% endblock extra_js %}
+		</body>
+	</html>
+{% endblock html %}

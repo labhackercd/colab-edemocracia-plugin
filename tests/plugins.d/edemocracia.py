@@ -17,14 +17,16 @@ settings_variables = {
         'djangobower.finders.BowerFinder',
         'compressor.finders.CompressorFinder',
     ],
-    'BOWER_COMPONENTS_ROOT': '/colab-plugins/edemocracia/src/colab_edemocracia/static',
+    'BOWER_COMPONENTS_ROOT': '/vagrant_data/colab-edemocracia-plugin/src/colab_edemocracia/static',
     'BOWER_INSTALLED_APPS': (
         'foundation-sites',
+        'https://github.com/labhackercd/fontastic-labhacker.git',
     ),
     'COMPRESS_PRECOMPILERS': (
         ('text/x-scss', 'django_libsass.SassCompiler'),
     ),
-    'COMPRESS_ROOT': '/colab-plugins/edemocracia/src/colab_edemocracia/static',
-    'COLAB_TEMPLATES': ("/colab-plugins/edemocracia/src/colab_edemocracia/templates",),
-    'COLAB_STATICS': ['/colab-plugins/edemocracia/src/colab_edemocracia/static']
+    'LIBSASS_SOURCEMAPS': 'DEBUG',
+    'COMPRESS_ROOT': '/vagrant_data/colab-edemocracia-plugin/src/colab_edemocracia/static',
+    'COLAB_TEMPLATES': ("/vagrant_data/colab-edemocracia-plugin/src/colab_edemocracia/templates",),
+    'COLAB_STATICS': ['/vagrant_data/colab-edemocracia-plugin/src/colab_edemocracia/static']
 }
