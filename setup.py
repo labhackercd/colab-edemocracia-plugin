@@ -5,7 +5,12 @@ Colab Edemocracia Colab plugin
 """
 from setuptools import setup, find_packages
 
-install_requires = ['colab']
+install_requires = [
+    'colab',
+    'django-bower',
+    'django-compressor==1.6',
+    'django-libsass'
+]
 
 tests_require = ['mock']
 
