@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<section class="section section--login">
+  <div class="row align-middle">
+    <div class="columns small-12 medium-12 large-7">
+      <div class="section__info">
+        <img class="section__logo section__logo--icon" src="{% static 'img/edem-logo.png' %}">
+        <img class="section__logo section__logo--text" src="{% static 'img/edem-logo-text.png' %}">
+        <p class="section__text">
+          O portal e-Democracia é uma iniciativa da Câmara dos Deputados, que visa aproximar a sociedade e os seus representantes, através da interação digital.
+        </p>
+      </div>
+    </div>
+    
+    <div class="columns small-12 medium-12 large-5">
+      <div class="login-box">
+        <div class="login-box__options">
+          <span class="login-box__option login-box__option--login">Login</span> | 
+          <span class="login-box__option login-box__signup">Cadastre-se</span>
+        </div>
+      
+        <div class="login-box__form-wrapper">
+          <form class="login-box__form" method="post" action="#">
+      
+            <p class="login-box__input-wrapper input-group">
+              <i class="login-box__icon icon icon-user input-group-label"></i>
+              <input class="input input-group-field" type="text" name="login" placeholder="Nome de usuário" required/>
+            </p>
+      
+            <p class="login-box__input-wrapper input-group">
+              <i class="login-box__icon icon icon-lock input-group-label"></i>
+              <input class="input input-group-field" type="password" name="password" placeholder="Senha" required/>
+            </p>
+      
+            <button class="button expanded button--expanded">Login</button>                
+            </div>
+          </form>
+
+          <button class="button expanded button--social button--facebook"> 
+            <span class="button--social__icon"><i class="icon icon-facebook"></i></span><span class="button--social__label">Login com Facebook</span>
+          </button>
+          <button class="button expanded button--social button--google-plus">
+            <span class="button--social__icon"><i class="icon icon-google-plus"></i></span><span class="button--social__label">Login com Google+</span>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
