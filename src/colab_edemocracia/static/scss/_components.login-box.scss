@@ -1,0 +1,29 @@
+.login-box {
+  padding: 10%;
+  background-color: #245d49;
+  color: white;
+
+  &__options {
+    border-top: solid 0.5rem $secondary-color;
+    margin-bottom: 1rem;
+  }
+
+  &__option {
+    &--login {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #a9de8c;
+    }
+  }
+
+  &__icon {
+    background-color: $primary-color;
+    color: white;
+    border: 0;
+    line-height: 1rem;
+  }
+
+  &__form {
+    margin-bottom: 2rem;
+  }
+}
