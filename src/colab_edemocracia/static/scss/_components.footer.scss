@@ -1,0 +1,32 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 4rem;
+  padding-top: 4rem;
+  background-color: #213d4d;
+  color: white;
+
+  &__logos {
+    display: flex;
+    flex: 0 1 35rem;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-right: 4rem;
+  }
+
+  &__logo-wrapper {
+    margin: 0.5rem 0rem;
+    margin-right: 1rem;
+  }
+
+  &__logo.image {
+    height: 3rem;
+  }
+
+  &__about {
+    flex: 1 1 50rem;
+    margin: 2rem 1rem;
+  }
+}
