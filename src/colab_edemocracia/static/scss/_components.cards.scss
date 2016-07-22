@@ -1,0 +1,147 @@
+.card-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  list-style: none;
+  margin: 0;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+.card-stats {
+  flex-grow: 1;
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  padding: 0 0.2rem;
+  border-right: 1px solid lightgray;
+
+  &:last-child {
+    border: none;
+  }
+
+  &__name {
+    margin-bottom: 0.3rem;
+  }
+
+  &__value {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+}
+
+.info-card {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 18rem;
+  min-height: 20rem;
+  margin: 0.5rem;
+  padding: 1.5rem;
+
+  @include material-shadow(1);
+
+  &:hover {
+    @include material-shadow(3);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+
+    &--seguranca {
+      background-color: $seguranca;
+    }
+
+    &--direitos-humanos {
+      background-color: $direitos-humanos;
+    }
+
+    &--educacao {
+      background-color: $educacao;
+    }
+
+    &--esportes {
+      background-color: $esportes;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  &__title {
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: auto;
+  }
+}
+
+.info-card--wikilegis {
+  background: white;
+
+  & .info-card__header {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid black;
+    max-height: 5rem;
+  }
+
+  & .info-card__icon {
+    flex: 0 0 3.6rem;
+    height: 3.5rem;
+    border: 0.3rem solid #00d574;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+  }
+
+  & .info-card__title {
+    max-height: 4rem;
+  }
+
+  & .card-stats__value {
+    color: #00d574;
+  }
+}
+
+.info-card--discourse {
+  background-color: white;
+
+  & .info-card__header {
+    justify-content: flex-end;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    color: white;
+  }
+
+  & .info-card__icon {
+    margin-right: 0.8rem;
+    font-size: 1.5rem;
+  }
+
+  & .info-card__title {
+    font-size: 0.9rem;
+  }
+
+  & .info-card__text {
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  & .card-stats__value {
+    color: #1b9894;
+  }
+}
