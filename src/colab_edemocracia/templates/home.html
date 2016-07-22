@@ -1,47 +1,240 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block title %}E-Democracia{% endblock %}
 
-{% block main_content %}
-  <div class="row">
-    {% for widget in widgets_dashboard %}
+{% block main %}
 
-    {% endfor %}
-  </div>
+	{% include "login.html" %}
 
-  <section class="login-section row">
-    <div class="description-block">
-      <img class="image logo -loginsection" src="">
-      <p class="text"></p>
-    </div>
-    <div class="login-box">
-      <div class="item-list">
-        <span class="login">Login</span>
-        <span class="signup">Cadastre-se</span>
-      </div>
-      <div class="login-form">
-        <div class="login">
-          <h1>Login</h1>
+	<section class="section section--wikilegis">
+		<div class="row expanded">
+			<div class="section__info section__block columns small-12 large-3">
+			  <img class="section__logo" src="{% static 'img/logo-wikilegis.svg' %}">
+			  <p class="section__text">
+			    Edite e aprimore projetos de lei artigo por artigo.
+			  </p>
+			</div>
 
-          <form class="form" method="post" action="#">
+			<div class="section__block columns small-12 large-9">
+				<div class="section__content">
+					<h1 class="section__title">Projetos de Lei</h1>
+					<div class="container container--card-list">
+						<ul class="card-list">
+							<li class="info-card info-card--wikilegis">
+								<div class="info-card__header">
+									<div class="info-card__icon"><i class="icon icon-documento"></i></div>
+									<h2 class="info-card__title">Autoriza Home-Office no Serviço Público</h2>
+								</div>
+								<p class="info-card__text">
+									Altera o Estatuto dos Servidores Públicos Civis da União (Lei 8.112/1990), para permitir a utilização do sistema de escritório remoto ("home-office") no serviço público.
+								</p>
+								<div class="info-card__footer">
+									<div class="card-stats">
+										<div class="card-stats__name">Propostas</div>
+										<div class="card-stats__value">12</div>
+									</div>
+								
+									<div class="card-stats">
+										<div class="card-stats__name">Em:</div>
+										<div class="card-stats__value">21/06/2016</div>
+									</div>
+								</div>
+							</li>
+						
+							
+						
+							<li class="info-card info-card--wikilegis">
+								<div class="info-card__header">
+									<div class="info-card__icon"><i class="icon icon-documento"></i></div>
+									<h2 class="info-card__title">Isenção</h2>
+								</div>
+								<p class="info-card__text">
+									Isenção do Imposto sobre Operações de Crédito, Câmbio e Seguro ou relativas a Títulos ou Valores
+								</p>
+								<div class="info-card__footer">
+									<div class="card-stats">
+										<div class="card-stats__name">Propostas</div>
+										<div class="card-stats__value">154</div>
+									</div>
+								
+									<div class="card-stats">
+										<div class="card-stats__name">Em:</div>
+										<div class="card-stats__value">25/02/2016</div>
+									</div>
+								</div>
+							</li>
+						
+							<li class="info-card info-card--wikilegis">
+								<div class="info-card__header">
+									<div class="info-card__icon"><i class="icon icon-documento"></i></div>
+									<h2 class="info-card__title">Isenção</h2>
+								</div>
+								<p class="info-card__text">
+									Isenção do Imposto sobre Operações de Crédito, Câmbio e Seguro ou relativas a Títulos ou Valores
+								</p>
+								<div class="info-card__footer">
+									<div class="card-stats">
+										<div class="card-stats__name">Propostas</div>
+										<div class="card-stats__value">154</div>
+									</div>
+								
+									<div class="card-stats">
+										<div class="card-stats__name">Em:</div>
+										<div class="card-stats__value">25/02/2016</div>
+									</div>
+								</div>
+							</li>
+						
+							<li class="info-card info-card--wikilegis">
+								<div class="info-card__header">
+									<div class="info-card__icon"><i class="icon icon-documento"></i></div>
+									<h2 class="info-card__title">Isenção</h2>
+								</div>
+								<p class="info-card__text">
+									Isenção do Imposto sobre Operações de Crédito, Câmbio e Seguro ou relativas a Títulos ou Valores
+								</p>
+								<div class="info-card__footer">
+									<div class="card-stats">
+										<div class="card-stats__name">Propostas</div>
+										<div class="card-stats__value">154</div>
+									</div>
+								
+									<div class="card-stats">
+										<div class="card-stats__name">Em:</div>
+										<div class="card-stats__value">25/02/2016</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-            <p class="field">
-              <input type="text" name="login" placeholder="Username" required/>
-              <i class="fa fa-user"></i>
-            </p>
+	<section class="section section--discourse">
+		<div class="row expanded">
+			<div class="section__info section__block columns small-12 large-3">
+			  <img class="section__logo" src="{% static 'img/logo-discussao.png' %}">
+			  <p class="section__text">
+			    Dê sua opinião sobre os assuntos que afetam a sua vida, discutindo soluções com outros cidadãos e os deputados.
+			  </p>
+			</div>
 
-            <p class="field">
-              <input type="password" name="password" placeholder="Password" required/>
-              <i class="fa fa-lock"></i>
-            </p>
+			<div class="section__block columns small-12 large-9">
+				<div class="section__content">
+					<h1 class="section__title">Discussões</h1>
+					<div class="container container--card-list">
+						<ul class="card-list">
+							<li class="info-card info-card--discourse">
+								<div class="info-card__header info-card__header--seguranca">
+									<div class="info-card__icon"><i class="icon icon-seguranca"></i></div>
+									<h2 class="info-card__title">Segurança</h2>
+								</div>
+								<p class="info-card__text">
+									Exemplo de Título de discurso 2 título meio grandinho pra dar três ou quatro linhas
+								</p>
+								<div class="info-card__footer">
+									<div class="card-stats">
+										<div class="card-stats__name">Respostas</div>
+										<div class="card-stats__value">15</div>
+									</div>
+						
+									<div class="card-stats">
+										<div class="card-stats__name">Visualizações</div>
+										<div class="card-stats__value">15</div>
+									</div>
+								
+									<div class="card-stats">
+										<div class="card-stats__name">Atividade</div>
+										<div class="card-stats__value">Jan/2016</div>
+									</div>
+								</div>
+							</li>
+						
+							<li class="info-card info-card--discourse">
+								<div class="info-card__header info-card__header--direitos-humanos">
+									<div class="info-card__icon"><i class="icon icon-direitos-humanos"></i></div>
+									<h2 class="info-card__title">Direitos Humanos</h2>
+								</div>
+								<p class="info-card__text">
+									Exemplo de título de discurso
+								</p>
+								<div class="info-card__footer">
+									<div class="card-stats">
+										<div class="card-stats__name">Respostas</div>
+										<div class="card-stats__value">15</div>
+									</div>
+						
+									<div class="card-stats">
+										<div class="card-stats__name">Visualizações</div>
+										<div class="card-stats__value">15</div>
+									</div>
+								
+									<div class="card-stats">
+										<div class="card-stats__name">Atividade</div>
+										<div class="card-stats__value">Jan/2016</div>
+									</div>
+								</div>
+							</li>
+						
+							<li class="info-card info-card--discourse">
+								<div class="info-card__header info-card__header--educacao">
+									<div class="info-card__icon"><i class="icon icon-educacao"></i></div>
+									<h2 class="info-card__title">Educação</h2>
+								</div>
+								<p class="info-card__text">
+									Exemplo de Título de discurso 2 título meio grandinho pra dar três ou quatro linhas
+								</p>
+								<div class="info-card__footer">
+									<div class="card-stats">
+										<div class="card-stats__name">Respostas</div>
+										<div class="card-stats__value">15</div>
+									</div>
+						
+									<div class="card-stats">
+										<div class="card-stats__name">Visualizações</div>
+										<div class="card-stats__value">15</div>
+									</div>
+								
+									<div class="card-stats">
+										<div class="card-stats__name">Atividade</div>
+										<div class="card-stats__value">Jan/2016</div>
+									</div>
+								</div>
+							</li>
+						
+							<li class="info-card info-card--discourse">
+								<div class="info-card__header info-card__header--esportes">
+									<div class="info-card__icon"><i class="icon icon-esportes"></i></div>
+									<h2 class="info-card__title">Esporte</h2>
+								</div>
+								<p class="info-card__text">
+									Exemplo de Título de discurso 2 título meio grandinho pra dar três ou quatro linhas
+								</p>
+								<div class="info-card__footer">
+									<div class="card-stats">
+										<div class="card-stats__name">Respostas</div>
+										<div class="card-stats__value">15</div>
+									</div>
+						
+									<div class="card-stats">
+										<div class="card-stats__name">Visualizações</div>
+										<div class="card-stats__value">15</div>
+									</div>
+								
+									<div class="card-stats">
+										<div class="card-stats__name">Atividade</div>
+										<div class="card-stats__value">Jan/2016</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-            <p class="submit"><input type="submit" name="sent" value="Login"></p>
-          </form>
-        </div>
-      </div>
-  </section>
-
-{% endblock main_content %}
-
-
-
+{% endblock main %}
