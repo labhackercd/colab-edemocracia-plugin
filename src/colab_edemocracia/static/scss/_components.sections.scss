@@ -1,0 +1,107 @@
+.section {
+  &__block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  &__content {
+    width: 100%;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  &__logo {
+    max-width: 100%;
+    width: 15rem;
+    margin-bottom: 1rem;
+  }
+
+  &__text {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  &__title {
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1rem solid;
+    width: 100%;
+    max-width: 30rem;
+  }
+}
+
+.section--login {
+  background: linear-gradient(45deg, #0d2625 0%, #134836 100%);
+  padding: 4rem 0;
+
+  .section__info {
+    display: block;
+    text-align: center;
+  }
+
+  .section__logo {
+    padding: 0 1rem 2rem;
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+    max-width: 100%;
+
+    &--icon {
+      height: 10rem;
+    }
+
+    &--text {
+      height: 8rem;
+    }
+  }
+
+  .section__text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #a9de8c;
+    text-align: left;
+  }
+}
+
+.section--wikilegis {
+  background: url(../img/wikilegis-bg.png) center center fixed;
+  background-size: cover;
+
+  & .section__text {
+    color: white;
+  }
+
+  & .section__title {
+    color: white;
+    border-color:#00d574;
+  }
+}
+
+.section--discourse {
+  background-color: #e5e5e5;
+
+  & .section__info {
+    background-color: white;
+  }
+
+  & .section__title {
+    color: #2c383a;
+    border-color:#4e9b95;
+  }
+}
