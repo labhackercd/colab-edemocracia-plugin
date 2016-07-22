@@ -24,9 +24,10 @@
 		<body>
 			
 			{# Navigation #}
-			{% block navigation %}
-				
-			{% endblock navigation %}
+			
+			<nav class="navigation">
+				{% include "navigation.html" %}
+			</nav>
 			
 			{# Feedback Messages #}
 			{% block messages %}
@@ -34,22 +35,20 @@
 			{% endblock messages %}
 
 			{# Main Content #}
-			<section class="main-container">
-				{% block main_content %}
+			<section class="main">
+				{% block main %}
 
-				{% endblock main_content %}
+				{% endblock main %}
 			</section>
 
 			{# Footer #}
-			<div class="footer-container">
-				{% block footer %}
-						
-				{% endblock footer %}
-			</div>
+			<footer class="footer">
+				{% include "footer.html" %}
+			</footer>
 
 			{# Scripts #}
 			{% block foot_js %}
-				<script type="text/javascript" src="{% static 'bower_components/jquery/jquery.min.js' %}"></script>
+				<script type="text/javascript" src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
 				<script type="text/javascript" src="{% static 'js/svg-support.js' %}"></script>
 			{% endblock foot_js %}
 
