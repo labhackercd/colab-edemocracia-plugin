@@ -1,9 +1,13 @@
 
 from django.conf.urls import patterns, url
+from django.contrib.auth import views as auth_views
 
-from .views import ColabEdemocraciaProxyView
+from . import views
 
-urlpatterns = patterns('',
-    url(r'^(?P<path>.*)$', ColabEdemocraciaProxyView.as_view(),
-        name='colab_edemocracia'),
+urlpatterns = patterns(
+    '',
+    url(r'^home/?$', auth_views.login,
+        {'template_name': 'home.html', 'extra_context': views.get_home_data(),
+         'redirect_field_name': 'previous_path'},
+        name="home"),
 )
