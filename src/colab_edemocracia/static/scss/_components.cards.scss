@@ -40,12 +40,6 @@
   margin: 0.5rem;
   padding: 1.5rem;
 
-  @include material-shadow(1);
-
-  &:hover {
-    @include material-shadow(3);
-  }
-
   &__header {
     display: flex;
     align-items: center;
