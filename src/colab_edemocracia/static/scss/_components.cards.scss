@@ -40,6 +40,8 @@
   margin: 0.5rem;
   padding: 1.5rem;
 
+  @include material-shadow(1);
+
   &__header {
     display: flex;
     align-items: center;
