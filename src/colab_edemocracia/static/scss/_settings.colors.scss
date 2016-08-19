@@ -1,3 +1,10 @@
+// These are set over at _settings.foundation! No need to mess them here.
+  $primary: map-get($foundation-palette, primary);
+  $secondary: map-get($foundation-palette, secondary);
+  $success: map-get($foundation-palette, success);
+  $warning: map-get($foundation-palette, warning);
+  $alert: map-get($foundation-palette, alert);
+
 $facebook-color: #3b5998;
 $google-color: #dc4e41;
 
