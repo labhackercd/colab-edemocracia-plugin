@@ -6,7 +6,7 @@ verbose_name = 'Colab eDemocracia Plugin'
 
 urls = {
     'include': 'colab_edemocracia.urls',
-    'prefix': '^edem/',
+    'prefix': '',
     'namespace': 'colab_edemocracia',
 }
 
