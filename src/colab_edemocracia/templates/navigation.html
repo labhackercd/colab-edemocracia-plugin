@@ -1,0 +1,53 @@
+{% load staticfiles %}
+
+<div class="logo logo--navigation">
+  <div class="logo__icon--edemocracia">
+    <img class="logo__image" src="{% static 'img/edem-logo.png' %}">
+  </div>
+  <div class="logo__name--edemocracia">
+    <img class="logo__image" src="{% static 'img/edem-logo-text-title.png' %}">
+  </div>
+</div>
+
+<form class="search-form search-form--navigation">
+  <input class="search-form__input" type="text" placeholder="Pesquisar"><span class="search-form__icon"><i class="icon icon-search"></i></span>
+</form>
+
+<ul class="menu-list menu-list--dropdown menu-list--apps">
+  <div class="apps">
+  </div>
+  <div class="menu-list--dropdown__wrapper">
+    <li class="menu-list__item">
+      <div class="logo logo--menu-list">
+        <div class="logo__icon--discourse">
+          <img class="logo__image" src="{% static 'img/logo-discussao.png' %}">
+        </div>
+      </div>
+      <span>Discussões</span>
+    </li>
+    <li class="menu-list__item">
+      <div class="logo logo--menu-list">
+        <div class="logo__icon--wikilegis">
+          <img class="logo__image" src="{% static 'img/logo-wikilegis-icon.svg' %}">
+        </div>
+      </div>
+      <span>Wikilegis</span>
+    </li>
+  </div>
+</ul>
+
+<ul class="menu-list menu-list--dropdown menu-list--user-profile">
+  <div class="user-profile">
+    <div class="user-profile__image">
+      <i class="icon icon-user"></i>
+    </div>
+  </div>
+  <div class="menu-list--dropdown__wrapper">
+    <li class="menu-list__item">
+      <span class="menu-list__text">Meu Perfil</span><i class="icon icon-user"></i>
+    </li>
+    <li class="menu-list__item">
+      <span class="menu-list__text">Encerrar Sessão</span><i class="icon icon-sign-out"></i>
+    </li>
+  </div>
+</ul>
