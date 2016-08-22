@@ -88,8 +88,11 @@
   }
 
   & .section__title {
-    color: white;
     border-color:#00d574;
+  }
+
+  & .section__link {
+    color: white;
   }
 }
 
@@ -101,7 +104,10 @@
   }
 
   & .section__title {
-    color: #2c383a;
     border-color:#4e9b95;
+  }
+
+  & .section__link {
+    color: #2c383a;
   }
 }
