@@ -18,20 +18,24 @@
   </div>
   <div class="menu-list--dropdown__wrapper">
     <li class="menu-list__item">
-      <div class="logo logo--menu-list">
-        <div class="logo__icon--discourse">
-          <img class="logo__image" src="{% static 'img/logo-discussao.png' %}">
+      <a class="menu-list__link" href="/discourse">
+        <div class="logo logo--menu-list">
+          <div class="logo__icon--discourse">
+            <img class="logo__image" src="{% static 'img/logo-discussao.png' %}">
+          </div>
         </div>
-      </div>
-      <span>Discussões</span>
+        <span class="menu-list__text">Discussões</span>
+      </a>
     </li>
     <li class="menu-list__item">
-      <div class="logo logo--menu-list">
-        <div class="logo__icon--wikilegis">
-          <img class="logo__image" src="{% static 'img/logo-wikilegis-icon.svg' %}">
+      <a class="menu-list__link" href="/wikilegis">
+        <div class="logo logo--menu-list">
+          <div class="logo__icon--wikilegis">
+            <img class="logo__image" src="{% static 'img/logo-wikilegis-icon.svg' %}">
+          </div>
         </div>
-      </div>
-      <span>Wikilegis</span>
+        <span class="menu-list__text">Wikilegis</span>
+      </a>
     </li>
   </div>
 </ul>

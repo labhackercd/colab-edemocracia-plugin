@@ -77,8 +77,6 @@ i {
       width: 100%;
     }
   }
-
-  
   
   .search-form__input {
     background: transparent;
@@ -164,6 +162,14 @@ i {
 
 }
 
+.menu-list__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0.75rem;
+}
+
 .menu-list--dropdown {
   display: flex;
   align-items: center;
@@ -173,9 +179,12 @@ i {
   cursor: pointer;
 
   .menu-list__item {
-    padding: 0.75rem;
     display: flex;
   }
+}
+
+.menu-list__text {
+  color: white;
 }
 
 .menu-list--dropdown__wrapper {
