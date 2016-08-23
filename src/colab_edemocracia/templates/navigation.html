@@ -40,22 +40,39 @@
   </div>
 </ul>
 
-<ul class="menu-list menu-list--dropdown menu-list--user-profile">
-  <div class="user-profile">
-    <div class="user-profile__image">
-      <i class="icon icon-user"></i>
+
+{% if user.is_authenticated %}
+
+  <ul class="menu-list menu-list--dropdown menu-list--user-profile">
+    <div class="user-profile">
+      <div class="user-profile__image">
+        <i class="icon icon-user"></i>
+      </div>
     </div>
-  </div>
-  <div class="menu-list--dropdown__wrapper">
-    <li class="menu-list__item">
+    <div class="menu-list--dropdown__wrapper">
+      <li class="menu-list__item">
+        <a class="menu-list__link" href="#">
+          <span class="menu-list__text">Meu Perfil</span><i class="icon icon-user"></i>
+        </a>
+      </li>
+      <li class="menu-list__item">
+        <a class="menu-list__link" href="/account/logout">
+          <span class="menu-list__text">Encerrar Sessão</span><i class="icon icon-sign-out"></i>
+        </a>
+      </li>
+    </div>
+  </ul>
+
+{% else %}
+
+  <ul class="menu-list menu-list--login">
+    
+    <li class="menu-list__item">   
       <a class="menu-list__link" href="#">
-        <span class="menu-list__text">Meu Perfil</span><i class="icon icon-user"></i>
+        <i class="menu-list__icon icon icon-sign-in"></i>
       </a>
     </li>
-    <li class="menu-list__item">
-      <a class="menu-list__link" href="/account/logout">
-        <span class="menu-list__text">Encerrar Sessão</span><i class="icon icon-sign-out"></i>
-      </a>
-    </li>
-  </div>
-</ul>
+  </ul>
+
+{% endif %}
+

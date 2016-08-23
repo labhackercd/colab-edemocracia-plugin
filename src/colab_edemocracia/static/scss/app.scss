@@ -146,6 +146,16 @@ i {
   align-self: stretch;
   list-style: none;
   margin: 0;
+  @include transition-default(background-color);
+
+  &:hover, &.toggled {
+    background-color: darken(#134836,5%);
+  }
+}
+
+.menu-list__icon {
+  font-size: 1.4rem;
+  color: white;
 }
 
 .menu-list__item {
@@ -166,10 +176,16 @@ i {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
   padding: 0.75rem;
   color: white;
+
   &:hover {
     color: white;
+  }
+
+  & .menu-list__text {
+    margin-right: 1rem;
   }
 }
 
@@ -181,8 +197,8 @@ i {
   position: relative;
   cursor: pointer;
 
-  .menu-list__item {
-    display: flex;
+  .menu-list__link {
+    justify-content: center;
   }
 }
 
@@ -218,20 +234,11 @@ i {
 
 .menu-list--user-profile {
 
-  & .menu-list__text {
-    margin-right: 1rem;
-  }
 
-  & .menu-list__link {
-    justify-content: space-between;
-    width: 100%;
-  }
 
   &:hover .user-profile, &.toggled .user-profile {
     background-color: #e9c23a;
   }
-
-
 }
 
 .user-profile {
@@ -267,11 +274,13 @@ i {
 
   .menu-list__link {
     flex-wrap: wrap;
+    justify-content: center;
   }
-}
 
-.menu-list--apps .menu-list__item {
-  flex-wrap: wrap;
+  .menu-list__text {
+    margin: 0;
+  }
+
 }
 
 .apps {
