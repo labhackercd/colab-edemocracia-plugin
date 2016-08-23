@@ -20,7 +20,7 @@
 
         <div class="login-box__forms">
           <div class="login-box__form-wrapper login-box__form-wrapper--login active">
-          
+
             <form class="login-box__form" method="post" role="form" action="{% url 'colab_edemocracia:home' %}" data-abide novalidate>
               {% csrf_token %}
               {% if previous_path %}
@@ -29,11 +29,11 @@
 
               <label class="login-box__input-wrapper input-group">
                 <i class="login-box__icon icon icon-user input-group-label" aria-hidden="true"></i>
-                
+
                 <span class="show-for-sr">Nome de usuário</span>
                 <div class="login-box__input-container">
                   <input class="login-box__input input input-group-field" type="text" id="id_username" name="username" placeholder="Nome de usuário" required/>
-                  
+
                   <div class="login-box__error form-error">
                     <span class="login-box__error-message">ERRO</span>
                     <i class="login-box__error-icon icon icon-arrow-circle-left"></i>
@@ -47,7 +47,7 @@
                 <span class="show-for-sr">Senha</span>
                 <div class="login-box__input-container">
                   <input class="login-box__input input input-group-field" type="password" id="id_password" name="password" placeholder="Senha" required/>
-                  
+
                   <div class="login-box__error form-error">
                     <span class="login-box__error-message">ERRO</span>
                     <i class="login-box__error-icon icon icon-arrow-circle-left"></i>
@@ -58,7 +58,7 @@
 
               <button class="button expanded button--expanded">Login</button>
             </form>
-          
+
             <div class="login-box__social-login">
               <button class="button expanded button--social button--facebook">
                 <span class="button--social__icon"><i class="icon icon-facebook"></i></span><span class="button--social__label">Login com Facebook</span>
@@ -67,12 +67,12 @@
                 <span class="button--social__icon"><i class="icon icon-google-plus"></i></span><span class="button--social__label">Login com Google+</span>
               </button>
             </div>
-          
+
           </div>
-          
+
           <div class="login-box__form-wrapper login-box__form-wrapper--signup inactive">
-          
-            <form class="login-box__form" method="post" role="form" action="{% url 'colab_edemocracia:home' %}" data-abide novalidate>
+
+            <form class="login-box__form" method="post" role="form" action="{% url 'colab_edemocracia:signup' %}" data-abide novalidate>
               {% csrf_token %}
               {% if previous_path %}
                 <input type="hidden" value="{{previous_path}}" name="previous_path">
@@ -82,9 +82,9 @@
                 <i class="login-box__icon icon icon-envelope input-group-label" aria-hidden="true"></i>
                 <span class="show-for-sr">E-mail</span>
                 <div class="login-box__input-container">
-                  
+
                   <input class="login-box__input input input-group-field" type="text" id="id_email" name="email" placeholder="E-mail" required/>
-                                    
+
                   <div class="login-box__error form-error">
                     <span class="login-box__error-message">ERRO</span>
                     <i class="login-box__error-icon icon icon-arrow-circle-left"></i>
@@ -97,9 +97,9 @@
                 <i class="login-box__icon icon icon-user input-group-label" aria-hidden="true"></i>
                 <span class="show-for-sr">Nome de usuário</span>
                 <div class="login-box__input-container">
-                  
+
                   <input class="login-box__input input input-group-field" type="text" id="id_username" name="username" placeholder="Nome de usuário" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$"required/>
-                  
+
                   <div class="login-box__error form-error">
                     <span class="login-box__error-message">ERRO</span>
                     <i class="login-box__error-icon icon icon-arrow-circle-left"></i>
@@ -112,9 +112,9 @@
                 <i class="login-box__icon icon icon-lock input-group-label" aria-hidden="true"></i>
                 <span class="show-for-sr">Senha</span>
                 <div class="login-box__input-container">
-                  
+
                   <input class="login-box__input input input-group-field" type="password" id="id_password" name="password" placeholder="Senha" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required/>
-                  
+
                   <div class="login-box__error form-error">
                     <span class="login-box__error-message">ERRO</span>
                     <i class="login-box__error-icon icon icon-arrow-circle-left"></i>
@@ -124,7 +124,7 @@
               </label>
 
               <button class="button expanded button--expanded">Cadastrar-se</button>
-            </form>      
+            </form>
           </div>
         </div>
       </div>
