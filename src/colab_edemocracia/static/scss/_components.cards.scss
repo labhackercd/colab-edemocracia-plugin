@@ -34,12 +34,19 @@
 .info-card {
   display: flex;
   flex-direction: column;
-  flex: 0 0 18rem;
   min-height: 20rem;
-  margin: 0.5rem;
   padding: 1.5rem;
+  background-color: white;
 
   @include material-shadow(1);
+
+  &__link {
+    display: flex;
+    flex: 0 0 18rem;
+    min-height: 20rem;
+    margin: 0.5rem;
+  }
+
 
   &__header {
     display: flex;
@@ -177,7 +184,6 @@
 }
 
 .info-card--wikilegis {
-  background: white;
 
   & .info-card__header {
     padding-bottom: 1rem;
@@ -205,7 +211,6 @@
 }
 
 .info-card--discourse {
-  background-color: white;
 
   & .info-card__header {
     justify-content: flex-end;
