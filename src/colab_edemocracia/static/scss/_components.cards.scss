@@ -45,12 +45,52 @@
     display: flex;
     align-items: center;
 
-    &--seguranca {
-      background-color: $seguranca;
+    &--documento {
+      background-color: $documento;
+    }
+
+    &--adm-publica {
+      background-color: $adm-publica;
+    }
+
+    &--agropecuaria {
+      background-color: $agropecuaria;
+    }
+
+    &--assistencia-social {
+      background-color: $assistencia-social;
+    }
+
+    &--cidades {
+      background-color: $cidades;
+    }
+
+    &--ciencia {
+      background-color: $ciencia;
+    }
+
+    &--comunicacao {
+      background-color: $comunicacao;
+    }
+
+    &--consumidor {
+      background-color: $consumidor;
+    }
+
+    &--cultura {
+      background-color: $cultura;
+    }
+
+    &--direito-e-justica {
+      background-color: $direito-e-justica;
     }
 
     &--direitos-humanos {
       background-color: $direitos-humanos;
+    }
+
+    &--economia {
+      background-color: $economia;
     }
 
     &--educacao {
@@ -59,6 +99,58 @@
 
     &--esportes {
       background-color: $esportes;
+    }
+
+    &--familia {
+      background-color: $familia;
+    }
+
+    &--industria {
+      background-color: $industria;
+    }
+
+    &--institucional {
+      background-color: $institucional;
+    }
+
+    &--meio-ambiente {
+      background-color: $meio-ambiente;
+    }
+
+    &--participacao_e_transparencia {
+      background-color: $participacao_e_transparencia;
+    }
+
+    &--politica {
+      background-color: $politica;
+    }
+
+    &--previdencia {
+      background-color: $previdencia;
+    }
+
+    &--relacoes-exteriores {
+      background-color: $relacoes-exteriores;
+    }
+
+    &--saude {
+      background-color: $saude;
+    }
+
+    &--seguranca {
+      background-color: $seguranca;
+    }
+
+    &--trabalho {
+      background-color: $trabalho;
+    }
+
+    &--transporte-e-transito {
+      background-color: $transporte-e-transito;
+    }
+
+    &--turismo {
+      background-color: $turismo;
     }
   }
 
