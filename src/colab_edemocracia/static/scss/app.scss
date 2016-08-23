@@ -166,8 +166,11 @@ i {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   padding: 0.75rem;
+  color: white;
+  &:hover {
+    color: white;
+  }
 }
 
 .menu-list--dropdown {
@@ -215,13 +218,20 @@ i {
 
 .menu-list--user-profile {
 
+  & .menu-list__text {
+    margin-right: 1rem;
+  }
+
+  & .menu-list__link {
+    justify-content: space-between;
+    width: 100%;
+  }
+
   &:hover .user-profile, &.toggled .user-profile {
     background-color: #e9c23a;
   }
-}
 
-.menu-list--user-profile .menu-list__text {
-  margin-right: 1rem;
+
 }
 
 .user-profile {
@@ -251,6 +261,13 @@ i {
 
 .menu-list--user-profile .menu-list__item {
   justify-content: space-between;
+}
+
+.menu-list--apps {
+
+  .menu-list__link {
+    flex-wrap: wrap;
+  }
 }
 
 .menu-list--apps .menu-list__item {
