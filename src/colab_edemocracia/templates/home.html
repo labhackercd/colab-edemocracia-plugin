@@ -70,8 +70,8 @@
             <ul class="card-list">
               {% for topic in discourse_data %}
                 <a class="info-card__link" href="{{topic.get_url}}">
-                  <li class="info-card info-card--discourse">
-                    <div class="info-card__header info-card__header--{{topic.category.slug}}">
+                  <li class="info-card info-card--discourse info-card--{{topic.category.slug}}">
+                    <div class="info-card__header">
                       <div class="info-card__icon"><i class="icon icon-{{topic.category.slug}}"></i></div>
                       <h2 class="info-card__title">{{topic.category.name}}</h2>
                     </div>
