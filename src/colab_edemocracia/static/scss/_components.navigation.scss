@@ -198,7 +198,7 @@
       background-color: initial;
 
       .user-profile {
-        background-color: #e9c23a;
+        border-color: $secondary-color;
       }
     }
 
@@ -208,26 +208,17 @@
   }
 
 .user-profile {
-  display: flex;
-  align-self: center;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  background-color: darken(#134836,5%);
+  text-align: center;
   border-radius: 50%;
+  background-color: #193e31;
   width: 3rem;
   height: 3rem;
-  transition: background-color 0.25s ease-in-out;
-
-  &__image {
-    text-align: center;
-    border-radius: 50%;
-    background-color: #193e31;
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 2rem;
-    line-height: 3.8rem;
-    color: white;
-    overflow: hidden;
-  }
+  border: 0.3rem solid;
+  border-color: $primary-color;
+  font-size: 2rem;
+  line-height: 3.8rem;
+  color: white;
+  overflow: hidden;
+  background-color: lighten($primary-color,3%);
+  @include transition-default(border-color);
 }
