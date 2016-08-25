@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block main %}
+
+  <section class="section section--category-select">
+    <div class="row">
+      <div class="column">
+        <div class="section__content">
+          <div class="section__title">Selecione os assuntos de seu interesse</div>
+          <div class="section__info">
+            <p class="section__description">Selecione os temas dos assuntos que você está com vontade de saber sobre projetos de lei e discussões.</p>
+          </div>
+          <ul class="category-list">
+          {% for category in categories %}
+            <li class="category-list__item">
+              <button class="category-list__button category-list__button--{{category.slug}}" name="{{category.slug}}">
+                <div class="category-list__icon">
+                    <i class="icon icon-{{category.slug}}"></i>
+                </div>
+                <span class="category-list__text">{{category.name}}</span>
+              </button>
+            </li>
+          {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock main %}

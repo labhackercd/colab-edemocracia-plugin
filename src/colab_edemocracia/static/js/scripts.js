@@ -80,3 +80,8 @@ $('.login-box__option')
     }  
 });
 
+$('.category-list__button')
+  .click(function() {  
+    $(this).toggleClass('active');
+});  
+

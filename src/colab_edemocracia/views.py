@@ -1,7 +1,7 @@
 from django.views.generic import View
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
@@ -17,7 +17,7 @@ from django.template.response import TemplateResponse
 from .forms.accounts import SignUpForm
 from colab.accounts.models import EmailAddressValidation, EmailAddress
 from colab_wikilegis.models import WikilegisBill
-from colab_discourse.models import DiscourseTopic
+from colab_discourse.models import DiscourseTopic, DiscourseCategory
 
 
 User = get_user_model()
@@ -106,3 +106,10 @@ class SignUpView(View):
         email_addr.save()
 
         return redirect(reverse('colab_edemocracia:home'))
+
+
+class ProfileView(View):
+
+    def get(self, request):
+        categories = DiscourseCategory.objects.all()
+        return render_to_response('profile.html', {'categories': categories})
