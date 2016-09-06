@@ -6,6 +6,10 @@
     flex-direction: column;
     padding-top: 4rem;
     padding-bottom: 4rem;
+    @include breakpoint(small only) {
+      padding-bottom: 1rem;
+      padding-top: 1rem;
+    }
   }
 
   &__content {
@@ -18,8 +22,6 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
   }
 
   &__logo {
@@ -51,6 +53,12 @@
       max-width: 90%;
       height: 1rem;
     }
+  }
+
+  &__caption {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
   }
 }
 
@@ -124,6 +132,40 @@
   }
 }
 
+.section--user-profile {
+  background-color: #1c5c44;
+  color: white;
+
+  & .section__title {
+    color: #ade182;
+
+    &::before {
+      background-color: $secondary-color;
+    }
+  }
+
+  & .section__block {
+    justify-content: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  & .section__block--title {
+    padding-bottom: 0;
+  }
+
+  & .user-profile--profile-page {
+    width: 7.5rem;
+    font-size: 6rem;
+    line-height: 9.5rem;
+    height: 7.5rem;
+    border-width: 0.5rem;
+  }
+
+  .user-figure {
+    margin-bottom: 1rem;
+  }
+}
 
 .section--category-select {
   background-color: #d1d1d1;
