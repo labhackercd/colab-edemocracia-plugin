@@ -9,7 +9,8 @@ install_requires = [
     'colab',
     'django-bower',
     'django-compressor==1.6',
-    'django-libsass'
+    'django-libsass',
+    'validate_email'
 ]
 
 tests_require = ['mock']
