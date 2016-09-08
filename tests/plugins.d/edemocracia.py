@@ -20,6 +20,7 @@ settings_variables = {
     'BOWER_COMPONENTS_ROOT': '/vagrant_data/colab-edemocracia-plugin/src/colab_edemocracia/static',
     'BOWER_INSTALLED_APPS': (
         'foundation-sites',
+        'jquery-mask-plugin',
         'https://github.com/labhackercd/fontastic-labhacker.git',
     ),
     'COMPRESS_PRECOMPILERS': (

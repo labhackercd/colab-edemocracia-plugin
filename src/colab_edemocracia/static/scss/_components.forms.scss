@@ -44,12 +44,15 @@
   }
   
   &__input {
+    @include transition-default(all);
+
+    &--date {
+      display: block;
+    }
 
     &:invalid {
       color: #a9a9a9;
     }
-
-    @include transition-default(all);
 
     &:focus {
       @include transition-default(all);

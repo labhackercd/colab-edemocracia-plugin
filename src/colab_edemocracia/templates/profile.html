@@ -113,7 +113,7 @@
 
             <span class="show-for-sr">Data de nascimento</span>
             <div class="form__input-container">
-              <input class="form__input input input-group-field" type="date" id="id_username" name="username" placeholder="Data de nascimento" required/>
+              <input class="form__input form__input--date input input-group-field" type="text" id="id_username" name="username" placeholder="Data de nascimento" data-mask="00/00/0000" pattern="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((1[6-9]|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((1[6-9]|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((1[6-9]|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$" required/>
               
               {# XXX extend foundation class in css #}
               <div class="form__error form-error">
@@ -129,7 +129,7 @@
 
             <span class="show-for-sr">E-mail</span>
             <div class="form__input-container">
-              <input class="form__input input input-group-field" type="text" id="id_username" name="username" placeholder="E-mail" required/>
+              <input class="form__input input input-group-field" type="email" id="id_username" name="username" placeholder="E-mail" required/>
               
               {# XXX extend foundation class in css #}
               <div class="form__error form-error">
@@ -139,7 +139,8 @@
 
             </div>
           </label>
-
+        
+          <button class="button expanded button--expanded">Atualizar</button>
         </form>
       </div>
     </div>
