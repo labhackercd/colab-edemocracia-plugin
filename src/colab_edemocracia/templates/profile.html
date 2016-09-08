@@ -5,11 +5,151 @@
 
 {% block main %}
 
+  <section class="section section--user-profile">
+    <div class="row">
+      <div class="section__block section__block--title columns small-12">
+        <h1 class="section__title">Perfil</h1>
+      </div>
+      <div class="section__block columns small-12 medium-4">
+        <span class="section__caption">Foto de perfil</span>
+        <div class="user-figure">
+          <div class="user-profile user-profile--profile-page">
+            <i class="icon icon-user" aria-hidden="true"></i>
+          </div>
+        </div>
+        <button class="button">Carregar foto</button>
+      </div>
+      <div class="section__block columns">
+        <span class="section__caption">Meus dados</span>
+        <form class="form" method="post" role="form" action="{% url 'colab_edemocracia:home' %}" data-abide novalidate>
+          
+          
+          <label class="form__input-wrapper form__input-wrapper--small input-group">
+            <i class="form__icon icon icon-user input-group-label" aria-hidden="true"></i>
+
+            <span class="show-for-sr">Nome</span>
+            <div class="form__input-container">
+              <input class="form__input input input-group-field" type="text" id="id_username" name="username" placeholder="Nome" required/>
+              
+              {# XXX extend foundation class in css #}
+              <div class="form__error form-error">
+                <span class="form__error-message">ERRO</span>
+                <i class="form__error-icon icon icon-arrow-circle-left"></i>
+              </div>
+
+            </div>
+          </label>
+
+          <label class="form__input-wrapper form__input-wrapper--small input-group">
+            <i class="form__icon icon icon-user input-group-label" aria-hidden="true"></i>
+
+            <span class="show-for-sr">Sobrenome</span>
+            <div class="form__input-container">
+              <input class="form__input input input-group-field" type="text" id="id_username" name="username" placeholder="Sobrenome" required/>
+              
+              {# XXX extend foundation class in css #}
+              <div class="form__error form-error">
+                <span class="form__error-message">ERRO</span>
+                <i class="form__error-icon icon icon-arrow-circle-left"></i>
+              </div>
+
+            </div>
+          </label>
+
+          <label class="form__input-wrapper form__input-wrapper--small input-group">
+            <i class="form__icon icon icon-transgender input-group-label" aria-hidden="true"></i>
+            
+            <span class="show-for-sr">Sexo</span>
+            <div class="form__input-container">
+              <select class="form__input input-group-field" required>
+                <option class="form__select-option" value="" disabled selected hidden>Sexo</option>
+                <option class="form__select-option" value="feminino">Feminino</option>
+                <option class="form__select-option" value="masculino">Masculino</option>
+                <option class="form__select-option" value="outro">Outro</option>
+              </select>
+            </div>
+          </label>
+
+          <label class="form__input-wrapper form__input-wrapper--micro input-group">
+            <i class="form__icon icon icon-map-marker input-group-label" aria-hidden="true"></i>
+            
+            <span class="show-for-sr">UF</span>
+            <div class="form__input-container">
+              <select class="form__input input-group-field" required>
+                <option class="form__select-option" value="" disabled selected hidden>UF</option>
+                <option class="form__select-option" value="AC">AC</option>
+                <option class="form__select-option" value="AL">AL</option>
+                <option class="form__select-option" value="AP">AP</option>
+                <option class="form__select-option" value="AM">AM</option>
+                <option class="form__select-option" value="BA">BA</option>
+                <option class="form__select-option" value="CE">CE</option>
+                <option class="form__select-option" value="DF">DF</option>
+                <option class="form__select-option" value="ES">ES</option>
+                <option class="form__select-option" value="GO">GO</option>
+                <option class="form__select-option" value="MA">MA</option>
+                <option class="form__select-option" value="MS">MS</option>
+                <option class="form__select-option" value="MT">MT</option>
+                <option class="form__select-option" value="MG">MG</option>
+                <option class="form__select-option" value="PA">PA</option>
+                <option class="form__select-option" value="PB">PB</option>
+                <option class="form__select-option" value="PR">PR</option>
+                <option class="form__select-option" value="PE">PE</option>
+                <option class="form__select-option" value="PI">PI</option>
+                <option class="form__select-option" value="RJ">RJ</option>
+                <option class="form__select-option" value="RN">RN</option>
+                <option class="form__select-option" value="RS">RS</option>
+                <option class="form__select-option" value="RO">RO</option>
+                <option class="form__select-option" value="RR">RR</option>
+                <option class="form__select-option" value="SC">SC</option>
+                <option class="form__select-option" value="SP">SP</option>
+                <option class="form__select-option" value="SE">SE</option>
+                <option class="form__select-option" value="TO">TO</option>
+              </select>
+            </div>
+          </label>
+
+          <label class="form__input-wrapper form__input-wrapper--small input-group">
+            <i class="form__icon icon icon-calendar input-group-label" aria-hidden="true"></i>
+
+            <span class="show-for-sr">Data de nascimento</span>
+            <div class="form__input-container">
+              <input class="form__input input input-group-field" type="date" id="id_username" name="username" placeholder="Data de nascimento" required/>
+              
+              {# XXX extend foundation class in css #}
+              <div class="form__error form-error">
+                <span class="form__error-message">ERRO</span>
+                <i class="form__error-icon icon icon-arrow-circle-left"></i>
+              </div>
+
+            </div>
+          </label>
+
+          <label class="form__input-wrapper form__input-wrapper--medium input-group">
+            <i class="form__icon icon icon-envelope input-group-label" aria-hidden="true"></i>
+
+            <span class="show-for-sr">E-mail</span>
+            <div class="form__input-container">
+              <input class="form__input input input-group-field" type="text" id="id_username" name="username" placeholder="E-mail" required/>
+              
+              {# XXX extend foundation class in css #}
+              <div class="form__error form-error">
+                <span class="form__error-message">ERRO</span>
+                <i class="form__error-icon icon icon-arrow-circle-left"></i>
+              </div>
+
+            </div>
+          </label>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
   <section class="section section--category-select">
     <div class="row">
       <div class="column">
         <div class="section__content">
-          <div class="section__title">Selecione os assuntos de seu interesse</div>
+          <h1 class="section__title">Selecione os assuntos de seu interesse</h1>
           <div class="section__info">
             <p class="section__description">Selecione os temas dos assuntos que você está com vontade de saber sobre projetos de lei e discussões.</p>
           </div>
