@@ -12,7 +12,7 @@
     </div>
     <div class="columns small-12 medium-12 large-5">
       <div class="login-box">
-        {# XXX make this options choice generic with .options-box #}
+        {# XXX make this options-box generic with .choice-box #}
         <div class="login-box__options">
           <span class="login-box__yellow-bar"></span>
           <button class="login-box__option login-box__option--login active">Login</button>
@@ -27,7 +27,8 @@
               {% if previous_path %}
                 <input type="hidden" value="{{previous_path}}" name="previous_path">
               {% endif %}
-
+              
+              {# XXX make all form inputs generic with another class #}
               <label class="login-box__input-wrapper input-group">
                 <i class="login-box__icon icon icon-user input-group-label" aria-hidden="true"></i>
 
@@ -56,7 +57,7 @@
 
                 </div>
               </label>
-
+              {# XXX make our custom modifier classes inherit the styles of foundation modifier classes (like .expanded here) #}
               <button class="button expanded button--expanded">Login</button>
             </form>
 
