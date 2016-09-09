@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required
 
 from . import views
@@ -11,4 +11,5 @@ urlpatterns = patterns(
     url(r'^signup/?$', views.SignUpView.as_view(), name="signup"),
     url(r'^profile/?$', login_required(views.ProfileView.as_view()),
         name="profile"),
+    url(r'^search/', include('haystack.urls')),
 )

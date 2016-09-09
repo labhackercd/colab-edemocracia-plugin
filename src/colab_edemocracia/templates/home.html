@@ -20,7 +20,7 @@
 
       <div class="section__block columns small-12 large-9">
         <div class="section__content">
-          <h1 class="section__title"><a class="section__link" href="wikilegis" title="Veja todos os projetos">Projetos de Lei</a></h1>
+          <h1 class="section__title"><a class="section__link" href="/wikilegis" title="Veja todos os projetos">Projetos de Lei</a></h1>
           <div class="container container--card-list">
             <ul class="card-list">
             {% for bill in wikilegis_data %}
@@ -38,7 +38,7 @@
                       <div class="card-stats__name">Propostas</div>
                       <div class="card-stats__value">{{bill.get_total_proposals}}</div>
                     </div>
-                
+
                     <div class="card-stats">
                       <div class="card-stats__name">Em:</div>
                       <div class="card-stats__value">{{bill.modified|date:"d/m/Y"}}</div>
@@ -83,12 +83,12 @@
                         <div class="card-stats__name">Respostas</div>
                         <div class="card-stats__value">{{topic.posts_count}}</div>
                       </div>
-                    
+
                       <div class="card-stats">
                         <div class="card-stats__name">Visualizações</div>
                         <div class="card-stats__value">{{topic.views}}</div>
                       </div>
-                    
+
                       <div class="card-stats">
                         <div class="card-stats__name">Criado em</div>
                         <div class="card-stats__value">{{topic.last_posted_at|date:"b/Y"}}</div>

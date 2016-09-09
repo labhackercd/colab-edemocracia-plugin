@@ -167,6 +167,26 @@
   }
 }
 
+.section--search {
+  background-color: #f3f3f3;
+
+  & .section__title {
+    &::before {
+      background-color: lighten(#134836, 10%);
+    }
+    margin-left: 0;
+    color: #2c383a;
+  }
+
+  & .section__text {
+    font-weight: 300;
+  }
+}
+
+.section--search-results {
+  background-color: #fdfdfd;
+}
+
 .section--category-select {
   background-color: #d1d1d1;
   padding: 4rem 0;

@@ -13,8 +13,8 @@
   </div>
 </a>
 
-<form class="search-form search-form--navigation" title="Pesquisar">
-  <input class="search-form__input" type="text" placeholder="Pesquisar">
+<form action="{% url 'haystack_search' %}" method="GET" role="search" class="search-form search-form--navigation" title="Pesquisar">
+  <input name="q" value="{{ request.GET.q }}" class="search-form__input" type="text" placeholder="Pesquisar">
   <span class="search-form__icon">
     <span class="show-for-sr">Pesquisar</span>
     <i class="icon icon-search" aria-hidden="true"></i>
@@ -22,7 +22,7 @@
 </form>
 
 <div class="navigation-wrapper">
-  
+
   <ul class="menu-list menu-list--dropdown menu-list--apps" title="Ferramentas">
     <span class="show-for-sr">Ferramentas</span>
     <i class="menu-list__icon icon icon-th" aria-hidden="true"></i>
@@ -49,10 +49,10 @@
       </li>
     </div>
   </ul>
-  
-  
+
+
   {% if user.is_authenticated %}
-  
+
     <ul class="menu-list menu-list--dropdown menu-list--user-profile" title="Perfil de Usuário">
       <div class="user-profile">
         <i class="icon icon-user" aria-hidden="true"></i>
@@ -70,17 +70,17 @@
         </li>
       </div>
     </ul>
-  
+
   {% else %}
-  
+
     <ul class="menu-list menu-list--login">
-      <li class="menu-list__item">   
+      <li class="menu-list__item">
         <a class="menu-list__link" href="/home#login" title="Fazer login">
           <span class="show-for-sr">Fazer login</span>
           <i class="menu-list__icon icon icon-sign-in" aria-hidden="true"></i>
         </a>
       </li>
     </ul>
-  
+
   {% endif %}
 </div>
