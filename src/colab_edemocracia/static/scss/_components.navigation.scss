@@ -9,6 +9,34 @@
   width: 100%;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.23);
   z-index: 10;
+  @include breakpoint(small only) {
+    height: 3rem;
+    padding: 0;
+  }
+}
+
+.navigation-wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  @include transition-default(transform);
+  
+  @include breakpoint(small only) {
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    width: 16rem;
+    height: calc(100vh - 3rem);
+    flex-direction: column;
+    justify-content: flex-start;
+    background: linear-gradient(105deg, #0d2625 0%, #134836 100%);
+    transform: translateX(-100%);
+    box-shadow: 3px 5px 6px rgba(0, 0, 0, 0.16), 1px 4px 4px rgba(0, 0, 0, 0.23);
+
+    &.toggled {
+      transform: translateX(0);
+    }
+  }
 }
 
 .logo--navigation {
@@ -28,6 +56,14 @@
 
 .logo--menu-list .logo__image {
   height: 1.75rem;
+}
+
+.logo--menu-list {
+  @include breakpoint(small only) {
+    width: 3rem;
+    text-align: center;
+    margin-right: 0.5rem; 
+  }
 }
 
 .search-form {
@@ -100,11 +136,18 @@
 
   &:hover, &.toggled {
     background-color: darken(#134836,5%);
+
+    @include breakpoint(small only) {
+      background-color: transparent;
+    }
   }
 
   &__icon {
     font-size: 1.4rem;
     color: white;
+    @include breakpoint(small only) {
+      display: none;  
+    }
   }
 
   &__item {
@@ -117,6 +160,10 @@
 
     &:hover {
       background-color: darken(#134836,5%);
+    }
+
+    @include breakpoint(small only) {
+      width: 100%;  
     }
   }
 
@@ -151,6 +198,10 @@
 
     .menu-list__link {
       justify-content: center;
+
+      @include breakpoint(small only) {
+        justify-content: flex-start;
+      }
     }
 
     &__wrapper {
@@ -172,11 +223,28 @@
         bottom: 100%;
         right: 1.5rem;
         @include css-triangle(0.5rem, #245d49, up);
+
+        @include breakpoint(small only) {
+          display: none;
+        }
       }
 
       &.toggled {
         display: flex;
       }
+
+      @include breakpoint(small only) {
+        position: relative;
+        display: flex;
+        margin: 0;
+        width: 100%;
+        background-color: transparent;
+        box-shadow: none;
+      }
+    }
+
+    @include breakpoint(small only) {
+      width: 100%;
     }
   }
 
@@ -184,7 +252,6 @@
 
     .menu-list__link {
       flex-wrap: wrap;
-      justify-content: center;
     }
 
     .menu-list__text {

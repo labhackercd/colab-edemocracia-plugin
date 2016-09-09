@@ -1,10 +1,14 @@
 {% load staticfiles %}
 
-<a class="logo logo--navigation" href="/home">
-  <div class="logo__icon--edemocracia">
+<div class="c-hamburger c-hamburger--htx show-for-small-only">
+  <span>Menu</span>
+</div>
+
+<a class="logo logo--navigation show-for-medium" href="/home">
+  <div class="logo__icon logo__icon--edemocracia">
     <img class="logo__image" src="{% static 'img/edem-logo.png' %}">
   </div>
-  <div class="logo__name--edemocracia">
+  <div class="logo__name logo__name--edemocracia">
     <img class="logo__image" src="{% static 'img/edem-logo-text-title.png' %}">
   </div>
 </a>
@@ -17,64 +21,66 @@
   </span>
 </form>
 
-<ul class="menu-list menu-list--dropdown menu-list--apps" title="Ferramentas">
-  <span class="show-for-sr">Ferramentas</span>
-  <i class="menu-list__icon icon icon-th" aria-hidden="true"></i>
-  <div class="menu-list--dropdown__wrapper">
-    <li class="menu-list__item">
-      <a class="menu-list__link" href="/discourse">
-        <div class="logo logo--menu-list">
-          <div class="logo__icon--discourse">
-            <img class="logo__image" src="{% static 'img/logo-discussao.png' %}">
-          </div>
-        </div>
-        <span class="menu-list__text">Discussões</span>
-      </a>
-    </li>
-    <li class="menu-list__item">
-      <a class="menu-list__link" href="/wikilegis">
-        <div class="logo logo--menu-list">
-          <div class="logo__icon--wikilegis">
-            <img class="logo__image" src="{% static 'img/logo-wikilegis-icon.svg' %}">
-          </div>
-        </div>
-        <span class="menu-list__text">Wikilegis</span>
-      </a>
-    </li>
-  </div>
-</ul>
-
-
-{% if user.is_authenticated %}
-
-  <ul class="menu-list menu-list--dropdown menu-list--user-profile">
-    <div class="user-profile">
-      <i class="icon icon-user" aria-hidden="true"></i>
-    </div>
+<div class="navigation-wrapper">
+  
+  <ul class="menu-list menu-list--dropdown menu-list--apps" title="Ferramentas">
+    <span class="show-for-sr">Ferramentas</span>
+    <i class="menu-list__icon icon icon-th" aria-hidden="true"></i>
     <div class="menu-list--dropdown__wrapper">
       <li class="menu-list__item">
-        <a class="menu-list__link" href="/profile">
-          <span class="menu-list__text">Meu Perfil</span><i class="icon icon-user" aria-hidden="true"></i>
+        <a class="menu-list__link" href="/discourse" title="Opine em temas que te afetam como cidadão">
+          <div class="logo logo--menu-list">
+            <div class="logo__icon--discourse">
+              <img class="logo__image" src="{% static 'img/logo-discussao.png' %}">
+            </div>
+          </div>
+          <span class="menu-list__text">Discussões</span>
         </a>
       </li>
       <li class="menu-list__item">
-        <a class="menu-list__link" href="/account/logout">
-          <span class="menu-list__text">Encerrar Sessão</span><i class="icon icon-sign-out" aria-hidden="true"></i>
+        <a class="menu-list__link" href="/wikilegis" title="Participe em Projetos de Lei">
+          <div class="logo logo--menu-list">
+            <div class="logo__icon--wikilegis">
+              <img class="logo__image" src="{% static 'img/logo-wikilegis-icon.svg' %}">
+            </div>
+          </div>
+          <span class="menu-list__text">Wikilegis</span>
         </a>
       </li>
     </div>
   </ul>
-
-{% else %}
-
-  <ul class="menu-list menu-list--login">
-    <li class="menu-list__item">   
-      <a class="menu-list__link" href="/home#login" title="Fazer login">
-        <span class="show-for-sr">Fazer login</span>
-        <i class="menu-list__icon icon icon-sign-in" aria-hidden="true"></i>
-      </a>
-    </li>
-  </ul>
-
-{% endif %}
-
+  
+  
+  {% if user.is_authenticated %}
+  
+    <ul class="menu-list menu-list--dropdown menu-list--user-profile" title="Perfil de Usuário">
+      <div class="user-profile">
+        <i class="icon icon-user" aria-hidden="true"></i>
+      </div>
+      <div class="menu-list--dropdown__wrapper">
+        <li class="menu-list__item">
+          <a class="menu-list__link" href="/profile">
+            <span class="menu-list__text">Meu Perfil</span><i class="icon icon-user" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="menu-list__item">
+          <a class="menu-list__link" href="/account/logout">
+            <span class="menu-list__text">Encerrar Sessão</span><i class="icon icon-sign-out" aria-hidden="true"></i>
+          </a>
+        </li>
+      </div>
+    </ul>
+  
+  {% else %}
+  
+    <ul class="menu-list menu-list--login">
+      <li class="menu-list__item">   
+        <a class="menu-list__link" href="/home#login" title="Fazer login">
+          <span class="show-for-sr">Fazer login</span>
+          <i class="menu-list__icon icon icon-sign-in" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+  
+  {% endif %}
+</div>

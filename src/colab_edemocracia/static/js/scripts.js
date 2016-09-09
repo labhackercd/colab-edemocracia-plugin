@@ -85,3 +85,9 @@ $('.category-list__button')
     $(this).toggleClass('active');
 });  
 
+$('.c-hamburger')
+  .click(function() {  
+    $(this).toggleClass('toggled');
+    $('.navigation-wrapper').toggleClass('toggled');
+
+});  
