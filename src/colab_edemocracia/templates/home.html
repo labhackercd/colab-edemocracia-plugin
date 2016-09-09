@@ -9,6 +9,56 @@
     {% include "login.html" %}
   {% endif %}
 
+  <section class="section section--discourse">
+    <div class="row expanded">
+      <div class="section__info section__block columns small-12 large-3">
+        <a href="/discourse"><img class="section__logo" src="{% static 'img/logo-discussao.png' %}"></a>
+        <p class="section__text">
+          Dê sua opinião sobre os assuntos que afetam a sua vida, discutindo soluções com outros cidadãos e os deputados.
+        </p>
+      </div>
+
+      <div class="section__block columns small-12 large-9">
+        <div class="section__content">
+          <h1 class="section__title"><a class="section__link" href="/discourse" title="Veja todas as discussões">Discussões</a></h1>
+          <div class="container container--card-list">
+            <ul class="card-list">
+              {% for topic in discourse_data %}
+                <a class="info-card__link" href="{{topic.get_url}}">
+                  <li class="info-card info-card--discourse info-card--{{topic.category.slug}}">
+                    <div class="info-card__header">
+                      <div class="info-card__icon"><i class="icon icon-{{topic.category.slug}}"></i></div>
+                      <h2 class="info-card__title">{{topic.category.name}}</h2>
+                    </div>
+                    <p class="info-card__text">
+                      {{topic.title}}
+                    </p>
+                    <div class="info-card__footer">
+                      <div class="card-stats">
+                        <div class="card-stats__name">Respostas</div>
+                        <div class="card-stats__value">{{topic.posts_count}}</div>
+                      </div>
+                    
+                      <div class="card-stats">
+                        <div class="card-stats__name">Visualizações</div>
+                        <div class="card-stats__value">{{topic.views}}</div>
+                      </div>
+                    
+                      <div class="card-stats">
+                        <div class="card-stats__name">Criado em</div>
+                        <div class="card-stats__value">{{topic.last_posted_at|date:"b/Y"}}</div>
+                      </div>
+                    </div>
+                  </li>
+                </a>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section section--wikilegis">
     <div class="row expanded">
       <div class="section__info section__block columns small-12 large-3">
@@ -43,7 +93,7 @@
                       <div class="card-stats__name">Em:</div>
                       <div class="card-stats__value">{{bill.modified|date:"d/m/Y"}}</div>
                     </div>
-                  </div>
+                  </div>  
                 </li>
               </a>
             {% endfor %}
@@ -54,50 +104,30 @@
     </div>
   </section>
 
-  <section class="section section--discourse">
+  <section class="section section--audiencas">
     <div class="row expanded">
+
       <div class="section__info section__block columns small-12 large-3">
-        <a href="/discourse"><img class="section__logo" src="{% static 'img/logo-discussao.png' %}"></a>
+        <a href="http://edemocracia.camara.gov.br/web/eventosinterativos">
+          <img class="section__logo" src="{% static 'img/logo-audiencias-publicas.svg' %}">
+        </a>
         <p class="section__text">
-          Dê sua opinião sobre os assuntos que afetam a sua vida, discutindo soluções com outros cidadãos e os deputados.
+          Acompanhe ao vivo e participe enviando perguntas aos deputados!
         </p>
       </div>
 
       <div class="section__block columns small-12 large-9">
         <div class="section__content">
-          <h1 class="section__title"><a class="section__link" href="/discourse" title="Veja todas as discussões">Discussões</a></h1>
-          <div class="container container--card-list">
-            <ul class="card-list">
-              {% for topic in discourse_data %}
-                <a class="info-card__link" href="{{topic.get_url}}">
-                  <li class="info-card info-card--discourse info-card--{{topic.category.slug}}">
-                    <div class="info-card__header">
-                      <div class="info-card__icon"><i class="icon icon-{{topic.category.slug}}"></i></div>
-                      <h2 class="info-card__title">{{topic.category.name}}</h2>
-                    </div>
-                    <p class="info-card__text">
-                      {{topic.title}}
-                    </p>
-                    <div class="info-card__footer">
-                      <div class="card-stats">
-                        <div class="card-stats__name">Respostas</div>
-                        <div class="card-stats__value">{{topic.posts_count}}</div>
-                      </div>
-
-                      <div class="card-stats">
-                        <div class="card-stats__name">Visualizações</div>
-                        <div class="card-stats__value">{{topic.views}}</div>
-                      </div>
-
-                      <div class="card-stats">
-                        <div class="card-stats__name">Criado em</div>
-                        <div class="card-stats__value">{{topic.last_posted_at|date:"b/Y"}}</div>
-                      </div>
-                    </div>
-                  </li>
-                </a>
-              {% endfor %}
-            </ul>
+          <h1 class="section__title">
+            <a class="section__link" href="http://edemocracia.camara.gov.br/web/eventosinterativos" title="Acesse a versão anterior!">
+              Em breve uma nova versão!
+            </a>
+          </h1>
+          <div class="section__content-wrapper section__content-wrapper--center text-center">
+            <p class="section__text">
+              Mas você ainda pode acompanhar as Audiências Públicas em nossa versão anterior:
+            </p>
+            <a class="button large secondary hollow" role="button" href="http://edemocracia.camara.gov.br/web/eventosinterativos">Acessar</a>
           </div>
         </div>
       </div>

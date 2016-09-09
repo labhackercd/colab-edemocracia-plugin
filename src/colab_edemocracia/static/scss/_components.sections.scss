@@ -1,7 +1,7 @@
 .section {
   &__block {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     padding-top: 4rem;
@@ -13,7 +13,20 @@
   }
 
   &__content {
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    height: 100%
+
+  }
+
+
+  &__content-wrapper {
+    width: 100%;
+
+    &--center {
+      margin: auto;
+    }
   }
 
   &__info {
@@ -27,7 +40,7 @@
   &__logo {
     max-width: 100%;
     width: 15rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 
   &__text {
@@ -41,8 +54,8 @@
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 1rem;
-    margin-left: 0.5rem;
     padding-top: 1.5rem;
+    text-indent: -0.2rem;
     width: 100%;
     &::before {
       content: '';
@@ -132,9 +145,32 @@
   }
 }
 
+.section--audiencas{
+  background-color: $primary-color;
+
+  & .section__info {
+    background-color: #245d49;
+  }
+
+  & .section__text {
+    color: white;
+  }
+
+  & .section__title {
+    &::before {
+      background-color: $secondary-color;
+    }
+  }
+
+  & .section__link {
+    color: white;
+  }
+}
+
 .section--user-profile {
   background-color: #1c5c44;
   color: white;
+  padding: 4rem 0;
 
   & .section__title {
     color: #ade182;

@@ -1,6 +1,11 @@
 .button {
   font-weight: 600;
 
+  &--secondary {
+    background-color: $secondary-color;
+    color: $primary-color;
+  }
+
   &--facebook {
     background-color: $facebook-color;
 
