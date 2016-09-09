@@ -5,10 +5,35 @@
 
 {% block main %}
 
+  <section class="section section--category-select">
+    <div class="row">
+      <div class="column">
+        <div class="section__content">
+          <h1 class="section__title">Selecione os assuntos de seu interesse</h1>
+          <div class="section__info">
+            <p class="section__description">Selecione os temas dos assuntos que você está com vontade de saber sobre projetos de lei e discussões.</p>
+          </div>
+          <ul class="category-list">
+          {% for category in categories %}
+            <li class="category-list__item">
+              <button class="category-list__button category-list__button--{{category.slug}}" name="{{category.slug}}">
+                <div class="category-list__icon">
+                    <i class="icon icon-{{category.slug}}"></i>
+                </div>
+                <span class="category-list__text">{{category.name}}</span>
+              </button>
+            </li>
+          {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section section--user-profile">
     <div class="row">
       <div class="section__block section__block--title columns small-12">
-        <h1 class="section__title">Perfil</h1>
+        <h1 class="section__title">Meu Perfil</h1>
       </div>
       <div class="section__block columns small-12 medium-4">
         <span class="section__caption">Foto de perfil</span>
@@ -142,31 +167,6 @@
         
           <button class="button button--profile">Atualizar</button>
         </form>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--category-select">
-    <div class="row">
-      <div class="column">
-        <div class="section__content">
-          <h1 class="section__title">Selecione os assuntos de seu interesse</h1>
-          <div class="section__info">
-            <p class="section__description">Selecione os temas dos assuntos que você está com vontade de saber sobre projetos de lei e discussões.</p>
-          </div>
-          <ul class="category-list">
-          {% for category in categories %}
-            <li class="category-list__item">
-              <button class="category-list__button category-list__button--{{category.slug}}" name="{{category.slug}}">
-                <div class="category-list__icon">
-                    <i class="icon icon-{{category.slug}}"></i>
-                </div>
-                <span class="category-list__text">{{category.name}}</span>
-              </button>
-            </li>
-          {% endfor %}
-          </ul>
-        </div>
       </div>
     </div>
   </section>
