@@ -5,13 +5,16 @@ $(document).foundation();
 
 let searchWrapper = document.querySelector('.search-form'),
     searchInput = document.querySelector('.search-form__input');
+    navBar = document.querySelector('.navigation');
 
 document.addEventListener('click', (e) => {
   if (~e.target.className.indexOf('search')) {
     searchWrapper.classList.add('focused');
+    navBar.classList.add('search-on');
     searchInput.focus();
   } else {
     searchWrapper.classList.remove('focused');
+    navBar.classList.remove('search-on');
   }
 });
 
@@ -89,5 +92,4 @@ $('.c-hamburger')
   .click(function() {  
     $(this).toggleClass('toggled');
     $('.navigation-wrapper').toggleClass('toggled');
-
-});  
+});

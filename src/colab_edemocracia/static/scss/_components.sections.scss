@@ -65,6 +65,14 @@
       width: 30rem;
       max-width: 90%;
       height: 1rem;
+      @include breakpoint(small only) {
+        margin: auto;
+        right: 0;
+      }
+    }
+
+    @include breakpoint(small only) {
+      text-align: center;
     }
   }
 

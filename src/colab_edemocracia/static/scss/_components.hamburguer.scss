@@ -23,6 +23,7 @@ $button-transistion-duration: 0.25s;     // The transition duration
   margin-right: auto;
   padding: 0;
   width: $button-width;
+  flex: 0 0 $button-width;
   height: $button-height;
   font-size: 0;
   text-indent: -9999px;
