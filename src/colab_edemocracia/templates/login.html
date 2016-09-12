@@ -27,7 +27,7 @@
               {% if previous_path %}
                 <input type="hidden" value="{{previous_path}}" name="previous_path">
               {% endif %}
-              
+
               {# XXX make all form inputs generic with another class #}
               <label class="login-box__input-wrapper input-group">
                 <i class="login-box__icon icon icon-user input-group-label" aria-hidden="true"></i>
@@ -62,12 +62,12 @@
             </form>
 
             <div class="login-box__social-login">
-              <button class="button expanded button--social button--facebook">
+              <a href="{% url 'social:begin' backend='facebook' %}" class="button expanded button--social button--facebook">
                 <span class="button--social__icon"><i class="icon icon-facebook"></i></span><span class="button--social__label">Login com Facebook</span>
-              </button>
-              <button class="button expanded button--social button--google-plus">
+              </a>
+              <a href="{% url 'social:begin' backend='google' %}" class="button expanded button--social button--google-plus">
                 <span class="button--social__icon"><i class="icon icon-google-plus"></i></span><span class="button--social__label">Login com Google+</span>
-              </button>
+              </a>
             </div>
 
           </div>

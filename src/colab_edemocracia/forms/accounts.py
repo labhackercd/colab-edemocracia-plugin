@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django import forms
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
@@ -11,9 +12,8 @@ User = get_user_model()
 class SignUpForm(forms.ModelForm):
 
     error_messages = {
-        'duplicate_email': _("Email already used. Is it you? "
-                             " Please <a href='%(url)s'>login</a>"),
-        'duplicate_username': _("A user with that username already exists."),
+        'duplicate_email': _(u"Email já cadastrado."),
+        'duplicate_username': _(u"Nome de usuário já cadastrado."),
     }
 
     required = ('username', 'email', 'password')
@@ -40,9 +40,7 @@ class SignUpForm(forms.ModelForm):
         user_qs = User.objects.filter(email=email).exclude(username=username)
 
         if email and user_qs.exists():
-            msg = self.error_messages.get('duplicate_email') % {
-                'url': reverse('colab_edemocracia:home')
-            }
+            msg = self.error_messages.get('duplicate_email')
             raise forms.ValidationError(mark_safe(msg))
 
         return email

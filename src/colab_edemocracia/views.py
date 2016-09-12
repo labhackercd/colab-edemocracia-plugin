@@ -1,13 +1,14 @@
+# -*- coding: utf-8 -*-
 from django.views.generic import View
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import redirect, render_to_response, resolve_url
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.utils.http import is_safe_url
 from django.conf import settings
-from django.shortcuts import resolve_url
 from django.http import HttpResponseRedirect
 from django.contrib.auth import (REDIRECT_FIELD_NAME, login as auth_login)
 from django.contrib.auth.forms import AuthenticationForm
@@ -79,8 +80,9 @@ class SignUpView(View):
         user_form = SignUpForm(request.POST)
 
         if not user_form.is_valid():
-            return render(request, 'home.html',
-                          {'user_form': user_form, })
+            for error in user_form.errors.values():
+                messages.add_message(request, messages.ERROR, error[0])
+            return redirect(reverse('colab_edemocracia:home'))
 
         user = user_form.save(commit=False)
         user.needs_update = False
@@ -100,6 +102,11 @@ class SignUpView(View):
         email_addr, created = EmailAddress.objects.get_or_create(
             address=user.email)
         if created:
+            messages.add_message(
+                request, messages.SUCCESS,
+                u"Usuário criado com sucesso! Por favor, verifique seu email"
+                " para concluir seu cadastro."
+            )
             email_addr.real_name = user.get_full_name()
 
         email_addr.user = user
