@@ -8,7 +8,7 @@ let searchWrapper = document.querySelector('.search-form'),
     navBar = document.querySelector('.navigation');
 
 document.addEventListener('click', (e) => {
-  if (~e.target.className.indexOf('search')) {
+  if (~e.target.className.indexOf('search-form')) {
     searchWrapper.classList.add('focused');
     navBar.classList.add('search-on');
     searchInput.focus();
