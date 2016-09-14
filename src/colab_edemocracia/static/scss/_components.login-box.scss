@@ -6,7 +6,7 @@
   overflow: hidden;
   margin: auto;
   @include breakpoint(small only) {
-    padding-top: 2rem;
+    padding: 2rem;
   }
 
   &__options {
@@ -33,6 +33,9 @@
       color: #a9de8c;
       margin-top: -0.5rem;
       order: 0;
+      @include breakpoint(small only) {
+        font-size: 1.75rem;
+      }
     }
 
     &:not(.active) {
