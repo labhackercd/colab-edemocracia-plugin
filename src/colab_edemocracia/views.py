@@ -89,6 +89,7 @@ class SignUpView(View):
         user.needs_update = False
 
         user.is_active = False
+        user.set_password(user_form.cleaned_data['password'])
         user.save()
 
         email = EmailAddressValidation.create(user.email, user)
