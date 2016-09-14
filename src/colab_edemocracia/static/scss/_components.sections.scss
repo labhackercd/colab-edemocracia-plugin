@@ -159,16 +159,20 @@
 }
 
 .section--discourse {
-  background-color: #e5e5e5;
+  background-color: #dfdfdf;
 
   & .section__info {
-    background-color: white;
+    background-color: #efefef;
   }
 
   & .section__title {
     &::before {
       background-color: #4e9b95;
     }
+  }
+
+  & .section__text {
+    color: #656565;
   }
 
   & .section__link {
@@ -280,5 +284,21 @@
 
   & .section__link {
     color: #2c383a;
+  }
+}
+
+.section--change-password {
+  background-color: #f3f3f3;
+
+  & .section__title {
+    &::before {
+      background-color: $primary-color;
+    }
+    margin-left: 0;
+    color: #2c383a;
+  }
+
+  & .section__text {
+    font-weight: 300;
   }
 }
