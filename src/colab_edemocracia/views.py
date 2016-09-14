@@ -54,7 +54,8 @@ def login(request, template_name='registration/login.html',
 
     current_site = get_current_site(request)
 
-    wikilegis_data = WikilegisBill.objects.all().order_by('-modified')
+    wikilegis_data = WikilegisBill.objects.filter(status='published')
+    wikilegis_data = wikilegis_data.order_by('-modified')
     discourse_data = DiscourseTopic.objects.all().order_by('-last_posted_at')
 
     context = {
