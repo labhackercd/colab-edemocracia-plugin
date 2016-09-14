@@ -12,4 +12,8 @@ urlpatterns = patterns(
     url(r'^profile/?$', login_required(views.ProfileView.as_view()),
         name="profile"),
     url(r'^search/', include('haystack.urls')),
+    url(r'^password_change/$', 'django.contrib.auth.views.password_change',
+        name='password_change'),
+    url(r'^password_change/done/$', 'django.contrib.auth.views.password_change_done',
+        name='password_change_done'),
 )
