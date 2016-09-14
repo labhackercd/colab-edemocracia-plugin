@@ -1,24 +1,26 @@
 .footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 4rem;
-  padding-top: 4rem;
+  padding: 3rem 0;
   background-color: #213d4d;
   color: white;
+  @include breakpoint(small only) {
+    padding: 2rem 0;
+  }
+
+  &__container {
+    align-items: center;
+  }
 
   &__logos {
-    display: flex;
-    flex: 0 1 35rem;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-right: 4rem;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0.5rem 0;
   }
 
   &__logo-wrapper {
     margin: 0.5rem 0rem;
-    margin-right: 1rem;
+    margin-right: 2rem;
   }
 
   &__logo.image {
@@ -26,7 +28,10 @@
   }
 
   &__about {
-    flex: 1 1 50rem;
-    margin: 2rem 1rem;
+    margin: 0.5rem 0;
+  }
+
+  &__text {
+    margin: 0;
   }
 }
