@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.core.management.base import BaseCommand
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth import get_user_model
