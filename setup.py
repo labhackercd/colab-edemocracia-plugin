@@ -10,7 +10,8 @@ install_requires = [
     'django-bower',
     'django-compressor==1.6',
     'django-libsass',
-    'validate_email'
+    'validate_email',
+    'django-widget-tweaks==1.4.1'
 ]
 
 tests_require = ['mock']
