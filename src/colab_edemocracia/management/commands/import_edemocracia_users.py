@@ -58,7 +58,7 @@ class Command(BaseCommand):
         html = render_to_string('emails/wikilegis_new_user.html',
                                 {'user': user, 'password': password})
         email_to = [user.email, ]
-        subject = "Login no Novo Portal do e-Democracia"
+        subject = "Conheça o novo e-Democracia!"
         mail = EmailMultiAlternatives(subject=subject, to=email_to)
         mail.attach_alternative(html, 'text/html')
         mail.send()
