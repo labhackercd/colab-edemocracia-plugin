@@ -49,6 +49,9 @@ def login(request, template_name='registration/login.html',
             auth_login(request, form.get_user())
 
             return HttpResponseRedirect(redirect_to)
+        else:
+            messages.add_message(request, messages.ERROR,
+                                 u"Usuário ou senhas incorretos.")
     else:
         form = authentication_form(request)
 
