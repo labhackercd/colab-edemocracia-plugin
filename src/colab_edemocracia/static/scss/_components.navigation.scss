@@ -13,200 +13,199 @@
     height: 3rem;
     padding: 0;
   }
-}
 
-.navigation-wrapper {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  @include transition-default(transform);
-  
-  @include breakpoint(small only) {
-    position: absolute;
-    top: 3rem;
-    left: 0;
-    width: 16rem;
-    height: calc(100vh - 3rem);
-    flex-direction: column;
-    justify-content: flex-start;
-    background: linear-gradient(105deg, #0d2625 0%, #134836 100%);
-    transform: translateX(-100%);
-    box-shadow: 3px 5px 6px rgba(0, 0, 0, 0.16), 1px 4px 4px rgba(0, 0, 0, 0.23);
-
-    &.toggled {
-      transform: translateX(0);
-    }
-  }
-}
-
-.logo--navigation {
-  display: flex;
-  align-items: center;
-  margin-right: auto;
-  opacity: 1;
-  @include transition-default(opacity);
-
-  @include breakpoint(small only) {
-    .navigation.search-on & {
-      opacity: 0;
-    }
-  }
-}
-
-.logo--navigation .logo__image {
-  height: 2.5rem;
-
-  @include breakpoint(small only) {
-    height: 1.8rem;
-  }
-}
-
-.logo__name--edemocracia .logo__image {
-  height: 1.5rem;
-  margin-left: 0.8rem;
-
-  @include breakpoint(small only) {
-    height: 1.25rem;
-  }
-}
-
-.logo--menu-list .logo__image {
-  height: 1.75rem;
-}
-
-.logo--menu-list {
-  @include breakpoint(small only) {
-    width: 3rem;
-    text-align: center;
-    margin-right: 0.5rem; 
-  }
-}
-
-.search-form {
-  $root: &;
-  position: relative;
-  transform-origin: 50% 100%;
-  width: 4rem;
-  height: 100%;
-  cursor: pointer;
-  transition: width 0.5s 0s $swift-out, background-color 0.3s $swift-out;
-  
-  &:hover {
-    background-color: darken(#134836,5%);
-  }
-
-  &.focused, &.opened {
-    width: 15rem;
-    background-color: darken(#134836,5%);
-    cursor: default;
-  }
-  
-  &__input {
-    background: transparent;
-    color: white;
-    border: 0;
-    width: 0;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    font-weight: 300;
-    font-size: 0.9rem;
-    
-    
-    &::placeholder {
-      color: #63717f;
-    }
-    
-    &:focus {
-      background: transparent;
-      border: 0;
-      outline: none;
-      box-shadow: none;
-    }
-
-    .search-form.focused &, .search-form.opened & {
-      padding: 0 4rem 0 1rem;
-      width: 100%;
-    }
-
-  }
-  
-  &__icon {
-    position: absolute;
-    color: white;
-    font-size: 1.4rem;
-    top: 50%;
-    right: 1.3rem;
-    transform: translateY(-50%);
-    display: flex;
-  }
-}
-
-.menu-list {
-  display: flex;
-  align-self: stretch;
-  list-style: none;
-  margin: 0;
-  @include transition-default(background-color);
-
-  &:hover, &.toggled {
-    background-color: darken(#134836,5%);
-
-    @include breakpoint(small only) {
-      background-color: transparent;
-    }
-  }
-
-  &__icon {
-    font-size: 1.4rem;
-    color: white;
-    @include breakpoint(small only) {
-      display: none;  
-    }
-  }
-
-  &__item {
+  .navigation-wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
-    min-width: 4rem;
-    @include transition-default(background-color);
-    cursor: pointer;
+    height: 100%;
+    @include transition-default(transform);
+    
+    @include breakpoint(small only) {
+      position: absolute;
+      top: 3rem;
+      left: 0;
+      width: 16rem;
+      height: calc(100vh - 3rem);
+      flex-direction: column;
+      justify-content: flex-start;
+      background: linear-gradient(105deg, #0d2625 0%, #134836 100%);
+      transform: translateX(-100%);
+      box-shadow: 3px 5px 6px rgba(0, 0, 0, 0.16), 1px 4px 4px rgba(0, 0, 0, 0.23);
 
+      &.toggled {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  .logo--navigation {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    opacity: 1;
+    @include transition-default(opacity);
+
+    @include breakpoint(small only) {
+      .navigation.search-on & {
+        opacity: 0;
+      }
+    }
+  }
+
+  .logo--navigation .logo__image {
+    height: 2.5rem;
+
+    @include breakpoint(small only) {
+      height: 1.8rem;
+    }
+  }
+
+  .logo__name--edemocracia .logo__image {
+    height: 1.5rem;
+    margin-left: 0.8rem;
+
+    @include breakpoint(small only) {
+      height: 1.25rem;
+    }
+  }
+
+  .logo--menu-list .logo__image {
+    height: 1.75rem;
+  }
+
+  .logo--menu-list {
+    @include breakpoint(small only) {
+      width: 3rem;
+      text-align: center;
+      margin-right: 0.5rem; 
+    }
+  }
+
+  .search-form {
+    $root: &;
+    position: relative;
+    transform-origin: 50% 100%;
+    width: 4rem;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
+    transition: width 0.5s 0s $swift-out, background-color 0.3s $swift-out;
+    
     &:hover {
       background-color: darken(#134836,5%);
     }
 
-    @include breakpoint(small only) {
-      width: 100%;  
+    &.focused, &.opened {
+      width: 15rem;
+      background-color: darken(#134836,5%);
+      cursor: default;
+    }
+    
+    &__input {
+      background: transparent;
+      color: white;
+      border: 0;
+      width: 0;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-weight: 300;
+      font-size: 0.9rem;
+      
+      
+      &::placeholder {
+        color: #63717f;
+      }
+      
+      &:focus {
+        background: transparent;
+        border: 0;
+        outline: none;
+        box-shadow: none;
+      }
+    }
+
+    &.focused .search-form__input, &.opened .search-form__input {
+      padding: 0 4rem 0 1rem;
+      width: 100%;
+    }
+    
+    &__icon {
+      position: absolute;
+      color: white;
+      font-size: 1.4rem;
+      top: 50%;
+      right: 1.3rem;
+      transform: translateY(-50%);
+      display: flex;
     }
   }
 
-  &__link {
+  .menu-list {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    font-weight: 600;
-    padding: 0.75rem;
-    color: white;
+    align-self: stretch;
+    list-style: none;
+    margin: 0;
+    @include transition-default(background-color);
 
-    &:hover {
+    &:hover, &.toggled {
+      background-color: darken(#134836,5%);
+
+      @include breakpoint(small only) {
+        background-color: transparent;
+      }
+    }
+
+    &__icon {
+      font-size: 1.4rem;
+      color: white;
+      @include breakpoint(small only) {
+        display: none;  
+      }
+    }
+
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 4rem;
+      @include transition-default(background-color);
+      cursor: pointer;
+
+      &:hover {
+        background-color: darken(#134836,5%);
+      }
+
+      @include breakpoint(small only) {
+        width: 100%;  
+      }
+    }
+
+    &__link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      font-weight: 600;
+      padding: 0.75rem;
+      color: white;
+
+      &:hover {
+        color: white;
+      }
+
+      @include breakpoint(small only) {
+        justify-content: flex-start;
+      }
+    }
+
+    &__text {
+      margin-right: 1rem;
       color: white;
     }
-
-    @include breakpoint(small only) {
-      justify-content: flex-start;
-    }
   }
-
-  &__text {
-    margin-right: 1rem;
-    color: white;
-  }
-}
 
 
   .menu-list--dropdown {
@@ -319,5 +318,5 @@
         margin-right: 0.5rem;
       }
     }
-
   }
+}
