@@ -9,6 +9,51 @@
     {% include "login.html" %}
   {% endif %}
 
+  <section class="section section--wikilegis">
+    <div class="e-row e-expanded">
+      <div class="section__info section__block e-columns small-12 large-3">
+        <a href="/wikilegis"><img class="section__logo" src="{% static 'img/logo-wikilegis.svg' %}"></a>
+        <p class="section__text">
+          Edite e aprimore projetos de lei artigo por artigo.
+        </p>
+      </div>
+
+      <div class="section__block e-columns small-12 large-9">
+        <div class="section__content">
+          <h1 class="section__title"><a class="section__link" href="/wikilegis" title="Veja todos os projetos">Projetos de Lei</a></h1>
+          <div class="container container--card-list">
+            <ul class="card-list">
+            {% for bill in wikilegis_data %}
+              <a class="info-card__link" href="{{bill.get_url}}">
+                <li class="info-card info-card--wikilegis">
+                  <div class="info-card__header">
+                    <div class="info-card__icon"><i class="icon icon-{{bill.theme}}"></i></div>
+                    <h2 class="info-card__title">{{bill.title|truncatechars:40}}</h2>
+                  </div>
+                  <p class="info-card__text">
+                    {{bill.description|truncatechars:160}}
+                  </p>
+                  <div class="info-card__footer">
+                    <div class="card-stats">
+                      <div class="card-stats__name">Propostas</div>
+                      <div class="card-stats__value">{{bill.get_total_proposals}}</div>
+                    </div>
+
+                    <div class="card-stats">
+                      <div class="card-stats__name">Em:</div>
+                      <div class="card-stats__value">{{bill.modified|date:"d/m/Y"}}</div>
+                    </div>
+                  </div>  
+                </li>
+              </a>
+            {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section section--discourse">
     <div class="e-row e-expanded">
       <div class="section__info section__block e-columns small-12 large-3">
@@ -52,51 +97,6 @@
                   </li>
                 </a>
               {% endfor %}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--wikilegis">
-    <div class="e-row e-expanded">
-      <div class="section__info section__block e-columns small-12 large-3">
-        <a href="/wikilegis"><img class="section__logo" src="{% static 'img/logo-wikilegis.svg' %}"></a>
-        <p class="section__text">
-          Edite e aprimore projetos de lei artigo por artigo.
-        </p>
-      </div>
-
-      <div class="section__block e-columns small-12 large-9">
-        <div class="section__content">
-          <h1 class="section__title"><a class="section__link" href="/wikilegis" title="Veja todos os projetos">Projetos de Lei</a></h1>
-          <div class="container container--card-list">
-            <ul class="card-list">
-            {% for bill in wikilegis_data %}
-              <a class="info-card__link" href="{{bill.get_url}}">
-                <li class="info-card info-card--wikilegis">
-                  <div class="info-card__header">
-                    <div class="info-card__icon"><i class="icon icon-{{bill.theme}}"></i></div>
-                    <h2 class="info-card__title">{{bill.title|truncatechars:40}}</h2>
-                  </div>
-                  <p class="info-card__text">
-                    {{bill.description|truncatechars:160}}
-                  </p>
-                  <div class="info-card__footer">
-                    <div class="card-stats">
-                      <div class="card-stats__name">Propostas</div>
-                      <div class="card-stats__value">{{bill.get_total_proposals}}</div>
-                    </div>
-
-                    <div class="card-stats">
-                      <div class="card-stats__name">Em:</div>
-                      <div class="card-stats__value">{{bill.modified|date:"d/m/Y"}}</div>
-                    </div>
-                  </div>  
-                </li>
-              </a>
-            {% endfor %}
             </ul>
           </div>
         </div>
