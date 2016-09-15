@@ -151,6 +151,10 @@
     .login-box__input:focus ~ &.is-visible {
       transform: translate(-100%,0);
     }
+
+    &__message {
+      font-size: 0.62rem;
+    }
   }
 
   &__error-icon {

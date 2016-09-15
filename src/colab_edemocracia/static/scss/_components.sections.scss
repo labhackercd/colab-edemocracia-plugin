@@ -10,6 +10,10 @@
       padding-bottom: 1rem;
       padding-top: 1rem;
     }
+
+    &--title {
+      padding-bottom: 0;
+    }
   }
 
   &__content {
@@ -219,10 +223,6 @@
     justify-content: flex-start;
     padding-top: 1rem;
     padding-bottom: 1rem;
-  }
-
-  & .section__block--title {
-    padding-bottom: 0;
   }
 
   & .user-profile--profile-page {
