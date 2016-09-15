@@ -65,9 +65,10 @@ def login(request, template_name='registration/login.html',
     wikilegis_query = Q()
     discourse_query = Q()
 
-    for category in request.user.profile.prefered_themes.all():
-        wikilegis_query = wikilegis_query | Q(theme=category.slug)
-        discourse_query = discourse_query | Q(category__slug=category.slug)
+    if request.user.is_authenticated():
+        for category in request.user.profile.prefered_themes.all():
+            wikilegis_query = wikilegis_query | Q(theme=category.slug)
+            discourse_query = discourse_query | Q(category__slug=category.slug)
 
     wikilegis_data = wikilegis_data.filter(wikilegis_query)
     wikilegis_data = wikilegis_data.order_by('-modified')
