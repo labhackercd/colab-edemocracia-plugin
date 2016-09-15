@@ -1,5 +1,6 @@
 from django import forms
 from django.db import models
+from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from image_cropping import ImageCropField, ImageRatioField
@@ -56,9 +57,13 @@ class UserProfile(models.Model):
     gender = models.CharField(max_length=999, choices=GENDER_CHOICES, null=True)
     uf = models.CharField(max_length=2, choices=UF_CHOICES, null=True)
     birthdate = models.DateField(null=True)
-    photo = models.ImageField(null=True)
     user = models.OneToOneField("accounts.User", related_name='profile')
     prefered_themes = models.ManyToManyField('colab_discourse.DiscourseCategory')
     avatar = ImageCropField(upload_to="avatars/", null=True, blank=True,
                             validators=[avatar_validation])
     cropping = ImageRatioField('avatar', '70x70',)
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_user_profile(sender, instance, **kwargs):
+    UserProfile.objects.get_or_create(user=instance)
