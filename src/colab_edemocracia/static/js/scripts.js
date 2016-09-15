@@ -19,7 +19,7 @@ document.addEventListener('click', (e) => {
 });
 
 $('.menu-list--dropdown')
-  .click(function() {    
+  .click(function() {
     $('.menu-list--dropdown, .menu-list--dropdown__wrapper')
       .not(this)
       .removeClass('toggled');
@@ -33,24 +33,24 @@ $('.menu-list--dropdown')
 });
 
 $('.menu-list--dropdown__wrapper')
-  .click(function() { 
+  .click(function() {
     event.stopPropagation();
 });
 
-$(document).click(function(e) { 
+$(document).click(function(e) {
     var target = e.target
     if (!$(target).closest('.toggled').length) {
-      
+
       $('.toggled')
         .removeClass('toggled');
-    }  
+    }
 });
 
 $('.login-box__option')
-  .click(function() {  
+  .click(function() {
     var selectedOption = $(this);
 
-    if (!selectedOption.hasClass('active')) { 
+    if (!selectedOption.hasClass('active')) {
 
       $('.login-box__form-wrapper.active')
         .addClass('transition')
@@ -80,16 +80,34 @@ $('.login-box__option')
             .unbind()
             .removeClass('active');
       });
-    }  
+    }
+});
+
+window.getCookie = function(name) {
+  match = document.cookie.match(new RegExp(name + '=([^;]+)'));
+  if (match) return match[1];
+}
+
+// Set CSRF Token on ajax requests
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+        }
+    }
 });
 
 $('.category-list__button')
-  .click(function() {  
+  .click(function() {
     $(this).toggleClass('active');
-});  
+    $.post('/profile/update_prefered_theme/',
+      {csrftoken: getCookie("csrftoken"),
+       category_slug: $(this).attr('slug')}, null
+    )
+});
 
 $('.c-hamburger')
-  .click(function() {  
+  .click(function() {
     $(this).toggleClass('toggled');
     $('.navigation-wrapper').toggleClass('toggled');
 });

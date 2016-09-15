@@ -3,6 +3,7 @@ from django.views.generic import View
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.shortcuts import redirect, render_to_response, resolve_url
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
@@ -19,6 +20,7 @@ from .forms.accounts import SignUpForm
 from colab.accounts.models import EmailAddressValidation, EmailAddress
 from colab_wikilegis.models import WikilegisBill
 from colab_discourse.models import DiscourseTopic, DiscourseCategory
+from colab_edemocracia.models import UserProfile
 
 
 User = get_user_model()
@@ -58,8 +60,19 @@ def login(request, template_name='registration/login.html',
     current_site = get_current_site(request)
 
     wikilegis_data = WikilegisBill.objects.filter(status='published')
+    discourse_data = DiscourseTopic.objects.all()
+    wikilegis_query = Q()
+    discourse_query = Q()
+
+    for category in request.user.profile.prefered_themes.all():
+        wikilegis_query = wikilegis_query | Q(theme=category.slug)
+        discourse_query = discourse_query | Q(category__slug=category.slug)
+
+    wikilegis_data = wikilegis_data.filter(wikilegis_query)
     wikilegis_data = wikilegis_data.order_by('-modified')
-    discourse_data = DiscourseTopic.objects.all().order_by('-last_posted_at')
+
+    discourse_data = discourse_data.filter(discourse_query)
+    discourse_data = discourse_data.order_by('-last_posted_at')
 
     context = {
         'form': form,
@@ -125,3 +138,20 @@ class ProfileView(View):
     def get(self, request):
         categories = DiscourseCategory.objects.all()
         return render_to_response('profile.html', {'categories': categories})
+
+
+class UpdateUserPreferedTheme(View):
+
+    http_method_names = ['post']
+
+    def post(self, request):
+        category_slug = request.POST.get('category_slug')
+        category = DiscourseCategory.objects.get(slug=category_slug)
+        profile = UserProfile.objects.get_or_create(user=request.user)[0]
+
+        if category in profile.prefered_themes.all():
+            profile.prefered_themes.remove(category)
+        else:
+            profile.prefered_themes.add(category)
+
+        return HttpResponse('')
