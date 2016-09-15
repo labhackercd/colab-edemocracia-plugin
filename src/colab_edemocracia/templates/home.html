@@ -12,7 +12,7 @@
   <section class="section section--wikilegis">
     <div class="e-row e-expanded">
       <div class="section__info section__block e-columns small-12 large-3">
-        <a href="/wikilegis"><img class="section__logo" src="{% static 'img/logo-wikilegis.svg' %}"></a>
+        <a href="{% url 'wikilegis:colab_wikilegis' '' %}"><img class="section__logo" src="{% static 'img/logo-wikilegis.svg' %}"></a>
         <p class="section__text">
           Edite e aprimore projetos de lei artigo por artigo.
         </p>
@@ -20,7 +20,7 @@
 
       <div class="section__block e-columns small-12 large-9">
         <div class="section__content">
-          <h1 class="section__title"><a class="section__link" href="/wikilegis" title="Veja todos os projetos">Projetos de Lei</a></h1>
+          <h1 class="section__title"><a class="section__link" href="{% url 'wikilegis:colab_wikilegis' '' %}" title="Veja todos os projetos">Projetos de Lei</a></h1>
           <div class="container container--card-list">
             <ul class="card-list">
             {% for bill in wikilegis_data %}
@@ -57,7 +57,7 @@
   <section class="section section--discourse">
     <div class="e-row e-expanded">
       <div class="section__info section__block e-columns small-12 large-3">
-        <a href="/discourse"><img class="section__logo" src="{% static 'img/logo-expressao.svg' %}" data-fallback="{% static 'img/logo-labhacker.png' %}"></a>
+        <a href="{% url 'discourse:colab_discourse' '' %}"><img class="section__logo" src="{% static 'img/logo-expressao.svg' %}" data-fallback="{% static 'img/logo-labhacker.png' %}"></a>
         <p class="section__text">
           Dê sua opinião sobre os assuntos que afetam a sua vida, discutindo soluções com outros cidadãos e os deputados.
         </p>
@@ -65,7 +65,7 @@
 
       <div class="section__block e-columns small-12 large-9">
         <div class="section__content">
-          <h1 class="section__title"><a class="section__link" href="/discourse" title="Veja todas as discussões">Discussões</a></h1>
+          <h1 class="section__title"><a class="section__link" href="{% url 'discourse:colab_discourse' '' %}" title="Veja todas as discussões">Discussões</a></h1>
           <div class="container container--card-list">
             <ul class="card-list">
               {% for topic in discourse_data %}
