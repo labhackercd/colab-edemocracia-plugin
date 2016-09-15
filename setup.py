@@ -12,6 +12,8 @@ install_requires = [
     'django-libsass',
     'validate_email',
     'django-widget-tweaks==1.4.1'
+    'django-image-cropping',
+    'easy_thumbnails'
 ]
 
 tests_require = ['mock']
