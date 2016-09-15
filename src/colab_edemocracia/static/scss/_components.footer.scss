@@ -33,4 +33,12 @@
   &__text {
     margin: 0;
   }
+
+  &__link {
+    color: $secondary-color;
+    font-weight: 400;
+    &:hover {
+      color: darken($secondary-color, 20%);
+    }
+  }
 }

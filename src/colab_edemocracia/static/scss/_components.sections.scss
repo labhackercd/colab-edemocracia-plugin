@@ -57,6 +57,10 @@
     }
   }
 
+  &__link {
+    @include transition-default(color);
+  }
+
   &__title {
     position: relative;
     font-size: 3rem;
@@ -132,13 +136,20 @@
   }
 
   .section__text {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: #a9de8c;
     text-align: left;
     @include breakpoint(small only) {
       font-size: 1rem;
       text-align: center;
+    }
+  }
+
+  .section__link {
+    color: $secondary-color;
+    &:hover {
+      color: darken($secondary-color, 20%);
     }
   }
 }
@@ -197,7 +208,7 @@
 
   & .section__title {
     &::before {
-      background-color: $secondary-color;
+      background-color: #f8c300;
     }
   }
 
