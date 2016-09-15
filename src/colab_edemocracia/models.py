@@ -42,6 +42,23 @@ UF_CHOICES = (
     ('TO', 'TO'),
 )
 
+
+def sizeof_fmt(num, suffix='B'):
+    """
+    Shamelessly copied from StackOverflow:
+    http://stackoverflow.com/questions/1094841/reusable-library-to-get-human-readable-version-of-file-size
+
+    :param num:
+    :param suffix:
+    :return:
+    """
+    for unit in ['', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi']:
+        if abs(num) < 1024.0:
+            return "%3.1f%s%s" % (num, unit, suffix)
+        num /= 1024.0
+    return "%.1f%s%s" % (num, 'Yi', suffix)
+
+
 def avatar_validation(image):
     if image:
         # 10 MB
@@ -52,8 +69,8 @@ def avatar_validation(image):
                 error_message.format(sizeof_fmt(max_file_size))
             )
 
-class UserProfile(models.Model):
 
+class UserProfile(models.Model):
     gender = models.CharField(max_length=999, choices=GENDER_CHOICES, null=True)
     uf = models.CharField(max_length=2, choices=UF_CHOICES, null=True)
     birthdate = models.DateField(null=True)

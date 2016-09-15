@@ -11,7 +11,7 @@ install_requires = [
     'django-compressor==1.6',
     'django-libsass',
     'validate_email',
-    'django-widget-tweaks==1.4.1'
+    'django-widget-tweaks==1.4.1',
     'django-image-cropping',
     'easy_thumbnails'
 ]

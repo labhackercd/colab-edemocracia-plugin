@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load staticfiles %}
+{% load staticfiles widget_tweaks %}
 
 {% block title %}Perfil{% endblock %}
 
@@ -39,7 +39,7 @@
       <div class="section__block section__block--title e-columns small-12">
         <h1 class="section__title">Meu Perfil</h1>
       </div>
-      <div class="section__block e-columns small-12 medium-4">
+      <!--<div class="section__block e-columns small-12 medium-4">
         <span class="section__caption">Foto de perfil</span>
         <div class="user-figure">
           <div class="user-profile user-profile--profile-page">
@@ -47,24 +47,30 @@
           </div>
         </div>
         <button class="button">Carregar foto</button>
+      </div>-->
+       <div class="section__block e-columns small-12 medium-4">
+        <span class="section__caption">Minha Senha</span>
+        <a class="button" href="{% url 'colab_edemocracia:password_change' %}">Alterar Senha</a>
       </div>
       <div class="section__block e-columns small-12 medium-8">
         <span class="section__caption">Meus dados</span>
-        <form class="form" method="post" role="form" action="{% url 'colab_edemocracia:home' %}" data-abide novalidate>
 
+        <form class="form" method="post" role="form" action="{% url 'colab_edemocracia:profile' %}" data-abide novalidate>
+          {% csrf_token %}
+          
           <label class="form__input-wrapper form__input-wrapper--small input-group">
             <i class="form__icon icon icon-user input-group-label" aria-hidden="true"></i>
 
             <span class="show-for-sr">Nome</span>
             <div class="form__input-container">
-              <input class="form__input input input-group-field" type="text" id="id_username" name="username" placeholder="Nome" required/>
-
+              {{ form.first_name|append_attr:"class: form__input input input-group-field"|append_attr:"placeholder: Nome" }}
+              {% if form.first_name.errors %}
               {# XXX extend foundation class in css #}
               <div class="form__error form-error">
                 <span class="form__error-message">ERRO</span>
                 <i class="form__error-icon icon icon-are-row-circle-left"></i>
               </div>
-
+              {% endif %}
             </div>
           </label>
 
@@ -73,14 +79,14 @@
 
             <span class="show-for-sr">Sobrenome</span>
             <div class="form__input-container">
-              <input class="form__input input input-group-field" type="text" id="id_username" name="username" placeholder="Sobrenome" required/>
-
+              {{ form.last_name|append_attr:"class: form__input input input-group-field"|append_attr:"placeholder: Sobrenome" }}
+              {% if form.last_name.errors %}
               {# XXX extend foundation class in css #}
               <div class="form__error form-error">
                 <span class="form__error-message">ERRO</span>
                 <i class="form__error-icon icon icon-are-row-circle-left"></i>
               </div>
-
+              {% endif %}
             </div>
           </label>
 
@@ -89,12 +95,7 @@
 
             <span class="show-for-sr">Sexo</span>
             <div class="form__input-container">
-              <select class="form__input input-group-field" required>
-                <option class="form__select-option" value="" disabled selected hidden>Sexo</option>
-                <option class="form__select-option" value="feminino">Feminino</option>
-                <option class="form__select-option" value="masculino">Masculino</option>
-                <option class="form__select-option" value="outro">Outro</option>
-              </select>
+            {{ form.gender|append_attr:"class: form__input input-group-field" }}
             </div>
           </label>
 
@@ -103,36 +104,7 @@
 
             <span class="show-for-sr">UF</span>
             <div class="form__input-container">
-              <select class="form__input input-group-field" required>
-                <option class="form__select-option" value="" disabled selected hidden>UF</option>
-                <option class="form__select-option" value="AC">AC</option>
-                <option class="form__select-option" value="AL">AL</option>
-                <option class="form__select-option" value="AP">AP</option>
-                <option class="form__select-option" value="AM">AM</option>
-                <option class="form__select-option" value="BA">BA</option>
-                <option class="form__select-option" value="CE">CE</option>
-                <option class="form__select-option" value="DF">DF</option>
-                <option class="form__select-option" value="ES">ES</option>
-                <option class="form__select-option" value="GO">GO</option>
-                <option class="form__select-option" value="MA">MA</option>
-                <option class="form__select-option" value="MS">MS</option>
-                <option class="form__select-option" value="MT">MT</option>
-                <option class="form__select-option" value="MG">MG</option>
-                <option class="form__select-option" value="PA">PA</option>
-                <option class="form__select-option" value="PB">PB</option>
-                <option class="form__select-option" value="PR">PR</option>
-                <option class="form__select-option" value="PE">PE</option>
-                <option class="form__select-option" value="PI">PI</option>
-                <option class="form__select-option" value="RJ">RJ</option>
-                <option class="form__select-option" value="RN">RN</option>
-                <option class="form__select-option" value="RS">RS</option>
-                <option class="form__select-option" value="RO">RO</option>
-                <option class="form__select-option" value="RR">RR</option>
-                <option class="form__select-option" value="SC">SC</option>
-                <option class="form__select-option" value="SP">SP</option>
-                <option class="form__select-option" value="SE">SE</option>
-                <option class="form__select-option" value="TO">TO</option>
-              </select>
+              {{ form.uf|append_attr:"class: form__input input-group-field" }}
             </div>
           </label>
 
@@ -141,14 +113,14 @@
 
             <span class="show-for-sr">Data de nascimento</span>
             <div class="form__input-container">
-              <input class="form__input form__input--date input input-group-field" type="text" id="id_username" name="username" placeholder="Data de nascimento" data-mask="00/00/0000" pattern="^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((1[6-9]|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((1[6-9]|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((1[6-9]|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$" required/>
-
+              {{ form.birthdate|append_attr:"class:form__input form__input--date input input-group-field"|append_attr:"placeholder:Data de nascimento"|append_attr:"data-mask:00/00/0000"|append_attr:"pattern:^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((1[6-9]|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((1[6-9]|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((1[6-9]|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$" }}
+              {% if form.birthdate.errors %}
               {# XXX extend foundation class in css #}
               <div class="form__error form-error">
                 <span class="form__error-message">ERRO</span>
                 <i class="form__error-icon icon icon-are-row-circle-left"></i>
               </div>
-
+              {% endif %}
             </div>
           </label>
 
@@ -157,13 +129,7 @@
 
             <span class="show-for-sr">E-mail</span>
             <div class="form__input-container">
-              <input class="form__input input input-group-field" type="email" id="id_username" name="username" placeholder="E-mail" required/>
-
-              {# XXX extend foundation class in css #}
-              <div class="form__error form-error">
-                <span class="form__error-message">ERRO</span>
-                <i class="form__error-icon icon icon-are-row-circle-left"></i>
-              </div>
+              <input class="form__input input input-group-field" type="email" id="id_email" name="email" value="{{ request.user.email }}" placeholder="E-mail" readonly="readonly" />
 
             </div>
           </label>
@@ -171,10 +137,7 @@
           <button class="button button--profile">Atualizar</button>
         </form>
       </div>
-      <div class="section__block e-columns small-12">
-        <span class="section__caption">Minha Senha</span>
-        <button class="button">Alterar Senha</button>
-      </div>
+     
     </div>
   </section>
 

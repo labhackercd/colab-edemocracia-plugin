@@ -4,23 +4,24 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.shortcuts import redirect, render_to_response, resolve_url
+from django.shortcuts import redirect, resolve_url
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.utils.http import is_safe_url
 from django.conf import settings
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import (REDIRECT_FIELD_NAME, login as auth_login)
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.response import TemplateResponse
+from django.views.generic import UpdateView
 
-from .forms.accounts import SignUpForm
+from .forms.accounts import SignUpForm, UserProfileForm
+from .models import UserProfile
 from colab.accounts.models import EmailAddressValidation, EmailAddress
 from colab_wikilegis.models import WikilegisBill
 from colab_discourse.models import DiscourseTopic, DiscourseCategory
-from colab_edemocracia.models import UserProfile
 
 
 User = get_user_model()
@@ -133,11 +134,22 @@ class SignUpView(View):
         return redirect(reverse('colab_edemocracia:home'))
 
 
-class ProfileView(View):
+class ProfileView(UpdateView):
+    model = UserProfile
+    form_class = UserProfileForm
+    template_name = 'profile.html'
 
-    def get(self, request):
-        categories = DiscourseCategory.objects.all()
-        return render_to_response('profile.html', {'categories': categories})
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data(**kwargs)
+        context['categories'] = DiscourseCategory.objects.all()
+        return context
+
+    def get_object(self, queryset=None):
+        return self.request.user.profile
+
+    def get_success_url(self):
+        messages.success(self.request, 'Perfil modificado com sucesso!')
+        return reverse('colab_edemocracia:profile')
 
 
 class UpdateUserPreferedTheme(View):
