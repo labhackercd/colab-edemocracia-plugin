@@ -11,8 +11,11 @@ from django.views.decorators.csrf import csrf_protect
 from django.utils.http import is_safe_url
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth import (REDIRECT_FIELD_NAME, login as auth_login)
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import (
+    REDIRECT_FIELD_NAME, login as auth_login, update_session_auth_hash
+)
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.response import TemplateResponse
 from django.views.generic import UpdateView
@@ -87,6 +90,43 @@ def login(request, template_name='registration/login.html',
 
     return TemplateResponse(request, template_name, context,
                             current_app=current_app)
+
+
+@sensitive_post_parameters()
+@csrf_protect
+@login_required
+def password_change(request,
+                    template_name='registration/password_change_form.html',
+                    post_change_redirect=None,
+                    password_change_form=PasswordChangeForm,
+                    current_app=None, extra_context=None):
+    if post_change_redirect is None:
+        post_change_redirect = reverse('colab_edemocracia:password_change_done')
+    else:
+        post_change_redirect = resolve_url(post_change_redirect)
+    if request.method == "POST":
+        form = password_change_form(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            # Updating the password logs out all other sessions for the user
+            # except the current one if
+            # django.contrib.auth.middleware.SessionAuthenticationMiddleware
+            # is enabled.
+            update_session_auth_hash(request, form.user)
+            return HttpResponseRedirect(post_change_redirect)
+    else:
+        form = password_change_form(user=request.user)
+    context = {
+        'form': form,
+        'title': 'Alterar senha',
+    }
+    if extra_context is not None:
+        context.update(extra_context)
+
+    if current_app is not None:
+        request.current_app = current_app
+
+    return TemplateResponse(request, template_name, context)
 
 
 class SignUpView(View):
