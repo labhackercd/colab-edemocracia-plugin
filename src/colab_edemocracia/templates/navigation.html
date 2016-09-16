@@ -28,7 +28,7 @@
     <i class="menu-list__icon icon icon-th" aria-hidden="true"></i>
     <div class="menu-list--dropdown__wrapper">
       <li class="menu-list__item">
-        <a class="menu-list__link" href="/discourse" title="Opine em temas que te afetam como cidadão">
+        <a class="menu-list__link" href="{% url 'discourse:colab_discourse' '' %}" title="Opine em temas que te afetam como cidadão">
           <div class="logo logo--menu-list">
             <div class="logo__icon--discourse">
               <img class="logo__image" src="{% static 'img/logo-expressao-image.svg' %}" data-fallback="{% static 'img/logo-expressao-image.png' %}">
@@ -38,7 +38,7 @@
         </a>
       </li>
       <li class="menu-list__item">
-        <a class="menu-list__link" href="/wikilegis" title="Participe em Projetos de Lei">
+        <a class="menu-list__link" href="{% url 'wikilegis:colab_wikilegis' '' %}" title="Participe em Projetos de Lei">
           <div class="logo logo--menu-list">
             <div class="logo__icon--wikilegis">
               <img class="logo__image" src="{% static 'img/logo-wikilegis-icon.svg' %}">
