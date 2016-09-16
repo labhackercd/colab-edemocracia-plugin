@@ -45,7 +45,7 @@
 				<div class="messages-block">
 					{% if messages %}
 						{% for message in messages %}
-							<div class="feedback-message callout {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert{% endif %}{% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}warning{% endif %}{% if message.level == DEFAULT_MESSAGE_LEVELS.sucess %}sucess{% endif %}" data-closable>
+							<div class="feedback-message callout {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert{% endif %}{% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}warning{% endif %}{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}success{% endif %}" data-closable>
 								<h5 class="feedback-message__title">
 									{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
 										Erro:
@@ -62,9 +62,9 @@
 							</div>
 						{% endfor %}
 						<script>
-							/*setTimeout(function() {
+							setTimeout(function() {
 								$('.feedback-message__close').click();
-							}, 10000);*/
+							}, 10000);
 						</script>
 					{% endif %}
 				</div>
