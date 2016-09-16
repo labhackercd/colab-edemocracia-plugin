@@ -2,8 +2,10 @@
 from django.core.management.base import BaseCommand
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth import get_user_model
+from django.utils.text import slugify
 from django.template.loader import render_to_string
 from validate_email import validate_email
+from random import randint
 import uuid
 import csv
 
@@ -28,6 +30,14 @@ def edemocracia_users(list_users):
     return result_list
 
 
+def set_username(username, users):
+    usernames_in_db = users.filter(username=username)
+    usernames_in_db = usernames_in_db.values_list('username', flat=True)
+    if username in usernames_in_db:
+        return set_username(username + str(randint(1, 9)), users)
+    else:
+        return username
+
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
@@ -35,14 +45,12 @@ class Command(BaseCommand):
         colab_users = User.objects.all()
         for user in users:
             if not user['email'] in colab_users.values_list('email', flat=True):
-                username_in_db = colab_users.filter(username=user['username'])
-                username_in_db = username_in_db.exclude(email=user['email']).count()
-                if username_in_db:
-                    user['username'] = user['username'] + str(username_in_db)
+                username = set_username(slugify(user['username'][:30]),
+                                        colab_users)
 
                 new_password = str(uuid.uuid4().get_hex()[0:10])
                 new_user, created = User.objects.get_or_create(
-                    username=user['username'][:30],
+                    username=username,
                     email=user['email'],
                     first_name=user['first_name'],
                     last_name=user['last_name']
