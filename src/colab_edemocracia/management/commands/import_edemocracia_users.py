@@ -51,8 +51,8 @@ class Command(BaseCommand):
                 new_user, created = User.objects.get_or_create(
                     username=username,
                     email=user['email'],
-                    first_name=user['first_name'],
-                    last_name=user['last_name']
+                    first_name=user['first_name'][:25],
+                    last_name=user['last_name'][:25]
                 )
                 new_user.set_password(new_password)
                 new_user.is_active = True
