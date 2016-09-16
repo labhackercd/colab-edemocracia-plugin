@@ -37,7 +37,7 @@
                   <input class="login-box__input input input-group-field" type="text" id="id_username" name="username" placeholder="Nome de usuário" required/>
 
                   <div class="login-box__error form-error">
-                    <span class="login-box__error-message">ERRO</span>
+                    <span class="login-box__error-message">Insira o nome de Usuário</span>
                     <i class="login-box__error-icon icon icon-e-arrow-circle-left"></i>
                   </div>
 
@@ -51,7 +51,7 @@
                   <input class="login-box__input input input-group-field" type="password" id="id_password" name="password" placeholder="Senha" required/>
 
                   <div class="login-box__error form-error">
-                    <span class="login-box__error-message">ERRO</span>
+                    <span class="login-box__error-message">Insira sua Senha</span>
                     <i class="login-box__error-icon icon icon-e-arrow-circle-left"></i>
                   </div>
 
@@ -85,10 +85,10 @@
                 <span class="show-for-sr">E-mail</span>
                 <div class="login-box__input-container">
 
-                  <input class="login-box__input input input-group-field" type="text" id="id_email" name="email" placeholder="E-mail" required/>
+                  <input class="login-box__input input input-group-field" type="email" id="id_email" name="email" placeholder="E-mail" required/>
 
                   <div class="login-box__error form-error">
-                    <span class="login-box__error-message">ERRO</span>
+                    <span class="login-box__error-message">Por Favor insira um E-mail válido</span>
                     <i class="login-box__error-icon icon icon-e-arrow-circle-left"></i>
                   </div>
 
@@ -100,10 +100,10 @@
                 <span class="show-for-sr">Nome de usuário</span>
                 <div class="login-box__input-container">
 
-                  <input class="login-box__input input input-group-field" type="text" id="id_username" name="username" placeholder="Nome de usuário" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$"required/>
+                  <input class="login-box__input input input-group-field" type="text" id="id_username" name="username" placeholder="Nome de usuário" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{2,20}$"required/>
 
                   <div class="login-box__error form-error">
-                    <span class="login-box__error-message">ERRO</span>
+                    <span class="login-box__error-message">Nome de usuário só pode receber Números, letras, hífen, ponto e underscore</span>
                     <i class="login-box__error-icon icon icon-e-arrow-circle-left"></i>
                   </div>
 
@@ -115,10 +115,10 @@
                 <span class="show-for-sr">Senha</span>
                 <div class="login-box__input-container">
 
-                  <input class="login-box__input input input-group-field" type="password" id="id_password" name="password" placeholder="Senha" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required/>
+                  <input class="login-box__input input input-group-field" type="password" id="id_password" name="password" placeholder="Senha" pattern="{5,255}$" required/>
 
                   <div class="login-box__error form-error">
-                    <span class="login-box__error-message">ERRO</span>
+                    <span class="login-box__error-message">Sua senha necessita de pelo menos 6 caracteres</span>
                     <i class="login-box__error-icon icon icon-e-arrow-circle-left"></i>
                   </div>
 
