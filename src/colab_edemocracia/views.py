@@ -101,7 +101,8 @@ def password_change(request,
                     password_change_form=PasswordChangeForm,
                     current_app=None, extra_context=None):
     if post_change_redirect is None:
-        post_change_redirect = reverse('colab_edemocracia:password_change_done')
+        messages.success(request, 'Senha alterada com sucesso!')
+        post_change_redirect = reverse('colab_edemocracia:profile')
     else:
         post_change_redirect = resolve_url(post_change_redirect)
     if request.method == "POST":
