@@ -1,0 +1,31 @@
+.messages-block {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+}
+
+.feedback-message {
+  margin: 0;
+  padding-bottom: 1.3rem;
+
+  &__title {
+   color: white;
+   font-weight: 700;
+   margin: 0;
+  }
+
+  &__text {
+   color: white;
+   font-weight: 600;
+   margin: 0;
+  }
+
+  &__close {
+    color: white;
+    font-weight: 700;
+    outline: none;
+    &:hover {
+      color: white;
+    }
+  }
+}

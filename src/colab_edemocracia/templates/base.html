@@ -42,32 +42,44 @@
 
 			{# Feedback Messages #}
 			{% block messages %}
-			{% if messages %}
-				{% for message in messages %}
-				{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-					<div class="callout alert" data-closable>
-				{% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-					<div class="callout warning" data-closable>
-				{% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-					<div class="callout success" data-closable>
-				{% endif %}
-						<h5>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-							Erro:
-						{% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-							Atenção!
-						{% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-							Sucesso!
-						{% endif %}</h5>
-						<p>{{message}}</p>
-						<button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
+				<div class="messages-block">
+					{% if messages %}
+						{% for message in messages %}
+							<div class="feedback-message callout {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert{% endif %}{% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}warning{% endif %}{% if message.level == DEFAULT_MESSAGE_LEVELS.sucess %}sucess{% endif %}" data-closable>
+								<h5 class="feedback-message__title">
+									{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+										Erro:
+									{% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+										Atenção!
+									{% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+										Sucesso!
+									{% endif %}
+								</h5>
+								<p class="feedback-message__text">{{message}}</p>
+								<button class="feedback-message__close close-button" aria-label="Dismiss alert" type="button" data-close>
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						{% endfor %}
+						<script>
+							/*setTimeout(function() {
+								$('.feedback-message__close').click();
+							}, 10000);*/
+						</script>
+					{% endif %}
 				</div>
-				{% endfor %}
-			{% endif %}
 			{% endblock messages %}
-
+			<div class="timer">
+			 	<div class="circle-timer">
+			 		<div class="timer-slot">
+			 			<div class="timer-lt"></div>
+			 		</div>
+			 		<div class="timer-slot">
+			 			<div class="timer-rt"></div>
+			 		</div>
+			 		<div class="count"></div>
+			 	</div>
+			 </div> 
 			{# Main Content #}
 			<main class="main">
 				{% block main %}
