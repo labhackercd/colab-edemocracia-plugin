@@ -101,7 +101,6 @@ def password_change(request,
                     password_change_form=PasswordChangeForm,
                     current_app=None, extra_context=None):
     if post_change_redirect is None:
-        messages.success(request, 'Senha alterada com sucesso!')
         post_change_redirect = reverse('colab_edemocracia:profile')
     else:
         post_change_redirect = resolve_url(post_change_redirect)
@@ -109,6 +108,7 @@ def password_change(request,
         form = password_change_form(user=request.user, data=request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Senha alterada com sucesso!')
             # Updating the password logs out all other sessions for the user
             # except the current one if
             # django.contrib.auth.middleware.SessionAuthenticationMiddleware
