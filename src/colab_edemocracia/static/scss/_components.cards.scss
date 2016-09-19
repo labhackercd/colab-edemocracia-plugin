@@ -60,7 +60,7 @@
     min-height: 20rem;
     margin: 0.5rem;
     &:first-child {
-      margin-left: 0; 
+      margin-left: 0;
     }
     @include breakpoint(small only) {
       flex: 0 0 16rem;
@@ -365,12 +365,12 @@
   }
 }
 
-.info-card--participacao_e_transparencia {
+.info-card--participacao-e-transparencia {
 
   &.info-card--discourse {
 
     .info-card__header {
-      background-color: $participacao_e_transparencia-color;
+      background-color: $participacao-e-transparencia-color;
     }
   }
 }

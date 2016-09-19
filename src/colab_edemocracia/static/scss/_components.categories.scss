@@ -370,9 +370,9 @@
       }
     }
 
-    &--participacao_e_transparencia {
+    &--participacao-e-transparencia {
       &::before {
-        background-color: $participacao_e_transparencia-color;
+        background-color: $participacao-e-transparencia-color;
       }
 
       &:hover, &:focus {
@@ -383,7 +383,7 @@
       }
 
       &.active {
-      background-color: $participacao_e_transparencia-color;
+      background-color: $participacao-e-transparencia-color;
       color: white;
       }
     }
