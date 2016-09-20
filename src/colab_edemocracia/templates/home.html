@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load staticfiles %}
+{% load staticfiles edem_utils %}
 
 {% block title %}E-Democracia{% endblock %}
 
@@ -27,6 +27,12 @@
               <a class="info-card__link" href="{{bill.get_url}}">
                 <li class="info-card info-card--wikilegis">
                   <div class="info-card__header">
+                    {# XXX: Add different style when the category is one of the user's prefered themes #}
+                    {% if user.is_authenticated %}
+                      {% get_prefered_themes_list as prefered_themes %}
+                      {% if bill.theme in prefered_themes %}
+                      {% endif %}
+                    {% endif %}
                     <div class="info-card__icon"><i class="icon icon-{{bill.theme}}"></i></div>
                     <h2 class="info-card__title">{{bill.title|truncatechars:40}}</h2>
                   </div>
@@ -43,7 +49,7 @@
                       <div class="card-stats__name">Em:</div>
                       <div class="card-stats__value">{{bill.modified|date:"d/m/Y"}}</div>
                     </div>
-                  </div>  
+                  </div>
                 </li>
               </a>
             {% endfor %}
@@ -71,6 +77,11 @@
               {% for topic in discourse_data %}
                 <a class="info-card__link" href="{{topic.get_url}}">
                   <li class="info-card info-card--discourse info-card--{{topic.category.slug}}">
+                    {# XXX: Add different style when the category is one of the user's prefered themes #}
+                    {% if user.is_authenticated %}
+                      {% if topic.category in user.profile.prefered_themes.all %}
+                      {% endif %}
+                    {% endif %}
                     <div class="info-card__header">
                       <div class="info-card__icon"><i class="icon icon-{{topic.category.slug}}"></i></div>
                       <h2 class="info-card__title">{{topic.category.name}}</h2>
@@ -83,12 +94,12 @@
                         <div class="card-stats__name">Respostas</div>
                         <div class="card-stats__value">{{topic.posts_count}}</div>
                       </div>
-                    
+
                       <div class="card-stats">
                         <div class="card-stats__name">Visualizações</div>
                         <div class="card-stats__value">{{topic.views}}</div>
                       </div>
-                    
+
                       <div class="card-stats">
                         <div class="card-stats__name">Criado em</div>
                         <div class="card-stats__value">{{topic.last_posted_at|date:"b/Y"}}</div>

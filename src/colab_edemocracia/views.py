@@ -64,7 +64,10 @@ def login(request, template_name='registration/login.html',
     current_site = get_current_site(request)
 
     wikilegis_data = WikilegisBill.objects.filter(status='published')
+    wikilegis_data = wikilegis_data.order_by('-modified')
     discourse_data = DiscourseTopic.objects.all()
+    discourse_data = discourse_data.order_by('-last_posted_at')
+
     wikilegis_query = Q()
     discourse_query = Q()
 
@@ -73,11 +76,11 @@ def login(request, template_name='registration/login.html',
             wikilegis_query = wikilegis_query | Q(theme=category.slug)
             discourse_query = discourse_query | Q(category__slug=category.slug)
 
-    wikilegis_data = wikilegis_data.filter(wikilegis_query)
-    wikilegis_data = wikilegis_data.order_by('-modified')
+    wikilegis_data = list(wikilegis_data.filter(wikilegis_query)) + \
+        list(wikilegis_data.exclude(wikilegis_query))
 
-    discourse_data = discourse_data.filter(discourse_query)
-    discourse_data = discourse_data.order_by('-last_posted_at')
+    discourse_data = list(discourse_data.filter(discourse_query)) + \
+        list(discourse_data.exclude(discourse_query))
 
     context = {
         'form': form,
