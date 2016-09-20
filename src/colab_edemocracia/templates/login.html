@@ -59,11 +59,10 @@
               </label>
               {# XXX make our custom modifier classes inherit the styles of foundation modifier classes (like .expanded here) #}
               <button class="button expanded button--expanded">Login</button>
-              <a class="" href="{% url 'password_reset' %}">
-                <span>Esqueci minha senha</span>
+              <a class="login-box__link--forgotten-password" href="{% url 'password_reset' %}">
+                Esqueci minha senha
               </a>
             </form>
-            
 
             <div class="login-box__social-login">
               <a href="{% url 'social:begin' backend='facebook' %}" class="button expanded button--social button--facebook">

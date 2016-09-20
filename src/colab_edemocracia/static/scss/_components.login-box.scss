@@ -196,4 +196,14 @@
   &__form {
     margin-bottom: 2rem;
   }
+
+  &__link {
+    &--forgotten-password {
+      font-weight: 400;
+      color: #a9de8c;
+      width: 100%;
+      text-align: center;
+      display: block;
+    }
+  }
 }
