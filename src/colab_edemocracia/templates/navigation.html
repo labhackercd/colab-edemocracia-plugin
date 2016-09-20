@@ -54,9 +54,14 @@
   {% if user.is_authenticated %}
 
     <ul class="menu-list menu-list--dropdown menu-list--profile" title="Perfil de Usuário">
+      {% if user.profile.avatar %}
+      <div class="user-profile" style="background-image: url('{{ user.profile.get_avatar_140x140 }}')">
+      </div>
+      {% else %}
       <div class="user-profile">
         <i class="icon icon-user" aria-hidden="true"></i>
       </div>
+      {% endif %}
       <div class="menu-list--dropdown__wrapper">
         <li class="menu-list__item">
           <a class="menu-list__link" href="{% url 'colab_edemocracia:profile' %}">

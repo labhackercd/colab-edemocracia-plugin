@@ -39,24 +39,22 @@
       <div class="section__block section__block--title e-columns small-12">
         <h1 class="section__title">Meu Perfil</h1>
       </div>
-      <!--<div class="section__block e-columns small-12 medium-4">
-        <span class="section__caption">Foto de perfil</span>
-        <div class="user-figure">
-          <div class="user-profile user-profile--profile-page">
-            <i class="icon icon-user" aria-hidden="true"></i>
-          </div>
-        </div>
-        <button class="button">Carregar foto</button>
-      </div>-->
-       <div class="section__block e-columns small-12 medium-4">
-        <span class="section__caption">Minha Senha</span>
-        <a class="button" href="{% url 'colab_edemocracia:password_change' %}">Alterar Senha</a>
-      </div>
       <div class="section__block e-columns small-12 medium-8">
         <span class="section__caption">Meus dados</span>
-        <form class="form" method="post" role="form" action="{% url 'colab_edemocracia:profile' %}" data-abide novalidate>
+        <form class="form" method="post" role="form" enctype="multipart/form-data" action="{% url 'colab_edemocracia:profile' %}" data-abide novalidate>
           {% csrf_token %}
-          
+            <div class="user-figure">
+              <div class="user-profile user-profile--profile-page" {% if object.avatar %}style="background-image: url('{{ object.get_avatar_140x140 }}')"{% endif %}>
+                {% if not object.avatar %}
+                <i class="icon icon-user" aria-hidden="true"></i>
+                {% endif %}
+              </div>
+            {% if object.avatar %}
+            <span><input id="avatar-clear_id" name="avatar-clear" type="checkbox"> <label for="avatar-clear_id">Limpar</label></span>
+            {% endif %}
+            </div>
+            <input name="avatar" id="id_avatar" class="button" type="file" >
+
           <label class="form__input-wrapper input-group {% if form.username.errors %}is-invalid-label{% endif %}">
 
             <i class="form__icon icon icon-user input-group-label" aria-hidden="true"></i>
@@ -164,7 +162,10 @@
           <button class="button button--profile">Atualizar</button>
         </form>
       </div>
-     
+       <div class="section__block e-columns small-12 medium-4">
+        <span class="section__caption">Minha Senha</span>
+        <a class="button" href="{% url 'colab_edemocracia:password_change' %}">Alterar Senha</a>
+      </div>
     </div>
   </section>
 

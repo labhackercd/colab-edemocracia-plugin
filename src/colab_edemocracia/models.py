@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from image_cropping import ImageCropField, ImageRatioField
+from easy_thumbnails.files import get_thumbnailer
 
 
 GENDER_CHOICES = (
@@ -78,7 +79,15 @@ class UserProfile(models.Model):
     prefered_themes = models.ManyToManyField('colab_discourse.DiscourseCategory')
     avatar = ImageCropField(upload_to="avatars/", null=True, blank=True,
                             validators=[avatar_validation])
-    cropping = ImageRatioField('avatar', '70x70',)
+    cropping = ImageRatioField('avatar', '140x140',)
+
+    def get_avatar_140x140(self):
+        return get_thumbnailer(self.avatar).get_thumbnail({
+            'size': (140, 140),
+            'box': self.cropping,
+            'crop': True,
+            'detail': True,
+        }).url
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

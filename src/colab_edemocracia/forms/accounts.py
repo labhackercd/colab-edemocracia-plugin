@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from colab_edemocracia.models import UserProfile
@@ -65,7 +63,7 @@ class UserProfileForm(forms.ModelForm):
                 field.choices = field.choices[1:]
 
     class Meta:
-        fields = ('gender', 'uf', 'birthdate', 'first_name', 'last_name', 'username')
+        fields = ('gender', 'uf', 'birthdate', 'first_name', 'last_name', 'username', 'avatar')
         model = UserProfile
 
     def clean_username(self, **kwargs):
