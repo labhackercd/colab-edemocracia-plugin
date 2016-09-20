@@ -4,8 +4,8 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
     @include breakpoint(small only) {
       padding-bottom: 1rem;
       padding-top: 1rem;
@@ -42,7 +42,7 @@
 
   &__logo {
     max-width: 100%;
-    width: 15rem;
+    width: 12rem;
     margin-bottom: 2rem;
     @include breakpoint(small only) {
       width: 12rem;
@@ -50,7 +50,7 @@
   }
 
   &__text {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
     @include breakpoint(small only) {
       font-size: 1.2rem; 
@@ -63,11 +63,11 @@
 
   &__title {
     position: relative;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 1rem;
-    padding-top: 1.5rem;
+    padding-top: 1rem;
     text-indent: -0.2rem;
     width: 100%;
     &::before {
@@ -77,7 +77,7 @@
       left: 0;
       width: 30rem;
       max-width: 90%;
-      height: 1rem;
+      height: 0.7rem;
       @include breakpoint(small only) {
         margin: auto;
         right: 0;
@@ -99,10 +99,10 @@
 
 .section--login {
   background: linear-gradient(45deg, #0d2625 0%, #134836 100%);
-  padding: 4rem 0;
+  padding: 2.5rem 0;
 
   @include breakpoint(small only) {
-    padding: 2rem 0;
+    padding: 1rem 0;
   }
 
   .section__info {
@@ -121,14 +121,14 @@
     }
 
     &--icon {
-      height: 10rem;
+      height: 9rem;
       @include breakpoint(small only) {
         height: 9rem;
       }
     }
 
     &--text {
-      height: 8rem;
+      height: 7rem;
       @include breakpoint(small only) {
         height: 6rem;
       }
@@ -136,7 +136,6 @@
   }
 
   .section__text {
-    font-size: 1.4rem;
     font-weight: 700;
     color: #a9de8c;
     text-align: left;
