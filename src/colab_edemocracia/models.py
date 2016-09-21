@@ -72,9 +72,9 @@ def avatar_validation(image):
 
 
 class UserProfile(models.Model):
-    gender = models.CharField(max_length=999, choices=GENDER_CHOICES, null=True)
-    uf = models.CharField(max_length=2, choices=UF_CHOICES, null=True)
-    birthdate = models.DateField(null=True)
+    gender = models.CharField(max_length=999, choices=GENDER_CHOICES, blank=True, null=True)
+    uf = models.CharField(max_length=2, choices=UF_CHOICES, null=True, blank=True)
+    birthdate = models.DateField(blank=True, null=True)
     user = models.OneToOneField("accounts.User", related_name='profile')
     prefered_themes = models.ManyToManyField('colab_discourse.DiscourseCategory')
     avatar = ImageCropField(upload_to="avatars/", null=True, blank=True,
