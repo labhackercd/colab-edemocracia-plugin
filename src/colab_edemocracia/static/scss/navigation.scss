@@ -1,0 +1,48 @@
+@import '../bower_components/foundation-sites/scss/foundation';
+@import '../bower_components/foundation-sites/scss/util/util';
+@import 'settings.type';
+@import 'settings.animation';
+@import 'tools.animation';
+@import 'tools.material-shadow';
+@import 'settings.colors';
+@import 'components.hamburguer';
+@import 'components.navigation';
+
+@include foundation-visibility-classes;
+
+.has-edem-nav {
+  margin-top: 64px;
+  padding-top: 0;
+}
+
+.navigation {
+  position: absolute;
+  font-family: 'Open Sans', Helvetica, Roboto, Arial, sans-serif;
+  font-size: 16px;
+  box-sizing: border-box;
+  line-height: inherit;
+  z-index: 10000000;
+
+  i {
+    display: flex;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+}
+.navigation * {
+  box-sizing: border-box;
+}
+
+.menu-list__link {
+  font-size: inherit;
+}
+
+.search-form__input {
+  font-family: 'Open Sans', Helvetica, Roboto, Arial, sans-serif;
+}

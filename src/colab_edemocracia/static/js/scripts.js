@@ -1,4 +1,4 @@
-$(document).foundation();
+
 
 // Quick proof of concept for search form toggle
 // Would like to make CSS only
