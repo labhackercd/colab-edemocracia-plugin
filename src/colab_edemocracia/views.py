@@ -3,6 +3,7 @@ from django.views.generic import View
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
+from django.core.mail import EmailMultiAlternatives
 from django.db.models import Q
 from django.shortcuts import redirect, resolve_url
 from django.views.decorators.debug import sensitive_post_parameters
@@ -18,6 +19,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.response import TemplateResponse
+from django.template.loader import render_to_string
 from django.views.generic import UpdateView
 
 from .forms.accounts import SignUpForm, UserProfileForm
@@ -159,7 +161,7 @@ class SignUpView(View):
         location = reverse('email_view',
                            kwargs={'key': email.validation_key})
         verification_url = request.build_absolute_uri(location)
-        EmailAddressValidation.verify_email(email, verification_url)
+        self.send_email(user.email, verification_url)
 
         # Check if the user's email have been used previously in the mainling
         # lists to link the user to old messages
@@ -177,6 +179,14 @@ class SignUpView(View):
         email_addr.save()
 
         return redirect(reverse('colab_edemocracia:home'))
+
+    def send_email(self, email, verification_url):
+        html = render_to_string('emails/edemocracia_new_user.html',
+                                {'verification_url': verification_url})
+        subject = "Confirmação de cadastro"
+        mail = EmailMultiAlternatives(subject=subject, to=[email])
+        mail.attach_alternative(html, 'text/html')
+        mail.send()
 
 
 class ProfileView(UpdateView):
