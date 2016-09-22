@@ -7,6 +7,7 @@
 @import 'settings.colors';
 @import 'components.hamburguer';
 @import 'components.navigation';
+@import 'components.user-profile';
 
 @include foundation-visibility-classes;
 
@@ -24,7 +25,7 @@
   z-index: 10000000;
 
   i {
-    display: flex;
+    display: inline-flex;
   }
 
   img {
@@ -46,3 +47,19 @@
 .search-form__input {
   font-family: 'Open Sans', Helvetica, Roboto, Arial, sans-serif;
 }
+
+.user-profile {
+  width: 3em;
+  height: 3em;
+  border: 0.3em solid;
+  border-color: #123533;
+  font-size: inherit;
+  line-height: 4.6em;
+  color: white;
+  background-color: #16403e;
+
+  .icon-user {
+    font-size: 2em;
+  }
+}
+
