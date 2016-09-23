@@ -111,3 +111,49 @@ $('.c-hamburger')
     $(this).toggleClass('toggled');
     $('.navigation-wrapper').toggleClass('toggled');
 });
+
+
+// Input file name show 
+
+(function($, window, document, undefined)
+{
+  $('.button--file-input').each( function()
+  {
+    var $input = $(this),
+      $label = $input.next('label'),
+      labelVal = $label.html();
+
+    $input.on('change', function(e)
+    {
+      var fileName = '';
+
+      if(this.files && this.files.length > 1)
+        fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);
+      else if(e.target.value)
+        fileName = e.target.value.split('\\').pop();
+
+      if(fileName)
+        $label.html(fileName);
+      else
+        $label.html(labelVal);
+    });
+  });
+})(jQuery, window, document);
+
+// User profile image input preview
+
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('.user-profile--profile-page').attr('style','background-image:url("'+ e.target.result + '")');
+        }
+        reader.readAsDataURL(input.files[0]);
+        $('.user-profile--profile-page i').hide();
+    }
+}
+
+$(".user-figure__file-button").change(function(){
+    readURL(this);
+});
