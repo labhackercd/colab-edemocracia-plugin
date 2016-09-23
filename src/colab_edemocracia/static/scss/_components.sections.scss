@@ -235,6 +235,18 @@
     padding-bottom: 1rem;
   }
 
+  & .section__block--profile-form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  & .section__caption--profile-form {
+    
+  }
+
   & .user-profile--profile-page {
     width: 7.5rem;
     font-size: 6rem;

@@ -14,3 +14,14 @@
   background-color: lighten($primary-color,3%);
   @include transition-default(border-color);
 }
+
+.user-figure__file-button {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  padding: 0;
+  margin: 0;
+}
