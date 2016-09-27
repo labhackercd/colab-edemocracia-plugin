@@ -260,6 +260,13 @@
     }
   }
 
+  & .user-profile__label--change-picture {
+    max-width: 9.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
   & .user-profile--password {
     border: none;
     background-color: transparent;
