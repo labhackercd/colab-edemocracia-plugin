@@ -13,6 +13,11 @@
   overflow: hidden;
   background-color: lighten($primary-color,3%);
   @include transition-default(border-color);
+
+  &--password {
+    border: none;
+    background-color: transparent;
+  }
 }
 
 .user-figure__file-button {

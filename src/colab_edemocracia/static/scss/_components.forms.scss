@@ -14,7 +14,7 @@
     margin: 0rem 0.5rem 1rem;
 
     &--medium {
-      max-width: 18rem;
+      max-width: 17rem;
       @include breakpoint(small only) {
         max-width: initial;
       }

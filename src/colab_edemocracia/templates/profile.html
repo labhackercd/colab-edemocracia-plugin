@@ -38,6 +38,7 @@
       </div>
       <form class="form" method="post" role="form" enctype="multipart/form-data" action="{% url 'colab_edemocracia:profile' %}" data-abide novalidate>
         {% csrf_token %}
+
         <div class="section__block e-columns small-12 medium-4">
           <span class="section__caption">Foto de perfil</span>
           <div class="user-figure">
@@ -53,11 +54,21 @@
           <input class="user-figure__file-button button--file-input" name="avatar" id="id_avatar" type="file" data-multiple-caption="{count} files selected" multiple>
           <label class="user-figure__file-label button" for="id_avatar">Alterar Foto</label>
         </div>
-        <div class="section__block section__block--profile-form e-columns small-12 medium-8">
+
+        <div class="section__block e-columns small-12 medium-4">
+          <span class="section__caption">Minha Senha</span>
+          <div class="user-figure">
+            <div class="user-profile user-profile--password">
+              <i class="icon icon-lock" aria-hidden="true"></i>
+            </div>
+          </div>
+          <a class="button" href="{% url 'colab_edemocracia:password_change' %}">Alterar Senha</a>
+        </div>
+
+        <div class="section__block section__block--profile-form e-columns small-12 medium-9">
           <span class="section__caption section__caption--profile-form">Meus dados</span>
-          
-          
-          <label class="form__input-wrapper input-group {% if form.username.errors %}is-invalid-label{% endif %}">
+                    
+          <label class="form__input-wrapper form__input-wrapper--small input-group {% if form.username.errors %}is-invalid-label{% endif %}">
             <i class="form__icon icon icon-user input-group-label" aria-hidden="true"></i>
             <span class="show-for-sr">Nome de usuário</span>
             <div class="form__input-container">
@@ -73,7 +84,7 @@
             </div>
           </label>
           
-          <label class="form__input-wrapper form__input-wrapper--small input-group">
+          <label class="form__input-wrapper form__input-wrapper--medium input-group">
             <i class="form__icon icon icon-user input-group-label" aria-hidden="true"></i>
             <span class="show-for-sr">Nome</span>
             <div class="form__input-container">
@@ -88,7 +99,7 @@
             </div>
           </label>
           
-          <label class="form__input-wrapper form__input-wrapper--small input-group">
+          <label class="form__input-wrapper form__input-wrapper--medium input-group">
             <i class="form__icon icon icon-user input-group-label" aria-hidden="true"></i>
             <span class="show-for-sr">Sobrenome</span>
             <div class="form__input-container">
@@ -103,7 +114,7 @@
             </div>
           </label>
           
-          <label class="form__input-wrapper form__input-wrapper--small input-group">
+          <label class="form__input-wrapper form__input-wrapper--micro input-group">
             <i class="form__icon icon icon-transgender input-group-label" aria-hidden="true"></i>
             <span class="show-for-sr">Sexo</span>
             <div class="form__input-container">
@@ -129,7 +140,7 @@
             </div>
           </label>
           
-          <label class="form__input-wrapper form__input-wrapper--small input-group">
+          <label class="form__input-wrapper form__input-wrapper--micro input-group">
             <i class="form__icon icon icon-calendar input-group-label" aria-hidden="true"></i>
             <span class="show-for-sr">Data de nascimento</span>
             <div class="form__input-container">
@@ -152,11 +163,7 @@
             </div>
           </label>
         
-          <button class="button button--profile">Atualizar</button>
-        </div>
-        <div class="section__block e-columns small-12">
-          <span class="section__caption">Minha Senha</span>
-          <a class="button" href="{% url 'colab_edemocracia:password_change' %}">Alterar Senha</a>
+          <button class="button button--profile">Atualizar Dados</button>
         </div>
       </div>
     </div>

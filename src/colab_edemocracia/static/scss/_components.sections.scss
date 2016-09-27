@@ -244,7 +244,8 @@
   }
 
   & .section__caption--profile-form {
-    
+    width: 100%;
+    text-align: center;
   }
 
   & .user-profile--profile-page {
@@ -253,6 +254,15 @@
     line-height: 9.5rem;
     height: 7.5rem;
     border-width: 0.5rem;
+  }
+
+  & .user-profile--password {
+    border: none;
+    background-color: transparent;
+    width: 7.5rem;
+    font-size: 6rem;
+    line-height: 9.5rem;
+    height: 7.5rem;
   }
 
   .user-figure {
