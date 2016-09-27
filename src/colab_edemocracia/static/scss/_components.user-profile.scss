@@ -13,11 +13,6 @@
   overflow: hidden;
   background-color: lighten($primary-color,3%);
   @include transition-default(border-color);
-
-  &--password {
-    border: none;
-    background-color: transparent;
-  }
 }
 
 .user-figure__file-button {
@@ -33,4 +28,7 @@
 
 .user-figure__file-label {
   word-break: break-all;
+  vertical-align: initial !important;
+  margin: 0 0 1rem 0 !important;
+  // Damn you Foundation for making me use !important :(
 }

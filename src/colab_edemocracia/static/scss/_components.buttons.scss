@@ -47,4 +47,23 @@
     width: 100%;
     margin: 0 0.5rem;
   }
+
+  &--type-override {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    padding: 0;
+    margin: 0;
+  }
+  
+  &--label-override {
+    word-break: break-all;
+    vertical-align: initial !important;
+    margin: 0 0 1rem 0 !important;
+    // Damn you Foundation for making me use !important :(
+  }
+
 }

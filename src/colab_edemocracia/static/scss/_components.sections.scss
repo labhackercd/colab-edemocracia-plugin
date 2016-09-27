@@ -254,6 +254,10 @@
     line-height: 9.5rem;
     height: 7.5rem;
     border-width: 0.5rem;
+
+    &.no-bg {
+      background-image: none !important;
+    }
   }
 
   & .user-profile--password {

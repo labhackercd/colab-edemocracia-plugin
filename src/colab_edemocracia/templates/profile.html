@@ -39,23 +39,26 @@
       <form class="form" method="post" role="form" enctype="multipart/form-data" action="{% url 'colab_edemocracia:profile' %}" data-abide novalidate>
         {% csrf_token %}
 
-        <div class="section__block e-columns small-12 medium-4">
+        <div class="section__block e-columns small-12 medium-6 large-4">
           <span class="section__caption">Foto de perfil</span>
           <div class="user-figure">
             <div class="user-profile user-profile--profile-page" {% if object.avatar %}style="background-image: url('{{ object.get_avatar_140x140 }}')"{% endif %}>
-            {% if not object.avatar %}
-              <i class="icon icon-user" aria-hidden="true"></i>
-            {% endif %}
+              {% if not object.avatar %}
+                <i class="icon icon-user" aria-hidden="true"></i>
+              {% endif %}
             </div>
+          </div>
+          <div class="user-profile__actions">
+            <input class="user-profile__action--change-picture button--type-override button--file" id="id_avatar" name="avatar" type="file" data-multiple-caption="{count} files selected" multiple>
+            <label class="button--label-override button" for="id_avatar">Alterar</label>
             {% if object.avatar %}
-              <span><input id="avatar-clear_id" name="avatar-clear" type="checkbox"> <label for="avatar-clear_id">Limpar</label></span>
+              <input class="user-profile__action--clear-picture button--type-override button--checkbox" id="avatar-clear_id" name="avatar-clear" type="checkbox"> 
+              <label class="button--label-override button alert" for="avatar-clear_id">Remover</label>
             {% endif %}
           </div>
-          <input class="user-figure__file-button button--file-input" name="avatar" id="id_avatar" type="file" data-multiple-caption="{count} files selected" multiple>
-          <label class="user-figure__file-label button" for="id_avatar">Alterar Foto</label>
         </div>
 
-        <div class="section__block e-columns small-12 medium-4">
+        <div class="section__block e-columns small-12 medium-6 large-4">
           <span class="section__caption">Minha Senha</span>
           <div class="user-figure">
             <div class="user-profile user-profile--password">

@@ -117,7 +117,7 @@ $('.c-hamburger')
 
 (function($, window, document, undefined)
 {
-  $('.button--file-input').each( function()
+  $('.button--file').each( function()
   {
     var $input = $(this),
       $label = $input.next('label'),
@@ -142,7 +142,7 @@ $('.c-hamburger')
 
 // User profile image input preview
 
-function readURL(input) {
+function changeUserImg(input) {
 
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -153,7 +153,29 @@ function readURL(input) {
         $('.user-profile--profile-page i').hide();
     }
 }
+$('.user-profile__action--change-picture').change(function(){
+    changeUserImg(this);
 
-$(".user-figure__file-button").change(function(){
-    readURL(this);
+    // Uncheck clear image if is checked.
+    if ($('.user-profile__action--clear-picture').is(':checked')) {
+      $('.user-profile__action--clear-picture').click();
+    }
+});
+
+// Hide user image and change label when clear picture button is checked
+
+$('.user-profile__action--clear-picture').change(function(){
+  if ($(this).is(':checked')) {
+    $(this).next('label').html('Cancelar remoção');
+    $(this).next('label').removeClass('alert');
+    $(this).next('label').addClass('warning');
+    $('.user-profile--profile-page').addClass('no-bg');
+    $('.user-profile--profile-page').html('<i class="icon icon-user" aria-hidden="true"></i>');
+  } else {
+    $(this).next('label').html('Remover');
+    $('.user-profile--profile-page').html('');
+    $(this).next('label').addClass('alert');
+    $(this).next('label').removeClass('warning');
+    $('.user-profile--profile-page').removeClass('no-bg');
+  }
 });
