@@ -67,7 +67,7 @@ def login(request, template_name='registration/login.html',
 
     wikilegis_data = WikilegisBill.objects.filter(status='published')
     wikilegis_data = wikilegis_data.order_by('-modified')
-    discourse_data = DiscourseTopic.objects.all()
+    discourse_data = DiscourseTopic.objects.filter(visible=True)
     discourse_data = discourse_data.order_by('-last_posted_at')
 
     wikilegis_query = Q()
