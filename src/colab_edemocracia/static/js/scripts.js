@@ -104,6 +104,21 @@ $('.category-list__button')
       {csrftoken: getCookie("csrftoken"),
        category_slug: $(this).attr('slug')}, null
     )
+
+    var allCategoriesSelected = true
+    $('.category-list__button').each(function() {
+      if (!$(this).hasClass('active')) {
+        allCategoriesSelected = false;
+      }
+    })
+
+    if (allCategoriesSelected) {
+      $('.button--select-all').addClass('deselect');
+      $('.button--select-all').html('Deselecionar todos');
+    } else {
+      $('.button--select-all').removeClass('deselect');
+      $('.button--select-all').html('Selecionar todos');
+    }
 });
 
 $('.button--select-all')
