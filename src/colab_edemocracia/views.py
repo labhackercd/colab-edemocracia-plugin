@@ -222,3 +222,20 @@ class UpdateUserPreferedTheme(View):
             profile.prefered_themes.add(category)
 
         return HttpResponse('')
+
+
+class SetAllThemes(View):
+
+    http_method_names = ['post']
+
+    def post(self, request):
+        action = request.POST.get('action')
+        profile = UserProfile.objects.get_or_create(user=request.user)[0]
+
+        if action == 'select':
+            for category in DiscourseCategory.objects.all():
+                profile.prefered_themes.add(category)
+        elif action == 'deselect':
+            profile.prefered_themes.clear()
+
+        return HttpResponse('')

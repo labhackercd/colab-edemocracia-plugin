@@ -106,6 +106,27 @@ $('.category-list__button')
     )
 });
 
+$('.button--select-all')
+  .click(function() {
+    if ($('.button--select-all').hasClass('deselect')) {
+      $('.category-list__button').removeClass('active');
+      $('.button--select-all').removeClass('deselect');
+      $('.button--select-all').html('Selecionar todos');
+      $.post('/profile/set_all_themes/',
+        {csrftoken: getCookie("csrftoken"),
+         action: 'deselect'}, null
+      )
+    } else {
+      $('.category-list__button').addClass('active');
+      $('.button--select-all').addClass('deselect');
+      $('.button--select-all').html('Deselecionar todos');
+      $.post('/profile/set_all_themes/',
+        {csrftoken: getCookie("csrftoken"),
+         action: 'select'}, null
+      )
+    }
+});
+
 $('.c-hamburger')
   .click(function() {
     $(this).toggleClass('toggled');
@@ -113,7 +134,7 @@ $('.c-hamburger')
 });
 
 
-// Input file name show 
+// Input file name show
 
 (function($, window, document, undefined)
 {

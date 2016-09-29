@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load staticfiles widget_tweaks %}
+{% load staticfiles widget_tweaks edem_utils %}
 {% block title %}Perfil{% endblock %}
 {% block main %}
   <section class="section section--category-select">
@@ -26,11 +26,13 @@
               </li>
             {% endfor %}
           </ul>
+          {% get_select_all_info as select_all_info %}
+          <button class="button button--select-all {{select_all_info.class}}">{{select_all_info.text}}</button>
         </div>
       </div>
     </div>
   </section>
-  
+
   <section class="section section--user-profile">
     <div class="e-row">
       <div class="section__block section__block--title e-columns small-12">
@@ -52,7 +54,7 @@
             <input class="user-profile__action--change-picture button--type-override button--file" id="id_avatar" name="avatar" type="file" data-multiple-caption="{count} files selected" multiple>
             <label class="user-profile__label--change-picture button--label-override button" for="id_avatar">Alterar</label>
             {% if object.avatar %}
-              <input class="user-profile__action--clear-picture button--type-override button--checkbox" id="avatar-clear_id" name="avatar-clear" type="checkbox"> 
+              <input class="user-profile__action--clear-picture button--type-override button--checkbox" id="avatar-clear_id" name="avatar-clear" type="checkbox">
               <label class="button--label-override button alert" for="avatar-clear_id">Remover</label>
             {% endif %}
           </div>
@@ -70,14 +72,14 @@
 
         <div class="section__block section__block--profile-form e-columns small-12 medium-9">
           <span class="section__caption section__caption--profile-form">Meus dados</span>
-                    
+
           <label class="form__input-wrapper form__input-wrapper--small input-group {% if form.username.errors %}is-invalid-label{% endif %}">
             <i class="form__icon icon icon-user input-group-label" aria-hidden="true"></i>
             <span class="show-for-sr">Nome de usuário</span>
             <div class="form__input-container">
-              
+
               <input class="form__input input input-group-field {% if form.username.errors %}is-invalid-input{% endif %}" type="text" id="id_username" name="username" value="{{ form.username.value|default_if_none:"" }}" placeholder="Nome de usuário" required/>
-              
+
               {% if form.username.errors %}
                 <div class="form__error form-error is-visible">
                   <span class="form__error-message">{{ form.username.errors.as_text }}</span>
@@ -86,7 +88,7 @@
               {% endif %}
             </div>
           </label>
-          
+
           <label class="form__input-wrapper form__input-wrapper--medium input-group">
             <i class="form__icon icon icon-user input-group-label" aria-hidden="true"></i>
             <span class="show-for-sr">Nome</span>
@@ -101,7 +103,7 @@
               {% endif %}
             </div>
           </label>
-          
+
           <label class="form__input-wrapper form__input-wrapper--medium input-group">
             <i class="form__icon icon icon-user input-group-label" aria-hidden="true"></i>
             <span class="show-for-sr">Sobrenome</span>
@@ -116,7 +118,7 @@
               {% endif %}
             </div>
           </label>
-          
+
           <label class="form__input-wrapper form__input-wrapper--micro input-group">
             <i class="form__icon icon icon-transgender input-group-label" aria-hidden="true"></i>
             <span class="show-for-sr">Sexo</span>
@@ -129,7 +131,7 @@
               </select>
             </div>
           </label>
-          
+
           <label class="form__input-wrapper form__input-wrapper--micro input-group">
             <i class="form__icon icon icon-map-marker input-group-label" aria-hidden="true"></i>
             <span class="show-for-sr">UF</span>
@@ -142,7 +144,7 @@
               </select>
             </div>
           </label>
-          
+
           <label class="form__input-wrapper form__input-wrapper--micro input-group">
             <i class="form__icon icon icon-calendar input-group-label" aria-hidden="true"></i>
             <span class="show-for-sr">Data de nascimento</span>
@@ -157,7 +159,7 @@
               {% endif %}
             </div>
           </label>
-          
+
           <label class="form__input-wrapper form__input-wrapper--medium input-group">
             <i class="form__icon icon icon-envelope input-group-label" aria-hidden="true"></i>
             <span class="show-for-sr">E-mail</span>
@@ -165,7 +167,7 @@
               <input class="form__input input input-group-field" type="email" id="id_email" name="email" value="{{ request.user.email }}" placeholder="E-mail" readonly="readonly" />
             </div>
           </label>
-        
+
           <button class="button button--profile">Atualizar Dados</button>
         </div>
       </div>
