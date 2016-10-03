@@ -9,6 +9,44 @@
     {% include "login.html" %}
   {% endif %}
 
+  <section class="section section--filter">
+    <div class="section__content">
+      <a class="show-filters" href=""><h1 class="section__title">Selecione os temas de seu interesse <i class="icon icon-angle-down"></i></h1></a>
+    </div>
+  </section>
+
+  <section class="section section--hide section--filter-select">
+    <div class="e-row">
+      <div class="e-column">
+        <div class="section__content">
+          <div class="section__info">
+            <p class="section__description">Filtre as discussões e projetos de lei e veja apenas o que você gosta!</p>
+          </div>
+          <ul class="category-list">
+            {% for category in categories %}
+              <li class="category-list__item">
+                {% if category.slug in selected_filters_list %}
+                  <button class="category-list__button category-list__button--{{category.slug}} active" name="{{category.slug}}" slug="{{category.slug}}">
+                {% else %}
+                  <button class="category-list__button category-list__button--{{category.slug}}" name="{{category.slug}}" slug="{{category.slug}}">
+                {% endif %}
+                <div class="category-list__icon">
+                  <i class="icon icon-{{category.slug}}"></i>
+                </div>
+                <span class="category-list__text">{{category.name}}</span>
+                </button>
+              </li>
+            {% endfor %}
+          </ul>
+          <form action="{% url 'colab_edemocracia:home' %}">
+            <input class="input--filter" name="filter" type="hidden" value="{{selected_filters}}">
+            <button class="button button--expanded">Filtrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section section--wikilegis">
     <div class="e-row e-expanded">
       <div class="section__info section__block e-columns small-12 large-3">
@@ -52,6 +90,14 @@
                   </div>
                 </li>
               </a>
+            {% empty %}
+              <li>
+                <div class="section__content-wrapper section__content-wrapper--center text-center">
+                  <p class="section__text">
+                    Desculpe. Não encontramos nenhum projeto de lei com os filtros acima.
+                  </p>
+                </div>
+              </li>
             {% endfor %}
             </ul>
           </div>
@@ -107,6 +153,14 @@
                     </div>
                   </li>
                 </a>
+              {% empty %}
+                <li>
+                  <div class="section__content-wrapper section__content-wrapper--center text-center">
+                    <p class="section__text">
+                      Desculpe. Não encontramos nenhuma discussão com os filtros acima.
+                    </p>
+                  </div>
+                </li>
               {% endfor %}
             </ul>
           </div>
@@ -146,3 +200,7 @@
   </section>
 
 {% endblock main %}
+
+{% block extra_js %}
+  {% include "filter.js" %}
+{% endblock extra_js %}

@@ -70,6 +70,20 @@ def login(request, template_name='registration/login.html',
     discourse_data = DiscourseTopic.objects.filter(visible=True)
     discourse_data = discourse_data.order_by('-last_posted_at')
 
+    selected_filters = request.GET.get('filter', "")
+    wikilegis_filter = Q()
+    discourse_filter = Q()
+
+    if selected_filters:
+        selected_filters = selected_filters.split(',')
+
+        for category in selected_filters:
+            wikilegis_filter = wikilegis_filter | Q(theme=category)
+            discourse_filter = discourse_filter | Q(category__slug=category)
+
+    wikilegis_data = wikilegis_data.filter(wikilegis_filter)
+    discourse_data = discourse_data.filter(discourse_filter)
+
     wikilegis_query = Q()
     discourse_query = Q()
 
@@ -91,6 +105,9 @@ def login(request, template_name='registration/login.html',
         'site_name': current_site.name,
         'wikilegis_data': wikilegis_data,
         'discourse_data': discourse_data,
+        'categories': DiscourseCategory.objects.all(),
+        'selected_filters_list': selected_filters,
+        'selected_filters': ','.join(selected_filters),
     }
 
     return TemplateResponse(request, template_name, context,

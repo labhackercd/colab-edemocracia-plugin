@@ -1,4 +1,8 @@
 .section {
+  &--hide {
+    display: none;
+  }
+
   &__block {
     display: flex;
     justify-content: flex-start;
@@ -53,7 +57,7 @@
     font-size: 1.2rem;
     font-weight: 700;
     @include breakpoint(small only) {
-      font-size: 1.2rem; 
+      font-size: 1.2rem;
     }
   }
 
@@ -343,5 +347,60 @@
 
   & .section__text {
     font-weight: 300;
+  }
+}
+
+.section--filter {
+  background-color: #dfdfdf;
+
+  & .section__title {
+    font-size: 1rem;
+    text-align: center;
+    color: #213d4d;
+
+    & .icon {
+      vertical-align: bottom;
+      font-size: 1.3rem;
+      transition-property: all;
+      transition-duration: 0.5s;
+    }
+  }
+  & .active {
+    & .icon{
+      -ms-transform: rotate(90deg);
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+      transition-property: all;
+      transition-duration: 0.5s;
+    }
+  }
+}
+
+.section--filter-select {
+  background-color: #d1d1d1;
+  padding: 2rem 0;
+
+  & .section__info {
+    align-items: flex-start;
+    text-align: left;
+    padding: 0;
+    background-color: #d1d1d1;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #1c5c44;
+  }
+
+  & .section__title {
+    margin: 0;
+    margin-bottom: 0.5rem;
+    color: #1c5c44;
+
+    &::before {
+      background-color: #f98957;
+    }
+  }
+
+  & .section__link {
+    color: #2c383a;
   }
 }

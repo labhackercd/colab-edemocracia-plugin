@@ -168,9 +168,13 @@
             </div>
           </label>
 
-          <button class="button button--profile">Atualizar Dados</button>
+          <button class="button button--expanded">Atualizar Dados</button>
         </div>
       </div>
     </div>
   </section>
 {% endblock main %}
+
+{% block extra_js %}
+  {% include "profile.js" %}
+{% endblock extra_js %}

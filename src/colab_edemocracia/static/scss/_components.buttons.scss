@@ -43,7 +43,7 @@
     }
   }
 
-  &--profile {
+  &--expanded {
     width: 100%;
     margin: 0 0.5rem;
   }
@@ -58,7 +58,7 @@
     padding: 0;
     margin: 0;
   }
-  
+
   &--label-override {
     word-break: break-all;
     vertical-align: top !important;
