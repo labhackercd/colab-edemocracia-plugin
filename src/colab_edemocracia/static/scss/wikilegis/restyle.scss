@@ -4,3 +4,24 @@
     padding: 0;
   }
 }
+
+body.dashboard {
+  padding-top: 4em;
+  @include breakpoint(small only) {
+    padding-top: 3em;
+  }
+
+  @media print {
+    padding-top: 0;
+  }  
+  
+  & .navigation {
+    @media print {
+      display: none;
+    }  
+  }
+}
+
+.dashboard #template-body {
+  padding: 2em 15em;
+}
