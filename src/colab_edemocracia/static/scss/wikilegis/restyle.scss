@@ -1,4 +1,4 @@
-@media screen and (max-width: 39.9375em){
+@media screen and (max-width: 39.9375em) {
   .wiki-navbar {
     height: 48px;
     padding: 0;
@@ -7,7 +7,7 @@
 
 body.dashboard {
   padding-top: 4em;
-  @include breakpoint(small only) {
+  @media screen and (max-width: 39.9375em) {
     padding-top: 3em;
   }
 
