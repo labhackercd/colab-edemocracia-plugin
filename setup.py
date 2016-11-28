@@ -12,7 +12,7 @@ install_requires = [
     'django-libsass',
     'validate_email',
     'django-widget-tweaks==1.4.1',
-    'django-image-cropping',
+    'django-image-cropping<1.0.4',
     'easy_thumbnails'
 ]
 
