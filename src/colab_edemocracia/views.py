@@ -70,41 +70,42 @@ def login(request, template_name='registration/login.html',
     discourse_data = DiscourseTopic.objects.filter(visible=True)
     discourse_data = discourse_data.order_by('-last_posted_at')
 
+    if request.user.is_authenticated():
+        wikilegis_query = Q()
+        discourse_query = Q()
+        for category in request.user.profile.prefered_themes.all():
+            wikilegis_query = wikilegis_query | Q(theme=category.slug)
+            discourse_query = discourse_query | Q(category__slug=category.slug)
+
+        if len(wikilegis_data.filter(wikilegis_query)) != len(wikilegis_data):
+            wikilegis_data = list(wikilegis_data.filter(wikilegis_query)) + \
+                list(wikilegis_data.exclude(wikilegis_query))
+
+        if len(discourse_data.filter(discourse_query)) != len(discourse_data):
+            discourse_data = list(discourse_data.filter(discourse_query)) + \
+                list(discourse_data.exclude(discourse_query))
+
     selected_filters = request.GET.get('filter', "")
-    wikilegis_filter = Q()
-    discourse_filter = Q()
 
     if selected_filters:
+        wikilegis_filter = Q()
+        discourse_filter = Q()
         selected_filters = selected_filters.split(',')
 
         for category in selected_filters:
             wikilegis_filter = wikilegis_filter | Q(theme=category)
             discourse_filter = discourse_filter | Q(category__slug=category)
 
-    wikilegis_data = wikilegis_data.filter(wikilegis_filter)
-    discourse_data = discourse_data.filter(discourse_filter)
-
-    wikilegis_query = Q()
-    discourse_query = Q()
-
-    if request.user.is_authenticated():
-        for category in request.user.profile.prefered_themes.all():
-            wikilegis_query = wikilegis_query | Q(theme=category.slug)
-            discourse_query = discourse_query | Q(category__slug=category.slug)
-
-    wikilegis_data = list(wikilegis_data.filter(wikilegis_query)) + \
-        list(wikilegis_data.exclude(wikilegis_query))
-
-    discourse_data = list(discourse_data.filter(discourse_query)) + \
-        list(discourse_data.exclude(discourse_query))
+        wikilegis_data = wikilegis_data.filter(wikilegis_filter)
+        discourse_data = discourse_data.filter(discourse_filter)
 
     context = {
         'form': form,
         redirect_field_name: redirect_to,
         'site': current_site,
         'site_name': current_site.name,
-        'wikilegis_data': wikilegis_data,
-        'discourse_data': discourse_data,
+        'wikilegis_data': wikilegis_data[:10],
+        'discourse_data': discourse_data[:10],
         'categories': DiscourseCategory.objects.all(),
         'selected_filters_list': selected_filters,
         'selected_filters': ','.join(selected_filters),
