@@ -173,7 +173,7 @@
     <div class="e-row e-expanded">
 
       <div class="section__info section__block e-columns small-12 large-3">
-        <a href="http://audiencias.labhackercd.net">
+        <a href="{% url 'audiencias:colab_audiencias' '' %}">
           <img class="section__logo" src="{% static 'img/logo-audiencias-publicas.svg' %}" data-fallback="{% static 'img/logo-audiencias-publicas.png' %}">
         </a>
         <p class="section__text">
@@ -184,7 +184,7 @@
       <div class="section__block e-columns small-12 large-9">
         <div class="section__content">
           <h1 class="section__title">
-            <a class="section__link" href="http://audiencias.labhackercd.net" title="Acesse a versão de testes">
+            <a class="section__link" href="{% url 'audiencias:colab_audiencias' '' %}" title="Acesse a versão de testes">
               Pergunte aos Deputados
             </a>
           </h1>
@@ -192,7 +192,7 @@
             <p class="section__text">
               Participe ao vivo das Audiências Públicas Interativas, discutindo temas relevantes com outros cidadãos e enviando perguntas aos deputados!
             </p>
-            <a class="button large secondary hollow" role="button" href="http://audiencias.labhackercd.net">Acesse a versão de testes</a>
+            <a class="button large secondary hollow" role="button" href="{% url 'audiencias:colab_audiencias' '' %}">Acesse a versão de testes</a>
           </div>
         </div>
       </div>
