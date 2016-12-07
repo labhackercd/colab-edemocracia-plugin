@@ -13,7 +13,7 @@ install_requires = [
     'validate_email',
     'django-widget-tweaks==1.4.1',
     'django-appconf<1.0.2',
-    'django-image-cropping<1.0.'4,
+    'django-image-cropping<1.0.',
     'easy_thumbnails'
 ]
 
