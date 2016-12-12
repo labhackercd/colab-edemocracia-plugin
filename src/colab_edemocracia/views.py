@@ -11,16 +11,18 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.utils.http import is_safe_url
 from django.conf import settings
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import (
+    HttpResponseRedirect, HttpResponse, Http404, HttpResponseBadrequest
+)
 from django.contrib.auth import (
-    REDIRECT_FIELD_NAME, login as auth_login, update_session_auth_hash
+    REDIRECT_FIELD_NAME, login as auth_login, update_session_auth_hash, logout
 )
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.response import TemplateResponse
 from django.template.loader import render_to_string
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, FormView, RedirectView
 
 from .forms.accounts import SignUpForm, UserProfileForm
 from .models import UserProfile
@@ -257,3 +259,90 @@ class SetAllThemes(View):
             profile.prefered_themes.clear()
 
         return HttpResponse('')
+
+
+class WidgetLoginView(FormView):
+    form_class = AuthenticationForm
+    template_name = 'widget/login.html'
+
+    def form_valid(self, form):
+        login(self.request, form.get_user())
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        next_url = self.request.POST.get('next', None)
+        if next_url:
+            return next_url
+        else:
+            raise HttpResponseBadrequest()
+
+
+class WidgetLogoutView(RedirectView):
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return super(WidgetLogoutView, self).get(request, *args, **kwargs)
+
+    def get_redirect_url(self, *args, **kwargs):
+        next_url = self.request.GET.get('next', None)
+        if next_url:
+            return next_url
+        else:
+            raise HttpResponseBadrequest()
+
+
+class WidgetSignUpView(View):
+    http_method_names = [u'post']
+
+    def post(self, request):
+        if request.user.is_authenticated():
+            if request.kwargs['next']:
+                return reverse(request.kwargs['next'])
+            else:
+                return HttpResponseBadrequest()
+
+        user_form = SignUpForm(request.POST)
+
+        if not user_form.is_valid():
+            for error in user_form.errors.values():
+                messages.add_message(request, messages.ERROR, error[0])
+            return redirect(reverse('colab_edemocracia:widget_login'))
+
+        user = user_form.save(commit=False)
+        user.needs_update = False
+
+        user.is_active = False
+        user.set_password(user_form.cleaned_data['password'])
+        user.save()
+
+        email = EmailAddressValidation.create(user.email, user)
+
+        location = reverse('email_view',
+                           kwargs={'key': email.validation_key})
+        verification_url = request.build_absolute_uri(location)
+        self.send_email(user.email, verification_url)
+
+        # Check if the user's email have been used previously in the mainling
+        # lists to link the user to old messages
+        email_addr, created = EmailAddress.objects.get_or_create(
+            address=user.email)
+        if created:
+            messages.add_message(
+                request, messages.SUCCESS,
+                u"Usuário criado com sucesso! Por favor, verifique seu email"
+                " para concluir seu cadastro."
+            )
+            email_addr.real_name = user.get_full_name()
+
+        email_addr.user = user
+        email_addr.save()
+
+        return redirect(reverse('colab_edemocracia:widget_login'))
+
+    def send_email(self, email, verification_url):
+        html = render_to_string('emails/edemocracia_new_user.html',
+                                {'verification_url': verification_url})
+        subject = "Confirmação de cadastro"
+        mail = EmailMultiAlternatives(subject=subject, to=[email])
+        mail.attach_alternative(html, 'text/html')
+        mail.send()
