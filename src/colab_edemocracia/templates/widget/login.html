@@ -8,19 +8,44 @@
       <title>Wikilegis Widget</title>
       <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
       <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+      <link rel="stylesheet" href="{% static 'fontastic-labhacker/styles.css' %}" />
       {% compress css %}
+          <link rel="stylesheet" href="{% static 'scss/app.scss' %}" type="text/x-scss" />
           <link type="text/x-scss" rel="stylesheet" href="{% static "scss/wikilegis/widget-2.0.scss" %}" media="screen,projection"/>
       {% endcompress %}
   </head>
   <body>
 
+    <div class="messages-block">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="feedback-message callout {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert{% endif %}{% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}warning{% endif %}{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}success{% endif %}" data-closable>
+            <h5 class="feedback-message__title">
+              {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                Erro:
+              {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                Atenção!
+              {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                Sucesso!
+              {% endif %}
+            </h5>
+            <p class="feedback-message__text">{{message}}</p>
+            <button class="feedback-message__close close-button" aria-label="Dismiss alert" type="button" data-close>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+        <script>
+          setTimeout(function() {
+            $('.feedback-message__close').click();
+          }, 10000);
+        </script>
+      {% endif %}
+    </div>
     <div class="wikilegis-widget">
       <div class="wikilegis-widget__access-wrapper">
         <div class="wikilegis-widget__access">
           <img class="wikilegis-widget__image wikilegis-widget__image--top-logo" src="{% static 'img/logo-wikilegis.png' %}" alt="Logo Wikilegis">
-          {% for message in messages %}
-            {{ message }}
-          {% endfor %}
           {% if form.non_field_errors %}
               <div>
                   {{ form.non_field_errors }}
@@ -33,7 +58,7 @@
                 {% if form.username.errors %}
                   <label class="wikilegis-widget__input-error" for="username">• {% trans "Username is a necessary field" %}</label>
                 {% endif %}
-                <input class="wikilegis-widget__input wikilegis-widget__input--access" type="username" name="username" placeholder="{% trans 'Username' %}">
+                <input class="wikilegis-widget__input wikilegis-widget__input--access" type="text" name="username" placeholder="{% trans 'Username' %}">
                 {% if form.password.errors %}
                   <label class="wikilegis-widget__input-error" for="password">• {% trans "Password is a necessary field" %}</label>
                 {% endif %}
@@ -64,7 +89,7 @@
                   <label class="wikilegis-widget__input-error" for="email">• {% trans "Email is a necessary field" %}</label>
                 {% endif %}
                 <input class="wikilegis-widget__input wikilegis-widget__input--access" type="email" name="email" placeholder="{% trans 'Email' %}">
-                <input class="wikilegis-widget__input wikilegis-widget__input--access" type="username" name="username" placeholder="{% trans 'Username' %}">
+                <input class="wikilegis-widget__input wikilegis-widget__input--access" type="text" name="username" placeholder="{% trans 'Username' %}">
                 {% if form.password.errors %}
                   <label class="wikilegis-widget__input-error" for="password">• {% trans "Password is a necessary field" %}</label>
                 {% endif %}
@@ -83,8 +108,11 @@
 
     {% compress js %}
         <script type="text/javascript" src="{% static "bower_components/jquery/dist/jquery.js" %}"></script>
+        <script type="text/javascript" src="{% static 'foundation-sites/dist/foundation.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/foundation.js' %}"></script>
         <script type="text/javascript" src="{% static "js/widget-2.0.js" %}"></script>
         <script type="text/javascript" src="{% static "js/widget-scripts.js" %}"></script>
+        <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
     {% endcompress %}
 
     {% block extra_js %}

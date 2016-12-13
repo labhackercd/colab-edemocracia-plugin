@@ -295,7 +295,6 @@ class WidgetSignUpView(View):
     http_method_names = [u'post']
 
     def post(self, request):
-        import ipdb; ipdb.set_trace()
         if request.user.is_authenticated():
             if request.kwargs['next']:
                 return reverse(request.kwargs['next'])
