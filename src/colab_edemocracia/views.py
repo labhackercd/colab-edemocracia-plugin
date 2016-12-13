@@ -12,7 +12,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.utils.http import is_safe_url
 from django.conf import settings
 from django.http import (
-    HttpResponseRedirect, HttpResponse, Http404, HttpResponseBadrequest
+    HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 )
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME, login as auth_login, update_session_auth_hash, logout
@@ -274,7 +274,7 @@ class WidgetLoginView(FormView):
         if next_url:
             return next_url
         else:
-            raise HttpResponseBadrequest()
+            raise HttpResponseBadRequest()
 
 
 class WidgetLogoutView(RedirectView):
@@ -288,18 +288,19 @@ class WidgetLogoutView(RedirectView):
         if next_url:
             return next_url
         else:
-            raise HttpResponseBadrequest()
+            raise HttpResponseBadRequest()
 
 
 class WidgetSignUpView(View):
     http_method_names = [u'post']
 
     def post(self, request):
+        import ipdb; ipdb.set_trace()
         if request.user.is_authenticated():
             if request.kwargs['next']:
                 return reverse(request.kwargs['next'])
             else:
-                return HttpResponseBadrequest()
+                return HttpResponseBadRequest()
 
         user_form = SignUpForm(request.POST)
 
