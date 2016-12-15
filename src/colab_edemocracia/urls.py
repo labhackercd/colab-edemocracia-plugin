@@ -22,4 +22,8 @@ urlpatterns = patterns(
         name='password_change'),
     url(r'^password_change/done/$', 'django.contrib.auth.views.password_change_done',
         name='password_change_done'),
+    url(r'^widget/login/$', views.WidgetLoginView.as_view(),
+        name='widget_login'),
+    url(r'^widget/signup/$', views.WidgetSignUpView.as_view(),
+        name='widget_signup'),
 )
