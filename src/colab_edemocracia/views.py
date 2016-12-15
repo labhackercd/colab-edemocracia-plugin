@@ -277,20 +277,6 @@ class WidgetLoginView(FormView):
             raise HttpResponseBadRequest()
 
 
-class WidgetLogoutView(RedirectView):
-
-    def get(self, request, *args, **kwargs):
-        logout(request)
-        return super(WidgetLogoutView, self).get(request, *args, **kwargs)
-
-    def get_redirect_url(self, *args, **kwargs):
-        next_url = self.request.GET.get('next', None)
-        if next_url:
-            return next_url
-        else:
-            raise HttpResponseBadRequest()
-
-
 class WidgetSignUpView(View):
     http_method_names = [u'post']
 

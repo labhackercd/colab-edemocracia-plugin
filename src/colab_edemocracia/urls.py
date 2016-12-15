@@ -26,6 +26,4 @@ urlpatterns = patterns(
         name='widget_login'),
     url(r'^widget/signup/$', views.WidgetSignUpView.as_view(),
         name='widget_signup'),
-    url(r'^widget/logout/$', views.WidgetLogoutView.as_view(),
-        name='widget_logout'),
 )
