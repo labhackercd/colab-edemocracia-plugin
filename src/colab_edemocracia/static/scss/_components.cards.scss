@@ -80,6 +80,11 @@
     line-height: 1;
   }
 
+  &__image {
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+
   &__title {
     font-size: 1rem;
     text-transform: uppercase;
@@ -153,6 +158,60 @@
     margin-right: 0.8rem;
     font-size: 1.5rem;
   }
+
+  & .info-card__title {
+    font-size: 0.9rem;
+  }
+
+  & .info-card__text {
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  & .card-stats__value {
+    color: #1b9894;
+  }
+}
+
+.info-card--audiencias{
+
+  & .info-card__header {
+    justify-content: flex-start;
+    height: 3rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    color: white;
+
+    &--live {
+      background-color: #1d694f;
+    }
+
+    &--old-video {
+      background-color: #11496c;
+    }
+  }
+
+  & .info-card__icon {
+    margin-right: 0.8rem;
+    font-size: 1.5rem;
+
+    &--live {
+      color: #ff3333;
+      font-size: 0.9em;
+    }
+
+    &--old-video {
+      font-size: 0.9em;
+      border: 2px solid;
+      padding: 0.4em;
+      border-radius: 50%;
+
+      .icon {
+        transform: translateX(10%)
+      }
+    }
+  }
+
 
   & .info-card__title {
     font-size: 0.9rem;
