@@ -22,7 +22,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.response import TemplateResponse
 from django.template.loader import render_to_string
-from django.views.generic import UpdateView, FormView, RedirectView
+from django.views.generic import UpdateView, FormView
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 from .forms.accounts import SignUpForm, UserProfileForm
 from .models import UserProfile
@@ -265,6 +266,10 @@ class WidgetLoginView(FormView):
     form_class = AuthenticationForm
     template_name = 'widget/login.html'
 
+    @xframe_options_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(WidgetLoginView, self).dispatch(*args, **kwargs)
+
     def form_valid(self, form):
         login(self.request, form.get_user())
         return HttpResponseRedirect(self.get_success_url())
@@ -279,6 +284,10 @@ class WidgetLoginView(FormView):
 
 class WidgetSignUpView(View):
     http_method_names = [u'post']
+
+    @xframe_options_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(WidgetSignUpView, self).dispatch(*args, **kwargs)
 
     def post(self, request):
         if request.user.is_authenticated():
