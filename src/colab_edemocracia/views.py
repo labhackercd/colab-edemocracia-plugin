@@ -73,8 +73,8 @@ def login(request, template_name='registration/login.html',
     wikilegis_data = wikilegis_data.order_by('-modified')
     discourse_data = DiscourseTopic.objects.filter(visible=True)
     discourse_data = discourse_data.order_by('-last_posted_at')
-    live_videos = AudienciasVideo.objects.filter(closed_date__insnull=True)
-    history_videos = AudienciasVideo.objects.filter(closed_date__insnull=False)
+    live_videos = AudienciasVideo.objects.filter(closed_date=None)
+    history_videos = AudienciasVideo.objects.exclude(closed_date=None)
 
     if request.user.is_authenticated():
         wikilegis_query = Q()
@@ -112,8 +112,8 @@ def login(request, template_name='registration/login.html',
         'site_name': current_site.name,
         'wikilegis_data': wikilegis_data[:10],
         'discourse_data': discourse_data[:10],
-        'live_videos': live_videos,
-        'history_videos': history_videos[:5],
+        'live_videos': live_videos.order_by('-created'),
+        'history_videos': history_videos.order_by('-created')[:5],
         'categories': DiscourseCategory.objects.all(),
         'selected_filters_list': selected_filters,
         'selected_filters': ','.join(selected_filters),
