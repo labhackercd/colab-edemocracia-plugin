@@ -190,53 +190,57 @@
           </h1>
           <div class="section__content-wrapper section__content-wrapper--center">
             <ul class="card-list">
-              <a class="info-card__link" href="/expressao/t/legalizacao-da-maconha/40974">
+              {% for video in live_videos %}
+              <a class="info-card__link" href="{{ video.get_url }}">
                 <li class="info-card info-card--audiencias">
                   <div class="info-card__header info-card__header--live">
                     <div class="info-card__icon info-card__icon--live"><i class="icon icon-circle live-blink"></i></div>
                     <h2 class="info-card__title">Ao Vivo</h2>
                   </div>
-                  <img class="info-card__image" src="https://i.ytimg.com/vi/V2oXOlim0jc/mqdefault_live.jpg">
-                  <p class="info-card__text">MEIO AMBIENTE E DESENVOLVIMENTO SUSTENTÁVEL</p>
+                  <img class="info-card__image" src="{{ video.thumb_default }}">
+                  <p class="info-card__text">{{ video.title }}</p>
                   <div class="info-card__footer">
-                    <div class="card-stats">
+                    <!--<div class="card-stats">
                       <div class="card-stats__name">Participantes</div>
                       <div class="card-stats__value">14</div>
-                    </div>
+                    </div>-->
 
                     <div class="card-stats">
                       <div class="card-stats__name">Perguntas</div>
-                      <div class="card-stats__value">56</div>
+                      <div class="card-stats__value">{{ video.questions_count }}</div>
                     </div>
 
-                    <div class="card-stats">
+                    <!--<div class="card-stats">
                       <div class="card-stats__name">Tempo</div>
                       <div class="card-stats__value">01:15:25</div>
-                    </div>
+                    </div>-->
                   </div>
                 </li>
               </a>
-              <a class="info-card__link" href="/expressao/t/legalizacao-da-maconha/40974">
+              {% endfor %}
+              {% for video in history_videos %}
+              <a class="info-card__link" href="{{ video.get_url }}">
                 <li class="info-card info-card--audiencias">
                   <div class="info-card__header info-card__header--old-video">
                     <div class="info-card__icon info-card__icon--old-video"><i class="icon icon-play"></i></div>
                     <h2 class="info-card__title">Audiências que já aconteceram</h2>
                   </div>
-                  <img class="info-card__image" src="https://i.ytimg.com/vi/V2oXOlim0jc/mqdefault_live.jpg">
-                  <p class="info-card__text">MEIO AMBIENTE E DESENVOLVIMENTO SUSTENTÁVEL</p>
+                  <img class="info-card__image" src="{{ video.thumb_default }}">
+                  <p class="info-card__text">{{ video.title }}</p>
                   <div class="info-card__footer">
-                    <div class="card-stats">
+                    <!--<div class="card-stats">
                       <div class="card-stats__name">Participantes</div>
                       <div class="card-stats__value">14</div>
-                    </div>
+                    </div>-->
 
                     <div class="card-stats">
                       <div class="card-stats__name">Perguntas</div>
-                      <div class="card-stats__value">56</div>
+                      <div class="card-stats__value">{{ video.questions_count }}</div>
                     </div>
                   </div>
                 </li>
               </a>
+              {% endfor %}
             </ul>
           </div>
         </div>
