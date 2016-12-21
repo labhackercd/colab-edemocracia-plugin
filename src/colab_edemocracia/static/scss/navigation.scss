@@ -14,6 +14,14 @@
 .has-edem-nav {
   margin-top: 64px;
   padding-top: 0;
+
+  @media screen and (max-width: 39.9375em) {
+    margin-top: 48px;
+  }
+}
+
+#template-body {
+  position: relative;
 }
 
 .navigation {
@@ -34,7 +42,7 @@
     display: inline-block;
     vertical-align: middle;
   }
-  
+
 }
 .navigation * {
   box-sizing: border-box;

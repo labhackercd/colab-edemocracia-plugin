@@ -22,6 +22,14 @@ body.report {
   }
 }
 
+.has-edem-nav .wiki-navbar.fixed-top {
+  position: absolute;
+}
+
+.has-edem-nav.wiki-fixed .wiki-navbar.fixed-top {
+  position: fixed;
+}
+
 body.widget {
 
   & .navigation {
