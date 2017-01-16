@@ -1,0 +1,12 @@
+.site-wrapper {
+  padding-top: 64px;
+  transition: padding-top 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+
+  @media screen and (max-width: 39.9375em) {
+    padding-top: 48px;
+  }
+
+  body.headroom--unpinned & {
+    padding-top: 0;
+  }
+}

@@ -1,5 +1,3 @@
-
-
 // Quick proof of concept for search form toggle
 // Would like to make CSS only
 
@@ -17,6 +15,21 @@ document.addEventListener('click', (e) => {
     navBar.classList.remove('search-on');
   }
 });
+
+// Hide nav on scroll
+
+// grab an element
+var myElement = document.querySelector('body');
+// construct an instance of Headroom, passing the element
+var headroom  = new Headroom(myElement, {
+  "tolerance" : {
+        up : 15,
+        down : 0
+    }
+});
+// initialise
+headroom.init();
+$('body').addClass('headroom--pinned');
 
 $('.menu-list--dropdown')
   .click(function() {
