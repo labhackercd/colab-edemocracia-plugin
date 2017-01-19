@@ -34,22 +34,22 @@
     {% if page.has_other_pages %}
       <ul class="pagination text-center" role="navigation" aria-label="Paginação">
         {% if page.number == 1 %}
-          <li class="pagination-previous disabled">Anterior</li>
+          <li class="pagination__item pagination-previous disabled">Anterior</li>
         {% elif page %}
-          <li class="pagination-previous"><a href="{% append_to_get page=page.previous_page_number %}">Anterior</a></li>
+          <li class="pagination__item pagination-previous"><a href="{% append_to_get page=page.previous_page_number %}">Anterior</a></li>
         {% endif %}
         {% if page.has_previous %}
-          <li><a href="{% append_to_get page=page.previous_page_number %}" aria-label="Page {{ page.number|add:-1 }}">{{ page.number|add:-1 }}</a></li>
+          <li class="pagination__item"><a href="{% append_to_get page=page.previous_page_number %}" aria-label="Page {{ page.number|add:-1 }}">{{ page.number|add:-1 }}</a></li>
         {% endif %}
-        <li class="current">{{ page.number }}</li>
+        <li class="pagination__item current">{{ page.number }}</li>
         {% if page.has_next %}
-          <li><a href="{% append_to_get page=page.next_page_number %}" aria-label="Page {{ page.number|add:1 }}">{{ page.number|add:1 }}</a></li>
+          <li class="pagination__item "><a href="{% append_to_get page=page.next_page_number %}" aria-label="Page {{ page.number|add:1 }}">{{ page.number|add:1 }}</a></li>
         {% endif %}
 
         {% if page.has_next %}
-          <li class="pagination-next"><a href="{% append_to_get page=page.next_page_number %}" aria-label="Next page">Próximo</a></li>
+          <li class="pagination__item pagination-next"><a href="{% append_to_get page=page.next_page_number %}" aria-label="Next page">Próximo</a></li>
         {% else %}
-          <li class="pagination-next disabled">Próximo</li>
+          <li class="pagination__item pagination-next disabled">Próximo</li>
         {% endif %}
 
       </ul>
