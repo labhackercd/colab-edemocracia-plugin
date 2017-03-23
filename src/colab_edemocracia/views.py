@@ -30,7 +30,7 @@ from .models import UserProfile
 from colab.accounts.models import EmailAddressValidation, EmailAddress
 from colab_wikilegis.models import WikilegisBill
 from colab_discourse.models import DiscourseTopic, DiscourseCategory
-from colab_audiencias.models import AudienciasVideo
+from colab_audiencias.models import AudienciasRoom
 
 
 User = get_user_model()
@@ -73,8 +73,10 @@ def login(request, template_name='registration/login.html',
     wikilegis_data = wikilegis_data.order_by('-modified')
     discourse_data = DiscourseTopic.objects.filter(visible=True)
     discourse_data = discourse_data.order_by('-last_posted_at')
-    live_videos = AudienciasVideo.objects.filter(closed_date=None)
-    history_videos = AudienciasVideo.objects.exclude(closed_date=None)
+    live_videos = AudienciasRoom.objects.filter(
+        video__closed_date__isnull=True, is_visible=True)
+    history_videos = AudienciasRoom.objects.filter(
+        video__closed_date__isnull=False, is_visible=True)
 
     if request.user.is_authenticated():
         wikilegis_query = Q()
