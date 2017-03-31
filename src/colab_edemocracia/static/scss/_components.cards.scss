@@ -86,7 +86,7 @@
   }
 
   &__title {
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     font-weight: 600;
     margin: 0;
@@ -511,6 +511,16 @@
 
     .info-card__header {
       background-color: $turismo-color;
+    }
+  }
+}
+
+.info-card--reforma-politica {
+
+  &.info-card--discourse {
+
+    .info-card__header {
+      background-color: $reforma-politica-color;
     }
   }
 }

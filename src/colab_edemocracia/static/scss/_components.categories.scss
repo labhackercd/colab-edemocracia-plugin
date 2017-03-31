@@ -532,6 +532,24 @@
       }
     }
 
+    &--reforma-politica {
+      &::before {
+        background-color: $reforma-politica-color;
+      }
+
+      &:hover, &:focus {
+        &::before {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
+      }
+
+      &.active {
+      background-color: $reforma-politica-color;
+      color: white;
+      }
+    }
+
     &.active {
       box-shadow: inset 2px 2px 2px rgba(0,0,0,0.5);
       transform: translate(1px, 1px);
