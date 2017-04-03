@@ -82,7 +82,7 @@ def login(request, template_name='registration/login.html',
         wikilegis_query = Q()
         discourse_query = Q()
         for category in request.user.profile.prefered_themes.all():
-            wikilegis_query = wikilegis_query | Q(theme=category.slug)
+            wikilegis_query = wikilegis_query | Q(theme__slug=category.slug)
             discourse_query = discourse_query | Q(category__slug=category.slug)
 
         if len(wikilegis_data.filter(wikilegis_query)) != len(wikilegis_data):
@@ -101,7 +101,7 @@ def login(request, template_name='registration/login.html',
         selected_filters = selected_filters.split(',')
 
         for category in selected_filters:
-            wikilegis_filter = wikilegis_filter | Q(theme=category)
+            wikilegis_filter = wikilegis_filter | Q(theme__slug=category)
             discourse_filter = discourse_filter | Q(category__slug=category)
 
         wikilegis_data = wikilegis_data.filter(wikilegis_filter)

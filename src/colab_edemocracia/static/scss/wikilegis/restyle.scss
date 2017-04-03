@@ -1,5 +1,10 @@
 body {
+  margin: 0;
   padding-top: 0;
+}
+
+#template-body {
+  height: 100%;
 }
 
 .wiki-navbar {
@@ -44,4 +49,20 @@ body.widget {
     display: none;
   }
 
+}
+
+.wikilegis {
+  height: calc(100vh - 4em);
+}
+
+.wikilegis__bill {
+  height: calc(100vh - 4em);
+}
+
+.bill__amendments-wrapper {
+  height: calc(100vh - 4em);
+}
+
+.wikilegis__alert {
+  margin-top: 5em;
 }
