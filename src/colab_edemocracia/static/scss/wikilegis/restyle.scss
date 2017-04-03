@@ -3,6 +3,10 @@ body {
   padding-top: 0;
 }
 
+#template-body {
+  height: 100%;
+}
+
 .wiki-navbar {
   position: fixed;
   transform: translateY(0);
