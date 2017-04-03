@@ -74,9 +74,9 @@ def login(request, template_name='registration/login.html',
     discourse_data = DiscourseTopic.objects.filter(visible=True)
     discourse_data = discourse_data.order_by('-last_posted_at')
     live_videos = AudienciasRoom.objects.filter(
-        video__isnull=False, video__closed_date__isnull=True, is_visible=True)
+        youtube_status=1, is_visible=True)
     history_videos = AudienciasRoom.objects.filter(
-        video__closed_date__isnull=False, is_visible=True)
+        youtube_status=2, is_visible=True)
 
     if request.user.is_authenticated():
         wikilegis_query = Q()
