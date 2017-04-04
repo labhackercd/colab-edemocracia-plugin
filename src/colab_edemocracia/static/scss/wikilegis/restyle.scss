@@ -7,6 +7,10 @@ body {
   height: 100%;
 }
 
+.widget #template-body {
+  padding-top: 0;
+}
+
 .wiki-navbar {
   position: fixed;
   transform: translateY(0);
