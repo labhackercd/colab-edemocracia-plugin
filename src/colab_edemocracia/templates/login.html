@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load staticfiles widget_tweaks %}
 <section class="section section--login" id="login">
   <div class="e-row align-middle">
     <div class="e-columns small-12 medium-12 large-7">
@@ -35,7 +35,7 @@
 
                 <span class="show-for-sr">Nome de usuário</span>
                 <div class="login-box__input-container">
-                  <input class="login-box__input input input-group-field" type="text" id="id_username" name="username" placeholder="Nome de usuário ou email" required/>
+                  {{ form.username|add_class:"login-box__input input input-group-field"|attr:"placeholder:Nome do usuário ou email"|attr:"required" }}
 
                   <div class="login-box__error form-error">
                     <span class="login-box__error-message">Insira o nome de Usuário</span>
