@@ -25,7 +25,9 @@
 
             <form class="login-box__form" method="post" role="form" action="{% url 'colab_edemocracia:home' %}" data-abide novalidate>
               {% csrf_token %}
-              {% if previous_path %}
+              {% if request.GET.next %}
+                <input type="hidden" value="{{ request.GET.next }}" name="previous_path">
+              {% elif previous_path %}
                 <input type="hidden" value="{{previous_path}}" name="previous_path">
               {% endif %}
 
@@ -80,7 +82,9 @@
 
             <form class="login-box__form" method="post" role="form" action="{% url 'colab_edemocracia:signup' %}" data-abide novalidate>
               {% csrf_token %}
-              {% if previous_path %}
+              {% if request.GET.next %}
+                <input type="hidden" value="{{ request.GET.next }}" name="previous_path">
+              {% elif previous_path %}
                 <input type="hidden" value="{{previous_path}}" name="previous_path">
               {% endif %}
 
