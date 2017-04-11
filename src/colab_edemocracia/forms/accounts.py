@@ -11,10 +11,11 @@ User = get_user_model()
 
 
 class SignUpForm(forms.ModelForm):
-
+    confirm_password = forms.CharField()
     error_messages = {
         'duplicate_email': _(u"Email já cadastrado."),
         'duplicate_username': _(u"Nome de usuário já cadastrado."),
+        'wrong_password': _(u"As senhas não são iguais."),
     }
 
     required = ('username', 'email', 'password')
@@ -22,6 +23,15 @@ class SignUpForm(forms.ModelForm):
     class Meta:
         fields = ('username', 'email', 'password')
         model = User
+
+    def clean(self):
+        cleaned_data = super(SignUpForm, self).clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password != confirm_password:
+            msg = self.error_messages.get('wrong_password')
+            raise forms.ValidationError(mark_safe(msg))
 
     def clean_username(self):
         username = self.cleaned_data.get('username').strip().lower()
