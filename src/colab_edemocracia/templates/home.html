@@ -198,7 +198,7 @@
                     <h2 class="info-card__title">Ao Vivo</h2>
                   </div>
                   <img class="info-card__image" src="https://i.ytimg.com/vi/{{room.youtube_id}}/mqdefault_live.jpg">
-                  <p class="info-card__text">{{ room.legislative_body_alias }}</p>
+                  <p class="info-card__text">{% if room.is_joint %}{{ room.title_reunion }}{% elif room.reunion_type %}{{ room.reunion_type }} - {{ room.legislative_body_alias }}{% else %}{{ room.legislative_body_alias }}{% endif %}</p>
                   <div class="info-card__footer">
                     <!--<div class="card-stats">
                       <div class="card-stats__name">Participantes</div>
