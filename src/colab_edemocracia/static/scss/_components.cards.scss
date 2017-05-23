@@ -217,9 +217,19 @@
     font-size: 0.9rem;
   }
 
+  & .info-card__description {
+    margin-bottom: 1rem;
+  }
+
   & .info-card__text {
     font-weight: 600;
     text-transform: uppercase;
+    margin-bottom: 0rem;
+    font-size: .8em;
+  }
+
+  & .info-card__type{
+    margin-bottom: 0rem;
   }
 
   & .card-stats__value {
