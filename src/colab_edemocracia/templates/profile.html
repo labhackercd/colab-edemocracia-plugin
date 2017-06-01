@@ -2,36 +2,6 @@
 {% load staticfiles widget_tweaks edem_utils %}
 {% block title %}Perfil{% endblock %}
 {% block main %}
-  <section class="section section--category-select">
-    <div class="e-row">
-      <div class="e-column">
-        <div class="section__content">
-          <h1 class="section__title">Selecione os assuntos de seu interesse</h1>
-          <div class="section__info">
-            <p class="section__description">Selecione os temas dos assuntos que você está com vontade de saber sobre projetos de lei e discussões.</p>
-          </div>
-          <ul class="category-list">
-            {% for category in categories %}
-              <li class="category-list__item">
-                {% if category in user.profile.prefered_themes.all %}
-                  <button class="category-list__button category-list__button--{{category.slug}} active" name="{{category.slug}}" slug="{{category.slug}}">
-                {% else %}
-                  <button class="category-list__button category-list__button--{{category.slug}}" name="{{category.slug}}" slug="{{category.slug}}">
-                {% endif %}
-                <div class="category-list__icon">
-                  <i class="icon icon-{{category.slug}}"></i>
-                </div>
-                <span class="category-list__text">{{category.name}}</span>
-                </button>
-              </li>
-            {% endfor %}
-          </ul>
-          {% get_select_all_info as select_all_info %}
-          <button class="button button--select-all {{select_all_info.class}}">{{select_all_info.text}}</button>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="section section--user-profile">
     <div class="e-row">
@@ -174,7 +144,3 @@
     </div>
   </section>
 {% endblock main %}
-
-{% block extra_js %}
-  {% include "profile.js" %}
-{% endblock extra_js %}
