@@ -49,7 +49,11 @@
             <a href="{{ request.GET.next }}" class="wikilegis-widget__back-icon">
               <i class="wikilegis-widget__icon wikilegis-widget__icon--access-back material-icons">keyboard_arrow_left</i>
             </a>
-            <img class="wikilegis-widget__image wikilegis-widget__image--top-logo" src="{% static 'img/logo-wikilegis.png' %}" alt="Logo Wikilegis">
+            {% if 'wikilegis' in request.GET.next %}
+              <img class="wikilegis-widget__image wikilegis-widget__image--top-logo" src="{% static 'img/logo-wikilegis.png' %}" alt="Logo Wikilegis">
+            {% elif 'audiencias' in request.GET.next %}
+              <img class="wikilegis-widget__image wikilegis-widget__image--top-logo" src="{% static 'img/logo-audiencias-text.svg' %}" alt="Logo Wikilegis">
+            {% endif %}
           </div>
           {% if form.non_field_errors %}
               <div>

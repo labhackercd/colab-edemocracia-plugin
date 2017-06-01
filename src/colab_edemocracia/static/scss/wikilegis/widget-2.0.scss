@@ -14,7 +14,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   margin: 1em;
   padding: 0;
-  background-color: hsl(0,0%,95%);
+  background: linear-gradient(45deg, #235643 0%, #092b2a 100%);
 
   @media (max-width: 640px) {
     font-size: 0.9em;
@@ -73,7 +73,7 @@ p {
     align-items: center;
     border-radius: 50%;
     border: 0.2em solid #1cd37a;
-    color: black;
+    color: white;
     text-decoration: none;
   }
 
@@ -553,7 +553,7 @@ p {
     max-width: 320px;
     padding: 1.5em 0;
     position: relative;
-    background: #fff;
+    background: #235643;
     overflow: hidden;
     border: 2px solid #1cd37a;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.23);
@@ -570,7 +570,6 @@ p {
     flex: 1 0 100%;
     width: 100%;
     padding: 0 1.5em;
-    background: #fff;
     @include transition-default(transform);
   }
 
