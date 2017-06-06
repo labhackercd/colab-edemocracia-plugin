@@ -5,9 +5,9 @@
     <div class="info-card__header">
       <h2 class="info-card__type"><i class="icon icon-play"></i>Sala em audiência pública</h2>
     </div>
-    <div class="info-card__header">
+    <div class="info-card__header info-card__header--secondary">
       <h2 class="info-card__title">{% highlight result.title_reunion with query css_class "info-card__highlighted" %}</h2>
-      <h2 class="info-card__title">{% highlight result.legislative_body_alias with query css_class "info-card__highlighted" %}</h2>
+      <h3 class="info-card__title info-card__title--secondary">{% highlight result.legislative_body_alias with query css_class "info-card__highlighted" %}</h3>
     </div>
     <p class="info-card__text">
       {% highlight result.reunion_object with query css_class "info-card__highlighted" %}

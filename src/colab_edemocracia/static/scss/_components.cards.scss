@@ -243,15 +243,29 @@
     font-size: 0.8rem;
     text-transform: uppercase;
     margin-bottom: 1rem;
+
     & .icon {
       margin-right: 1rem;
     }
   }
   & .info-card__title {
     & .info-card__highlighted {
-    background-color: lightgrey;
-    font-weight: 700;
+      background-color: lightgrey;
+      font-weight: 700;
+      color: black;
+    }
+
+    &--secondary {
+      color: #666666;
+    }
   }
+
+  & .info-card__header {
+    &--secondary {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 }
 
