@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
@@ -60,35 +59,25 @@ class SignUpForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     first_name = forms.CharField(required=False)
     last_name = forms.CharField(required=False)
-    username = forms.CharField(required=True)
 
     def __init__(self, *args, **kwargs):
         super(UserProfileForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].initial = kwargs['instance'].user.first_name
         self.fields['last_name'].initial = kwargs['instance'].user.last_name
-        self.fields['username'].initial = kwargs['instance'].user.username
         for field_name in self.fields:
             field = self.fields.get(field_name)
             if field and isinstance(field, forms.TypedChoiceField):
                 field.choices = field.choices[1:]
 
     class Meta:
-        fields = ('gender', 'uf', 'birthdate', 'first_name', 'last_name', 'username', 'avatar')
+        fields = ('gender', 'uf', 'birthdate', 'first_name', 'last_name', 'avatar')
         model = UserProfile
-
-    def clean_username(self, **kwargs):
-        self.request = kwargs.pop('request', None)
-        username = self.cleaned_data['username']
-        if username in User.objects.exclude(email=self.instance.user.email).values_list('username', flat=True):
-            raise ValidationError('Nome de usuário já existente!')
-        return username
 
     def save(self, commit=True):
         instance = super(UserProfileForm, self).save(commit=False)
         instance.save()
         instance.user.first_name = self.cleaned_data['first_name']
         instance.user.last_name = self.cleaned_data['last_name']
-        instance.user.username = self.cleaned_data['username']
         if commit:
             instance.user.save()
         return instance

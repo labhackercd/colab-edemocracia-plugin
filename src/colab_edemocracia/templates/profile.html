@@ -47,15 +47,7 @@
             <i class="form__icon icon icon-user input-group-label" aria-hidden="true"></i>
             <span class="show-for-sr">Nome de usuário</span>
             <div class="form__input-container">
-
-              <input class="form__input input input-group-field {% if form.username.errors %}is-invalid-input{% endif %}" type="text" id="id_username" name="username" value="{{ form.username.value|default_if_none:"" }}" placeholder="Nome de usuário" required/>
-
-              {% if form.username.errors %}
-                <div class="form__error form-error is-visible">
-                  <span class="form__error-message">{{ form.username.errors.as_text }}</span>
-                  <i class="form__error-icon icon icon-e-arrow-circle-left"></i>
-                </div>
-              {% endif %}
+              <input class="form__input input input-group-field" type="text" id="id_username" name="username" value="{{ request.user.username }}" placeholder="username" readonly="readonly" />
             </div>
           </label>
 
