@@ -1,18 +1,18 @@
 // Quick proof of concept for search form toggle
 // Would like to make CSS only
 
-let searchWrapper = document.querySelector('.search-form'),
-    searchInput = document.querySelector('.search-form__input');
-    navBar = document.querySelector('.navigation');
+var searchWrapper = $('.search-form');
+var searchInput = $('.search-form__input');
+    navBar = $('.navigation');
 
-document.addEventListener('click', (e) => {
+$(document).click(function(e){
   if (~e.target.className.indexOf('search-form')) {
-    searchWrapper.classList.add('focused');
-    navBar.classList.add('search-on');
+    $(searchWrapper).addClass('focused');
+    $(navBar).addClass('search-on');
     searchInput.focus();
   } else {
-    searchWrapper.classList.remove('focused');
-    navBar.classList.remove('search-on');
+    $(searchWrapper).removeClass('focused');
+    $(navBar).removeClass('search-on');
   }
 });
 
