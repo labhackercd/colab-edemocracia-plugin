@@ -98,13 +98,13 @@
 
 			{# Scripts #}
 			{% block foot_js %}
+				<script type="text/javascript" src="{% static 'js/ie-check.js' %}"></script>
 				<script type="text/javascript" src="{% static 'jquery/dist/jquery.min.js' %}"></script>
 				<script type="text/javascript" src="{% static 'foundation-sites/dist/foundation.min.js' %}"></script>
 				<script type="text/javascript" src="{% static 'js/foundation.js' %}"></script>
 				<script type="text/javascript" src="{% static 'jquery-mask-plugin/dist/jquery.mask.min.js' %}"></script>
 				<script type="text/javascript" src="https://npmcdn.com/headroom.js@0.9.3/dist/headroom.min.js"></script>
 				<script type="text/javascript" src="{% static 'js/svg-support.js' %}"></script>
-				<script type="text/javascript" src="{% static 'js/ie-check.js' %}"></script>
 				<script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
 			{% endblock foot_js %}
 
