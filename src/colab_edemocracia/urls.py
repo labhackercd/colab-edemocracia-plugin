@@ -26,7 +26,7 @@ urlpatterns = patterns(
     url(r'^search/', include('haystack.urls')),
     url(r'^password_change/$', 'colab_edemocracia.views.password_change',
         name='password_change'),
-    url(r'^password-reset/?$', auth_views.password_reset,
+    url(r'^account/password-reset/?$', auth_views.password_reset,
         {'template_name': 'registration/password_reset_form_custom.html',
          'password_reset_form': accounts.PasswordResetForm},
         name="password_reset"),
