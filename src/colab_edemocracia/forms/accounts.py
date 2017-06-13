@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import PasswordResetForm
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from colab_edemocracia.models import UserProfile
@@ -70,7 +71,8 @@ class UserProfileForm(forms.ModelForm):
                 field.choices = field.choices[1:]
 
     class Meta:
-        fields = ('gender', 'uf', 'birthdate', 'first_name', 'last_name', 'avatar')
+        fields = ('gender', 'uf', 'birthdate', 'first_name', 'last_name',
+                  'avatar')
         model = UserProfile
 
     def save(self, commit=True):
@@ -81,3 +83,17 @@ class UserProfileForm(forms.ModelForm):
         if commit:
             instance.user.save()
         return instance
+
+
+class PasswordResetForm(PasswordResetForm):
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        users = User.objects.filter(email__iexact=email, is_active=True)
+        if not users.exists():
+            raise forms.ValidationError(
+                "Não existe usuário registrado com esse "
+                "email ou usuário está inativo."
+            )
+
+        return email

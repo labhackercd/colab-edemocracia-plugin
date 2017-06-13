@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
+from colab_edemocracia.forms import accounts
 
 from . import views
 
@@ -24,7 +26,11 @@ urlpatterns = patterns(
     url(r'^search/', include('haystack.urls')),
     url(r'^password_change/$', 'colab_edemocracia.views.password_change',
         name='password_change'),
-    url(r'^password_change/done/$', 'django.contrib.auth.views.password_change_done',
+    url(r'^password-reset/?$', auth_views.password_reset,
+        {'template_name': 'registration/password_reset_form_custom.html',
+         'password_reset_form': accounts.PasswordResetForm},
+        name="password_reset"),
+    url(r'^password_change/done/$', auth_views.password_change_done,
         name='password_change_done'),
     url(r'^widget/login/$', views.WidgetLoginView.as_view(),
         name='widget_login'),
