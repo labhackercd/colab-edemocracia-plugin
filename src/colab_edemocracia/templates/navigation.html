@@ -13,7 +13,7 @@
   </div>
 </a>
 
-<form action="{% url 'haystack_search' %}" method="GET" role="search" class="search-form search-form--navigation" title="Pesquisar">
+<form action="{% url 'haystack_search' %}" method="GET" role="search" class="search-form search-form--navigation" data-default-behavior="true" title="Pesquisar">
   <input name="q" value="{{ request.GET.q }}" class="search-form__input" type="text" placeholder="Pesquisar">
   <span class="search-form__icon">
     <span class="show-for-sr">Pesquisar</span>
