@@ -11,9 +11,6 @@ urlpatterns = patterns(
     url(r'^home/?$', views.login,
         {'template_name': 'home.html', 'redirect_field_name': 'previous_path'},
         name="home"),
-    url(r'^redirect-widget/?$',
-        TemplateView.as_view(template_name='redirect.html'),
-        name='redirect_widget'),
     url(r'^signup/?$', views.SignUpView.as_view(), name="signup"),
     url(r'^profile/?$', login_required(views.ProfileView.as_view()),
         name="profile"),
@@ -36,4 +33,7 @@ urlpatterns = patterns(
         name='widget_login'),
     url(r'^widget/signup/$', views.WidgetSignUpView.as_view(),
         name='widget_signup'),
+    url(r'^widget/redirect/?$',
+        TemplateView.as_view(template_name='widget/redirect.html'),
+        name='redirect_widget'),
 )
