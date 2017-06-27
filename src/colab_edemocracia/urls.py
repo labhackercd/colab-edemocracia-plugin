@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, url, include
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
 from colab_edemocracia.forms import accounts
 
 from . import views
@@ -32,4 +33,7 @@ urlpatterns = patterns(
         name='widget_login'),
     url(r'^widget/signup/$', views.WidgetSignUpView.as_view(),
         name='widget_signup'),
+    url(r'^widget/redirect/?$',
+        TemplateView.as_view(template_name='widget/redirect.html'),
+        name='redirect_widget'),
 )
