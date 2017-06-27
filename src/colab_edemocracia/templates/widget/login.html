@@ -50,9 +50,6 @@
       <div class="wikilegis-widget__access-wrapper">
         <div class="wikilegis-widget__access">
           <div class="wikilegis-widget__access-top">
-            <a href="{{ request.GET.next }}" class="wikilegis-widget__back-icon">
-              <i class="wikilegis-widget__icon wikilegis-widget__icon--access-back material-icons">keyboard_arrow_left</i>
-            </a>
             {% if 'wikilegis' in request.GET.next %}
               <img class="wikilegis-widget__image wikilegis-widget__image--top-logo" src="{% static 'img/logo-wikilegis.png' %}" alt="Logo Wikilegis">
             {% elif 'audiencias' in request.GET.next %}
@@ -66,7 +63,7 @@
           {% endif %}
           <div class="wikilegis-widget__access-box-wrapper">
             <div class="wikilegis-widget__access-box wikilegis-widget__access-box--login {% if 'signup' in request.path %}translatex--left{% endif %}">
-              <form class="wikilegis-widget__access-form" name="login" action="{% url 'colab_edemocracia:widget_login' %}?next={{ request.GET.next }}" method="POST">
+              <form class="wikilegis-widget__access-form" name="login" action="{% url 'colab_edemocracia:widget_login' %}?next=/widget/redirect/" method="POST">
                 {% csrf_token %}
                 {% if form.username.errors %}
                   <label class="wikilegis-widget__input-error" for="username">• {% trans "Username is a necessary field" %}</label>
@@ -76,7 +73,7 @@
                   <label class="wikilegis-widget__input-error" for="password">• {% trans "Password is a necessary field" %}</label>
                 {% endif %}
                 <input class="wikilegis-widget__input wikilegis-widget__input--access" type="password" name="password" placeholder="{% trans 'Password' %}">
-                <input type="hidden" name="next" value="{{ request.GET.next }}" />
+                <input type="hidden" name="next" value="/widget/redirect/" />
                 <input class="wikilegis-widget__button wikilegis-widget__button--access" type="submit" name="login" value="{% trans 'Log in' %}">
               </form>
 
@@ -90,14 +87,13 @@
                 <img class="wikilegis-widget__icon wikilegis-widget__icon--access" src="{% static 'img/logo-google.svg' %}" alt="Google Logo">
                 Entrar com Google
               </a>
-              {% endif %}
 
               <div class="wikilegis-widget__access-footer">
                 <span>ou </span><a class="wikilegis-widget__link wikilegis-widget__link--access-toggle" href="#">Cadastrar</a>
               </div>
             </div>
             <div class="wikilegis-widget__access-box wikilegis-widget__access-box--signup {% if 'signup' in request.path %}translatex--left{% endif %}">
-              <form class="wikilegis-widget__access-form" name="signup" action="{% url 'colab_edemocracia:widget_signup' %}?next={{ request.GET.next }}" method="POST">
+              <form class="wikilegis-widget__access-form" name="signup" action="{% url 'colab_edemocracia:widget_signup' %}?next=/widget/redirect/" method="POST">
                 {% csrf_token %}
                 {% if form.email.errors %}
                   <label class="wikilegis-widget__input-error" for="email">• {% trans "Email is a necessary field" %}</label>
