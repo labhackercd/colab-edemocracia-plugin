@@ -70,7 +70,7 @@ def login(request, template_name='registration/login.html',
     current_site = get_current_site(request)
 
     wikilegis_data = WikilegisBill.objects.exclude(status='draft')
-    wikilegis_data = wikilegis_data.order_by('status', '-modified')
+    wikilegis_data = wikilegis_data.order_by('-status', '-modified')
     discourse_data = DiscourseTopic.objects.filter(visible=True)
     discourse_data = discourse_data.order_by('-last_posted_at')
     live_videos = AudienciasRoom.objects.filter(

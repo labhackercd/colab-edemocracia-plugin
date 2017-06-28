@@ -117,7 +117,11 @@
                       {% if bill.theme.slug in prefered_themes %}
                       {% endif %}
                     {% endif %}
+                    {% if bill.status == "closed" %}
+                    <div class="info-card-closed__icon"><i class="icon icon-{{bill.theme.slug}}"></i></div>
+                    {% else %}
                     <div class="info-card__icon"><i class="icon icon-{{bill.theme.slug}}"></i></div>
+                    {% endif %}
                     <h2 class="info-card__title">{{bill.title|truncatechars:40}}</h2>
                   </div>
                   <p class="info-card__text">
@@ -130,8 +134,13 @@
                     </div>
 
                     <div class="card-stats">
+                      {% if bill.status == "closed" %}
+                      <div class="card-stats__name">Encerrado em:</div>
+                      <div class="card-stats__value">{{bill.closing_date|date:"d/m/Y"}}</div>
+                      {% else %}
                       <div class="card-stats__name">Participe até:</div>
                       <div class="card-stats__value">{{bill.closing_date|date:"d/m/Y"}}</div>
+                      {% endif %}
                     </div>
                   </div>
                 </li>
