@@ -150,6 +150,10 @@
 
   & .card-stats__value {
     color: #00d574;
+    
+    &--closed {
+      color: #bfbfbf;
+    }
   }
 }
 
