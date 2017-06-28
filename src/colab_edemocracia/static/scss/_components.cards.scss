@@ -129,23 +129,15 @@
       font-size: 1.2rem;
       margin-right: 0.5rem;
     }
-  }
 
-  & .info-card-closed__icon {
-    flex: 0 0 3.6rem;
-    height: 3.5rem;
-    border: 0.3rem solid #bfbfbf;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    margin-right: 1rem;
+    &--closed {
+      border: 0.3rem solid #bfbfbf;
 
-    @include breakpoint(small only) {
-      flex: 0 0 2.8rem;
-      height: 2.8rem;
-      border: 0.2rem solid #bfbfbf;
-      font-size: 1.2rem;
-      margin-right: 0.5rem;
+      @include breakpoint(small only) {
+        border: 0.2rem solid #bfbfbf;
+      }
     }
+
   }
 
   & .info-card__title {
