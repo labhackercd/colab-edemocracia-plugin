@@ -131,7 +131,7 @@
                     <div class="card-stats">
                       <div class="card-stats__name">Propostas</div>
                       {% if bill.status == "closed" %}
-                      <div class="card-stats__value--closed">{{bill.amendments_count}}</div>
+                      <div class="card-stats__value card-stats__value--closed">{{bill.amendments_count}}</div>
                       {% else %}
                       <div class="card-stats__value">{{bill.amendments_count}}</div>
                       {% endif %}
@@ -140,7 +140,7 @@
                     <div class="card-stats">
                       {% if bill.status == "closed" %}
                       <div class="card-stats__name">Encerrado em:</div>
-                      <div class="card-stats__value--closed">{{bill.closing_date|date:"d/m/Y"}}</div>
+                      <div class="card-stats__value card-stats__value--closed">{{bill.closing_date|date:"d/m/Y"}}</div>
                       {% else %}
                       <div class="card-stats__name">Participe até:</div>
                       <div class="card-stats__value">{{bill.closing_date|date:"d/m/Y"}}</div>
