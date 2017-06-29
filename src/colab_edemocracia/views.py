@@ -25,7 +25,7 @@ from django.template.loader import render_to_string
 from django.views.generic import UpdateView, FormView
 from django.views.decorators.clickjacking import xframe_options_exempt
 import datetime
-
+from itertools import chain
 from .forms.accounts import SignUpForm, UserProfileForm
 from .models import UserProfile
 from colab.accounts.models import EmailAddressValidation, EmailAddress
@@ -74,17 +74,20 @@ def login(request, template_name='registration/login.html',
     wikilegis_data = wikilegis_data.order_by('-status', '-modified')
     discourse_data = DiscourseTopic.objects.filter(visible=True)
     discourse_data = discourse_data.order_by('-last_posted_at')
-    audiencias_today = AudienciasRoom.objects.filter(date=datetime.date.today())
+    audiencias_today = AudienciasRoom.objects.filter(
+        date__startswith=datetime.date.today())
     live_videos = audiencias_today.filter(youtube_status=1, is_visible=True)
     history_videos = audiencias_today.filter(youtube_status=2, is_visible=True)
-    agenda_videos = audiencias_today.filter(youtube_status=0, is_visible=True)
+    agenda_videos = audiencias_today.filter(
+        youtube_status=0, is_visible=True).order_by('-date')
 
     if audiencias_today.count() < 10:
         empty_cards_count = 10 - audiencias_today.count()
         next_agenda = AudienciasRoom.objects.filter(
             youtube_status=0, is_visible=True).exclude(
-            date=datetime.date.today())[:empty_cards_count]
-        agenda_videos = agenda_videos | next_agenda
+            date__startswith=datetime.date.today()).order_by(
+            '-date')[:empty_cards_count]
+        agenda_videos = list(chain(agenda_videos, next_agenda))
 
     if request.user.is_authenticated():
         wikilegis_query = Q()
@@ -124,7 +127,7 @@ def login(request, template_name='registration/login.html',
         'discourse_data': discourse_data[:10],
         'live_videos': live_videos.order_by('-date'),
         'history_videos': history_videos.order_by('-date'),
-        'agenda_videos': agenda_videos.distinct().order_by('-date'),
+        'agenda_videos': agenda_videos,
         'categories': DiscourseCategory.objects.all(),
         'selected_filters_list': selected_filters,
         'selected_filters': ','.join(selected_filters),
