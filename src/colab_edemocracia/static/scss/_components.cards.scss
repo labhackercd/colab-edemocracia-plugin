@@ -203,14 +203,17 @@
       background-color: #11496c;
     }
 
-    &--agenda {
+    &--calendar {
       background-color: #092b2a;
     }
   }
 
   & .info-card__icon {
     margin-right: 0.8rem;
-    font-size: 1.5rem;
+    font-size: 0.9em;
+    border: 2px solid;
+    padding: 0.4em;
+    border-radius: 50%;
 
     &--live {
       color: #ff3333;
@@ -218,20 +221,32 @@
     }
 
     &--old-video {
+      .icon {
+        transform: translateX(10%)
+      }
+    }
+
+    &--calendar {
       font-size: 0.9em;
       border: 2px solid;
       padding: 0.4em;
       border-radius: 50%;
-
-      .icon {
-        transform: translateX(10%)
-      }
     }
   }
 
 
   & .info-card__title {
     font-size: 0.9rem;
+  }
+
+  & .info-card__image {
+
+    &--calendar {
+      display: block;
+      height: 7em;
+      margin-bottom: 1em;
+      margin: 0 auto;
+    }
   }
 
   & .info-card__description {
