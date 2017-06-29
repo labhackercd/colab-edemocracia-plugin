@@ -79,14 +79,14 @@ def login(request, template_name='registration/login.html',
     live_videos = audiencias_today.filter(youtube_status=1, is_visible=True)
     history_videos = audiencias_today.filter(youtube_status=2, is_visible=True)
     agenda_videos = audiencias_today.filter(
-        youtube_status=0, is_visible=True).order_by('-date')
+        youtube_status=0, is_visible=True).order_by('date')
 
     if audiencias_today.count() < 10:
         empty_cards_count = 10 - audiencias_today.count()
         next_agenda = AudienciasRoom.objects.filter(
             youtube_status=0, is_visible=True).exclude(
             date__startswith=datetime.date.today()).order_by(
-            '-date')[:empty_cards_count]
+            'date')[:empty_cards_count]
         agenda_videos = list(chain(agenda_videos, next_agenda))
 
     if request.user.is_authenticated():
