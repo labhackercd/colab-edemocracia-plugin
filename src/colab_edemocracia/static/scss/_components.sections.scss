@@ -173,6 +173,12 @@
   & .section__link {
     color: white;
   }
+
+  & .section__button {
+    float: right;
+    background-color: #00d574;
+    color: white;
+  }
 }
 
 .section--discourse {
@@ -195,6 +201,12 @@
   & .section__link {
     color: #2c383a;
   }
+
+  & .section__button {
+    float: right;
+    background-color: #4e9b95;
+    color: white;
+  }
 }
 
 .section--audiencias{
@@ -216,6 +228,12 @@
 
   & .section__link {
     color: white;
+  }
+  
+  & .section__button {
+    float: right;
+    background-color: #f8c300;
+    color: black;
   }
 }
 

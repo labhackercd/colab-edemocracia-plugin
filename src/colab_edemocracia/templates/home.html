@@ -27,6 +27,9 @@
             <a class="section__link" href="{% url 'audiencias:colab_audiencias' '' %}" title="Acesse a versão de testes">
               Pergunte aos Deputados
             </a>
+            <a class="button section__button" href="{% url 'audiencias:colab_audiencias' '' %}" title="Ver todos">
+              Ver todos
+            </a>
           </h1>
           <div class="section__content-wrapper section__content-wrapper--center">
             <ul class="card-list">
@@ -132,7 +135,12 @@
 
       <div class="section__block e-columns small-12 large-9">
         <div class="section__content">
-          <h1 class="section__title"><a class="section__link" href="{% url 'wikilegis:colab_wikilegis' '' %}" title="Veja todos os projetos">Projetos de Lei</a></h1>
+          <h1 class="section__title">
+            <a class="section__link" href="{% url 'wikilegis:colab_wikilegis' '' %}" title="Veja todos os projetos">Projetos de Lei</a>
+            <a class="button section__button" href="{% url 'wikilegis:colab_wikilegis' '' %}" title="Ver todos">
+              Ver todos
+            </a>
+          </h1>
           <div class="container container--card-list">
             <ul class="card-list">
             {% for bill in wikilegis_data %}
@@ -204,7 +212,12 @@
 
       <div class="section__block e-columns small-12 large-9">
         <div class="section__content">
-          <h1 class="section__title"><a class="section__link" href="{% url 'discourse:colab_discourse' '' %}" title="Veja todas as discussões">Discussões</a></h1>
+          <h1 class="section__title">
+            <a class="section__link" href="{% url 'discourse:colab_discourse' '' %}" title="Veja todas as discussões">Discussões</a>
+            <a class="button section__button" href="{% url 'discourse:colab_discourse' '' %}" title="Ver todos">
+              Ver todos
+            </a>
+          </h1>
           <div class="container container--card-list">
             <ul class="card-list">
               {% for topic in discourse_data %}
