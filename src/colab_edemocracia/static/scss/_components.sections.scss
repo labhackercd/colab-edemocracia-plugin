@@ -73,6 +73,8 @@
     padding-top: 1rem;
     text-indent: -0.2rem;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
     &::before {
       content: '';
       position: absolute;
@@ -175,7 +177,6 @@
   }
 
   & .section__button {
-    float: right;
     background-color: #00d574;
     color: white;
   }
@@ -203,7 +204,6 @@
   }
 
   & .section__button {
-    float: right;
     background-color: #4e9b95;
     color: white;
   }
@@ -231,9 +231,8 @@
   }
   
   & .section__button {
-    float: right;
     background-color: #f8c300;
-    color: black;
+    color: white;
   }
 }
 
