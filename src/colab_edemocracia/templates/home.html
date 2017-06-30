@@ -55,7 +55,7 @@
 
                     <div class="card-stats">
                       <div class="card-stats__name">Organizador</div>
-                      <div class="card-stats__value">{{ room.legislative_body_initials }}</div>
+                      <div class="card-stats__value" title="{{ room.legislative_body|default_if_none:'' }}">{{ room.legislative_body_initials|default_if_none:'' }}</div>
                     </div>
 
                     <div class="card-stats">
@@ -88,7 +88,7 @@
 
                     <div class="card-stats">
                       <div class="card-stats__name">Organizador</div>
-                      <div class="card-stats__value">{{ room.legislative_body_initials }}</div>
+                      <div class="card-stats__value" title="{{ room.legislative_body|default_if_none:'' }}">{{ room.legislative_body_initials|default_if_none:'' }}</div>
                     </div>
 
                     <div class="card-stats">
@@ -121,7 +121,7 @@
 
                     <div class="card-stats">
                       <div class="card-stats__name">Organizador</div>
-                      <div class="card-stats__value">{{ room.legislative_body_initials }}</div>
+                      <div class="card-stats__value" title="{{ room.legislative_body|default_if_none:'' }}">{{ room.legislative_body_initials|default_if_none:'' }}</div>
                     </div>
 
                     <div class="card-stats">
