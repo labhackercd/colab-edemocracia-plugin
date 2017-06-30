@@ -85,7 +85,8 @@ def login(request, template_name='registration/login.html',
         empty_cards_count = 10 - audiencias_today.count()
         next_agenda = AudienciasRoom.objects.filter(
             youtube_status=0, is_visible=True).exclude(
-            date__startswith=datetime.date.today()).order_by(
+            date__startswith=datetime.date.today()).exclude(
+            date__lte=datetime.datetime.now()).order_by(
             'date')[:empty_cards_count]
         agenda_videos = list(chain(agenda_videos, next_agenda))
 
