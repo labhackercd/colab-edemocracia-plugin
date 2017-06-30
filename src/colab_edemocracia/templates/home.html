@@ -9,128 +9,6 @@
     {% include "login.html" %}
   {% endif %}
 
-  <section class="section section--wikilegis">
-    <div class="e-row e-expanded">
-      <div class="section__info section__block e-columns small-12 large-3">
-        <a href="{% url 'wikilegis:colab_wikilegis' '' %}"><img class="section__logo" src="{% static 'img/logo-wikilegis.svg' %}"></a>
-        <p class="section__text">
-          Edite e aprimore projetos de lei artigo por artigo.
-        </p>
-      </div>
-
-      <div class="section__block e-columns small-12 large-9">
-        <div class="section__content">
-          <h1 class="section__title"><a class="section__link" href="{% url 'wikilegis:colab_wikilegis' '' %}" title="Veja todos os projetos">Projetos de Lei</a></h1>
-          <div class="container container--card-list">
-            <ul class="card-list">
-            {% for bill in wikilegis_data %}
-              <a class="info-card__link" href="{{bill.get_url}}">
-                <li class="info-card info-card--wikilegis">
-                  <div class="info-card__header">
-                    {# XXX: Add different style when the category is one of the user's prefered themes #}
-                    {% if user.is_authenticated %}
-                      {% get_prefered_themes_list as prefered_themes %}
-                      {% if bill.theme.slug in prefered_themes %}
-                      {% endif %}
-                    {% endif %}
-                    <div class="info-card__icon"><i class="icon icon-{{bill.theme.slug}}"></i></div>
-                    <h2 class="info-card__title">{{bill.title|truncatechars:40}}</h2>
-                  </div>
-                  <p class="info-card__text">
-                    {{bill.description|truncatechars:160}}
-                  </p>
-                  <div class="info-card__footer">
-                    <div class="card-stats">
-                      <div class="card-stats__name">Propostas</div>
-                      <div class="card-stats__value">{{bill.amendments_count}}</div>
-                    </div>
-
-                    <div class="card-stats">
-                      <div class="card-stats__name">Participe até:</div>
-                      <div class="card-stats__value">{{bill.closing_date|date:"d/m/Y"}}</div>
-                    </div>
-                  </div>
-                </li>
-              </a>
-            {% empty %}
-              <li>
-                <div class="section__content-wrapper section__content-wrapper--center text-center">
-                  <p class="section__text">
-                    Desculpe. Não encontramos nenhum projeto de lei com os filtros acima.
-                  </p>
-                </div>
-              </li>
-            {% endfor %}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--discourse">
-    <div class="e-row e-expanded">
-      <div class="section__info section__block e-columns small-12 large-3">
-        <a href="{% url 'discourse:colab_discourse' '' %}"><img class="section__logo" src="{% static 'img/logo-expressao.svg' %}" data-fallback="{% static 'img/logo-labhacker.png' %}"></a>
-        <p class="section__text">
-          Dê sua opinião sobre os assuntos que afetam a sua vida, discutindo soluções com outros cidadãos e os deputados.
-        </p>
-      </div>
-
-      <div class="section__block e-columns small-12 large-9">
-        <div class="section__content">
-          <h1 class="section__title"><a class="section__link" href="{% url 'discourse:colab_discourse' '' %}" title="Veja todas as discussões">Discussões</a></h1>
-          <div class="container container--card-list">
-            <ul class="card-list">
-              {% for topic in discourse_data %}
-                <a class="info-card__link" href="{{topic.get_url}}">
-                  <li class="info-card info-card--discourse info-card--{{topic.category.slug}}">
-                    {# XXX: Add different style when the category is one of the user's prefered themes #}
-                    {% if user.is_authenticated %}
-                      {% if topic.category in user.profile.prefered_themes.all %}
-                      {% endif %}
-                    {% endif %}
-                    <div class="info-card__header">
-                      <div class="info-card__icon"><i class="icon icon-{{topic.category.slug}}"></i></div>
-                      <h2 class="info-card__title">{{topic.category.name}}</h2>
-                    </div>
-                    <p class="info-card__text">
-                      {{topic.title}}
-                    </p>
-                    <div class="info-card__footer">
-                      <div class="card-stats">
-                        <div class="card-stats__name">Respostas</div>
-                        <div class="card-stats__value">{{topic.posts_count}}</div>
-                      </div>
-
-                      <div class="card-stats">
-                        <div class="card-stats__name">Visualizações</div>
-                        <div class="card-stats__value">{{topic.views}}</div>
-                      </div>
-
-                      <div class="card-stats">
-                        <div class="card-stats__name">Atualização</div>
-                        <div class="card-stats__value">{{topic.last_posted_at|date:"b/Y"}}</div>
-                      </div>
-                    </div>
-                  </li>
-                </a>
-              {% empty %}
-                <li>
-                  <div class="section__content-wrapper section__content-wrapper--center text-center">
-                    <p class="section__text">
-                      Desculpe. Não encontramos nenhuma discussão com os filtros acima.
-                    </p>
-                  </div>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="section section--audiencias">
     <div class="e-row e-expanded">
 
@@ -149,6 +27,9 @@
             <a class="section__link" href="{% url 'audiencias:colab_audiencias' '' %}" title="Acesse a versão de testes">
               Pergunte aos Deputados
             </a>
+            <a class="button section__button" href="{% url 'audiencias:colab_audiencias' '' %}" title="Ver todos">
+              Ver todos
+            </a>
           </h1>
           <div class="section__content-wrapper section__content-wrapper--center">
             <ul class="card-list">
@@ -161,6 +42,34 @@
                   </div>
                   <img class="info-card__image" src="https://i.ytimg.com/vi/{{room.youtube_id}}/mqdefault_live.jpg">
                   <div class="info-card__description">
+                  <p class="info-card__text">{% if room.reunion_theme %}{{ room.reunion_theme|truncatechars:70 }}{% elif room.is_joint %}{{ room.title_reunion }}{% else %}{{ room.legislative_body_alias }}{% endif %}</p>
+                  {% if room.reunion_type %}
+                  <p class="info-card__type">{{ room.reunion_type }}</p>
+                  {% endif %}
+                  </div>
+                  <div class="info-card__footer">
+                    <div class="card-stats">
+                      <div class="card-stats__name">Perguntas</div>
+                      <div class="card-stats__value">{{ room.questions_count }}</div>
+                    </div>
+
+                    <div class="card-stats">
+                      <div class="card-stats__name">Data</div>
+                      <div class="card-stats__value">{{ room.date|date:'d/m/Y' }}</div>
+                    </div>
+                  </div>
+                </li>
+              </a>
+              {% endfor %}
+              {% for room in agenda_videos %}
+              <a class="info-card__link" href="{{ room.get_url }}">
+                <li class="info-card info-card--audiencias">
+                  <div class="info-card__header info-card__header--calendar">
+                    <div class="info-card__icon info-card__icon--calendar"><i class="icon icon-calendar"></i></div>
+                    <h2 class="info-card__title">Audiências Previstas</h2>
+                  </div>
+                  <div class="info-card__description">
+                  <img class="info-card__image info-card__image--calendar" src="/audiencias/static/img/calendar-book.svg">
                   <p class="info-card__text">{% if room.reunion_theme %}{{ room.reunion_theme|truncatechars:70 }}{% elif room.is_joint %}{{ room.title_reunion }}{% else %}{{ room.legislative_body_alias }}{% endif %}</p>
                   {% if room.reunion_type %}
                   <p class="info-card__type">{{ room.reunion_type }}</p>
@@ -214,6 +123,152 @@
       </div>
     </div>
   </section>
+  
+  <section class="section section--wikilegis">
+    <div class="e-row e-expanded">
+      <div class="section__info section__block e-columns small-12 large-3">
+        <a href="{% url 'wikilegis:colab_wikilegis' '' %}"><img class="section__logo" src="{% static 'img/logo-wikilegis.svg' %}"></a>
+        <p class="section__text">
+          Edite e aprimore projetos de lei artigo por artigo.
+        </p>
+      </div>
+
+      <div class="section__block e-columns small-12 large-9">
+        <div class="section__content">
+          <h1 class="section__title">
+            <a class="section__link" href="{% url 'wikilegis:colab_wikilegis' '' %}" title="Veja todos os projetos">Projetos de Lei</a>
+            <a class="button section__button" href="{% url 'wikilegis:colab_wikilegis' '' %}" title="Ver todos">
+              Ver todos
+            </a>
+          </h1>
+          <div class="container container--card-list">
+            <ul class="card-list">
+            {% for bill in wikilegis_data %}
+              <a class="info-card__link" href="{{bill.get_url}}">
+                <li class="info-card info-card--wikilegis">
+                  <div class="info-card__header">
+                    {# XXX: Add different style when the category is one of the user's prefered themes #}
+                    {% if user.is_authenticated %}
+                      {% get_prefered_themes_list as prefered_themes %}
+                      {% if bill.theme.slug in prefered_themes %}
+                      {% endif %}
+                    {% endif %}
+                    {% if bill.status == "closed" %}
+                    <div class="info-card__icon info-card__icon--closed"><i class="icon icon-{{bill.theme.slug}}"></i></div>
+                    {% else %}
+                    <div class="info-card__icon"><i class="icon icon-{{bill.theme.slug}}"></i></div>
+                    {% endif %}
+                    <h2 class="info-card__title">{{bill.title|truncatechars:40}}</h2>
+                  </div>
+                  <p class="info-card__text">
+                    {{bill.description|truncatechars:160}}
+                  </p>
+                  <div class="info-card__footer">
+                    <div class="card-stats">
+                      <div class="card-stats__name">Propostas</div>
+                      {% if bill.status == "closed" %}
+                      <div class="card-stats__value card-stats__value--closed">{{bill.amendments_count}}</div>
+                      {% else %}
+                      <div class="card-stats__value">{{bill.amendments_count}}</div>
+                      {% endif %}
+                    </div>
+
+                    <div class="card-stats">
+                      {% if bill.status == "closed" %}
+                      <div class="card-stats__name">Encerrado em:</div>
+                      <div class="card-stats__value card-stats__value--closed">{{bill.closing_date|date:"d/m/Y"}}</div>
+                      {% else %}
+                      <div class="card-stats__name">Participe até:</div>
+                      <div class="card-stats__value">{{bill.closing_date|date:"d/m/Y"}}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </li>
+              </a>
+            {% empty %}
+              <li>
+                <div class="section__content-wrapper section__content-wrapper--center text-center">
+                  <p class="section__text">
+                    Desculpe. Não encontramos nenhum projeto de lei com os filtros acima.
+                  </p>
+                </div>
+              </li>
+            {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--discourse">
+    <div class="e-row e-expanded">
+      <div class="section__info section__block e-columns small-12 large-3">
+        <a href="{% url 'discourse:colab_discourse' '' %}"><img class="section__logo" src="{% static 'img/logo-expressao.svg' %}" data-fallback="{% static 'img/logo-labhacker.png' %}"></a>
+        <p class="section__text">
+          Dê sua opinião sobre os assuntos que afetam a sua vida, discutindo soluções com outros cidadãos e os deputados.
+        </p>
+      </div>
+
+      <div class="section__block e-columns small-12 large-9">
+        <div class="section__content">
+          <h1 class="section__title">
+            <a class="section__link" href="{% url 'discourse:colab_discourse' '' %}" title="Veja todas as discussões">Discussões</a>
+            <a class="button section__button" href="{% url 'discourse:colab_discourse' '' %}" title="Ver todos">
+              Ver todos
+            </a>
+          </h1>
+          <div class="container container--card-list">
+            <ul class="card-list">
+              {% for topic in discourse_data %}
+                <a class="info-card__link" href="{{topic.get_url}}">
+                  <li class="info-card info-card--discourse info-card--{{topic.category.slug}}">
+                    {# XXX: Add different style when the category is one of the user's prefered themes #}
+                    {% if user.is_authenticated %}
+                      {% if topic.category in user.profile.prefered_themes.all %}
+                      {% endif %}
+                    {% endif %}
+                    <div class="info-card__header">
+                      <div class="info-card__icon"><i class="icon icon-{{topic.category.slug}}"></i></div>
+                      <h2 class="info-card__title">{{topic.category.name}}</h2>
+                    </div>
+                    <p class="info-card__text">
+                      {{topic.title}}
+                    </p>
+                    <div class="info-card__footer">
+                      <div class="card-stats">
+                        <div class="card-stats__name">Respostas</div>
+                        <div class="card-stats__value">{{topic.posts_count}}</div>
+                      </div>
+
+                      <div class="card-stats">
+                        <div class="card-stats__name">Visualizações</div>
+                        <div class="card-stats__value">{{topic.views}}</div>
+                      </div>
+
+                      <div class="card-stats">
+                        <div class="card-stats__name">Atualização</div>
+                        <div class="card-stats__value">{{topic.last_posted_at|date:"b/Y"}}</div>
+                      </div>
+                    </div>
+                  </li>
+                </a>
+              {% empty %}
+                <li>
+                  <div class="section__content-wrapper section__content-wrapper--center text-center">
+                    <p class="section__text">
+                      Desculpe. Não encontramos nenhuma discussão com os filtros acima.
+                    </p>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
 {% endblock main %}
 

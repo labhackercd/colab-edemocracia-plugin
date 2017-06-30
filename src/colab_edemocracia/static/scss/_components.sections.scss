@@ -73,6 +73,8 @@
     padding-top: 1rem;
     text-indent: -0.2rem;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
     &::before {
       content: '';
       position: absolute;
@@ -173,6 +175,11 @@
   & .section__link {
     color: white;
   }
+
+  & .section__button {
+    background-color: #00d574;
+    color: white;
+  }
 }
 
 .section--discourse {
@@ -195,6 +202,11 @@
   & .section__link {
     color: #2c383a;
   }
+
+  & .section__button {
+    background-color: #4e9b95;
+    color: white;
+  }
 }
 
 .section--audiencias{
@@ -215,6 +227,11 @@
   }
 
   & .section__link {
+    color: white;
+  }
+  
+  & .section__button {
+    background-color: #f8c300;
     color: white;
   }
 }

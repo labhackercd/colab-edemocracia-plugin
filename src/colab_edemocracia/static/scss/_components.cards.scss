@@ -129,6 +129,15 @@
       font-size: 1.2rem;
       margin-right: 0.5rem;
     }
+
+    &--closed {
+      border: 0.3rem solid #bfbfbf;
+
+      @include breakpoint(small only) {
+        border: 0.2rem solid #bfbfbf;
+      }
+    }
+
   }
 
   & .info-card__title {
@@ -141,6 +150,10 @@
 
   & .card-stats__value {
     color: #00d574;
+    
+    &--closed {
+      color: #bfbfbf;
+    }
   }
 }
 
@@ -189,6 +202,10 @@
     &--old-video {
       background-color: #11496c;
     }
+
+    &--calendar {
+      background-color: #092b2a;
+    }
   }
 
   & .info-card__icon {
@@ -201,20 +218,32 @@
     }
 
     &--old-video {
+      .icon {
+        transform: translateX(10%)
+      }
+    }
+
+    &--calendar {
       font-size: 0.9em;
       border: 2px solid;
       padding: 0.4em;
       border-radius: 50%;
-
-      .icon {
-        transform: translateX(10%)
-      }
     }
   }
 
 
   & .info-card__title {
     font-size: 0.9rem;
+  }
+
+  & .info-card__image {
+
+    &--calendar {
+      display: block;
+      height: 7em;
+      margin: 0 auto;
+      margin-bottom: 1em;
+    }
   }
 
   & .info-card__description {
