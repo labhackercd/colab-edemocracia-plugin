@@ -42,7 +42,7 @@
                   </div>
                   <img class="info-card__image" src="https://i.ytimg.com/vi/{{room.youtube_id}}/mqdefault_live.jpg">
                   <div class="info-card__description">
-                  <p class="info-card__text" title="{{ room.reunion_theme|truncatechars:280 }}">{% if room.reunion_theme %}{{ room.reunion_theme|truncatechars:70 }}{% elif room.is_joint %}{{ room.title_reunion }}{% else %}{{ room.legislative_body_alias }}{% endif %}</p>
+                  <p class="info-card__text" title="{{ room.reunion_theme|default_if_none:''|truncatechars:280 }}">{% if room.reunion_theme %}{{ room.reunion_theme|truncatechars:70 }}{% elif room.is_joint %}{{ room.title_reunion }}{% else %}{{ room.legislative_body_alias }}{% endif %}</p>
                   {% if room.reunion_type %}
                   <p class="info-card__type">{{ room.reunion_type }}</p>
                   {% endif %}
@@ -75,7 +75,7 @@
                   </div>
                   <div class="info-card__description">
                   <img class="info-card__image info-card__image--calendar" src="/audiencias/static/img/calendar-book.svg">
-                  <p class="info-card__text" title="{{ room.reunion_theme|truncatechars:280 }}">{% if room.reunion_theme %}{{ room.reunion_theme|truncatechars:70 }}{% elif room.is_joint %}{{ room.title_reunion }}{% else %}{{ room.legislative_body_alias }}{% endif %}</p>
+                  <p class="info-card__text" title="{{ room.reunion_theme|default_if_none:''|truncatechars:280 }}">{% if room.reunion_theme %}{{ room.reunion_theme|truncatechars:70 }}{% elif room.is_joint %}{{ room.title_reunion }}{% else %}{{ room.legislative_body_alias }}{% endif %}</p>
                   {% if room.reunion_type %}
                   <p class="info-card__type">{{ room.reunion_type }}</p>
                   {% endif %}
@@ -108,7 +108,7 @@
                   </div>
                   <img class="info-card__image" src="https://i.ytimg.com/vi/{{room.youtube_id}}/mqdefault_live.jpg">
                   <div class="info-card__description">
-                  <p class="info-card__text" title="{{ room.reunion_theme|truncatechars:280 }}">{% if room.reunion_theme %}{{ room.reunion_theme|truncatechars:70 }}{% elif room.is_joint %}{{ room.title_reunion }}{% else %}{{ room.legislative_body_alias }}{% endif %}</p>
+                  <p class="info-card__text" title="{{ room.reunion_theme|default_if_none:''|truncatechars:280 }}">{% if room.reunion_theme %}{{ room.reunion_theme|truncatechars:70 }}{% elif room.is_joint %}{{ room.title_reunion }}{% else %}{{ room.legislative_body_alias }}{% endif %}</p>
                   {% if room.reunion_type %}
                   <p class="info-card__type">{{ room.reunion_type }}</p>
                   {% endif %}
