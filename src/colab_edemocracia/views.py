@@ -75,15 +75,14 @@ def login(request, template_name='registration/login.html',
     discourse_data = DiscourseTopic.objects.filter(visible=True)
     discourse_data = discourse_data.order_by('-last_posted_at')
     audiencias_today = AudienciasRoom.objects.filter(
-        date__startswith=datetime.date.today())
-    live_videos = audiencias_today.filter(youtube_status=1, is_visible=True)
-    history_videos = audiencias_today.filter(youtube_status=2, is_visible=True)
+        date__startswith=datetime.date.today(), is_visible=True)
+    live_videos = audiencias_today.filter(youtube_status=1)
+    history_videos = audiencias_today.filter(youtube_status=2)
     agenda_videos = audiencias_today.filter(
-        youtube_status=0, is_visible=True,
-        reunion_status__in=[2, 3]).order_by('date')
+        youtube_status=0, reunion_status__in=[2, 3]).order_by('date')
 
-    if agenda_videos.count() < 10:
-        empty_cards_count = 10 - agenda_videos.count()
+    if audiencias_today.count() < 10:
+        empty_cards_count = 10 - audiencias_today.count()
         next_agenda = AudienciasRoom.objects.filter(
             youtube_status=0, is_visible=True,
             reunion_status__in=[2, 3]).exclude(
