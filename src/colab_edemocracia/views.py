@@ -4,7 +4,6 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.core.mail import EmailMultiAlternatives
-from django.db.models import Q
 from django.shortcuts import redirect, resolve_url
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
@@ -15,7 +14,7 @@ from django.http import (
     HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 )
 from django.contrib.auth import (
-    REDIRECT_FIELD_NAME, login as auth_login, update_session_auth_hash, logout
+    REDIRECT_FIELD_NAME, login as auth_login, update_session_auth_hash
 )
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
@@ -24,14 +23,11 @@ from django.template.response import TemplateResponse
 from django.template.loader import render_to_string
 from django.views.generic import UpdateView, FormView
 from django.views.decorators.clickjacking import xframe_options_exempt
-import datetime
-from itertools import chain
+
 from .forms.accounts import SignUpForm, UserProfileForm
 from .models import UserProfile
 from colab.accounts.models import EmailAddressValidation, EmailAddress
-from colab_wikilegis.models import WikilegisBill
-from colab_discourse.models import DiscourseTopic, DiscourseCategory
-from colab_audiencias.models import AudienciasRoom
+from colab_discourse.models import DiscourseCategory
 
 
 User = get_user_model()
@@ -70,69 +66,11 @@ def login(request, template_name='registration/login.html',
 
     current_site = get_current_site(request)
 
-    wikilegis_data = WikilegisBill.objects.exclude(status='draft')
-    wikilegis_data = wikilegis_data.order_by('-status', '-modified')
-    discourse_data = DiscourseTopic.objects.filter(visible=True)
-    discourse_data = discourse_data.order_by('-last_posted_at')
-    audiencias_today = AudienciasRoom.objects.filter(
-        date__startswith=datetime.date.today(), is_visible=True)
-    live_videos = audiencias_today.filter(youtube_status=1)
-    history_videos = audiencias_today.filter(youtube_status=2)
-    agenda_videos = audiencias_today.filter(
-        youtube_status=0, reunion_status__in=[2, 3]).order_by('date')
-
-    if audiencias_today.count() < 10:
-        empty_cards_count = 10 - audiencias_today.count()
-        next_agenda = AudienciasRoom.objects.filter(
-            youtube_status=0, is_visible=True,
-            reunion_status__in=[2, 3]).exclude(
-            date__startswith=datetime.date.today()).exclude(
-            date__lte=datetime.datetime.now()).order_by(
-            'date')[:empty_cards_count]
-        agenda_videos = list(chain(agenda_videos, next_agenda))
-
-    if request.user.is_authenticated():
-        wikilegis_query = Q()
-        discourse_query = Q()
-        for category in request.user.profile.prefered_themes.all():
-            wikilegis_query = wikilegis_query | Q(theme__slug=category.slug)
-            discourse_query = discourse_query | Q(category__slug=category.slug)
-
-        if len(wikilegis_data.filter(wikilegis_query)) != len(wikilegis_data):
-            wikilegis_data = list(wikilegis_data.filter(wikilegis_query)) + \
-                list(wikilegis_data.exclude(wikilegis_query))
-
-        if len(discourse_data.filter(discourse_query)) != len(discourse_data):
-            discourse_data = list(discourse_data.filter(discourse_query)) + \
-                list(discourse_data.exclude(discourse_query))
-
-    selected_filters = request.GET.get('filter', "")
-
-    if selected_filters:
-        wikilegis_filter = Q()
-        discourse_filter = Q()
-        selected_filters = selected_filters.split(',')
-
-        for category in selected_filters:
-            wikilegis_filter = wikilegis_filter | Q(theme__slug=category)
-            discourse_filter = discourse_filter | Q(category__slug=category)
-
-        wikilegis_data = wikilegis_data.filter(wikilegis_filter)
-        discourse_data = discourse_data.filter(discourse_filter)
-
     context = {
         'form': form,
         redirect_field_name: redirect_to,
         'site': current_site,
         'site_name': current_site.name,
-        'wikilegis_data': wikilegis_data[:10],
-        'discourse_data': discourse_data[:10],
-        'live_videos': live_videos.order_by('-date'),
-        'history_videos': history_videos.order_by('-date'),
-        'agenda_videos': agenda_videos,
-        'categories': DiscourseCategory.objects.all(),
-        'selected_filters_list': selected_filters,
-        'selected_filters': ','.join(selected_filters),
     }
 
     return TemplateResponse(request, template_name, context,
