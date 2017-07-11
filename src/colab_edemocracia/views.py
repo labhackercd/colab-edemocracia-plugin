@@ -10,9 +10,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.utils.http import is_safe_url
 from django.conf import settings
-from django.http import (
-    HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
-)
+from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME, login as auth_login, update_session_auth_hash
 )
@@ -27,7 +25,6 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from .forms.accounts import SignUpForm, UserProfileForm
 from .models import UserProfile
 from colab.accounts.models import EmailAddressValidation, EmailAddress
-from colab_discourse.models import DiscourseCategory
 
 
 User = get_user_model()
@@ -174,51 +171,12 @@ class ProfileView(UpdateView):
     form_class = UserProfileForm
     template_name = 'profile.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(ProfileView, self).get_context_data(**kwargs)
-        context['categories'] = DiscourseCategory.objects.all()
-        return context
-
     def get_object(self, queryset=None):
         return self.request.user.profile
 
     def get_success_url(self):
         messages.success(self.request, 'Perfil modificado com sucesso!')
         return reverse('colab_edemocracia:profile')
-
-
-class UpdateUserPreferedTheme(View):
-
-    http_method_names = ['post']
-
-    def post(self, request):
-        category_slug = request.POST.get('category_slug')
-        category = DiscourseCategory.objects.get(slug=category_slug)
-        profile = UserProfile.objects.get_or_create(user=request.user)[0]
-
-        if category in profile.prefered_themes.all():
-            profile.prefered_themes.remove(category)
-        else:
-            profile.prefered_themes.add(category)
-
-        return HttpResponse('')
-
-
-class SetAllThemes(View):
-
-    http_method_names = ['post']
-
-    def post(self, request):
-        action = request.POST.get('action')
-        profile = UserProfile.objects.get_or_create(user=request.user)[0]
-
-        if action == 'select':
-            for category in DiscourseCategory.objects.all():
-                profile.prefered_themes.add(category)
-        elif action == 'deselect':
-            profile.prefered_themes.clear()
-
-        return HttpResponse('')
 
 
 class WidgetLoginView(FormView):
