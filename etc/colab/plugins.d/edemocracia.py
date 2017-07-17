@@ -29,7 +29,7 @@ settings_variables = {
         ('text/x-scss', 'django_libsass.SassCompiler'),
     ),
     'LIBSASS_SOURCEMAPS': 'DEBUG',
-    'COMPRESS_ROOT': "/vagrant/colab/assets",
+    'COMPRESS_ROOT': "/colab-plugins/edemocracia/src/colab_edemocracia/static",
     'COLAB_TEMPLATES': (
         "/colab-plugins/edemocracia/src/colab_edemocracia/templates",
     ),

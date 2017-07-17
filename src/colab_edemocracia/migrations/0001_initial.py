@@ -10,7 +10,6 @@ import colab_edemocracia.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('colab_discourse', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
@@ -25,7 +24,6 @@ class Migration(migrations.Migration):
                 ('photo', models.ImageField(null=True, upload_to=b'')),
                 ('avatar', image_cropping.fields.ImageCropField(blank=True, null=True, upload_to=b'avatars/', validators=[colab_edemocracia.models.avatar_validation])),
                 (b'cropping', image_cropping.fields.ImageRatioField(b'avatar', '70x70', hide_image_field=False, size_warning=False, allow_fullsize=False, free_crop=False, adapt_rotation=False, help_text=None, verbose_name='cropping')),
-                ('prefered_themes', models.ManyToManyField(to='colab_discourse.DiscourseCategory')),
                 ('user', models.OneToOneField(related_name='profile', to=settings.AUTH_USER_MODEL)),
             ],
             options={

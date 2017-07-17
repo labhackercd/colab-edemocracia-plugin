@@ -1,4 +1,5 @@
-{% load staticfiles %}
+{% load staticfiles widgets_tag %}
+{% import_widgets 'navigation_links' %}
 
 <div class="c-hamburger c-hamburger--htx show-for-small-only">
   <span>Menu</span>
@@ -27,36 +28,9 @@
     <span class="show-for-sr">Ferramentas</span>
     <i class="menu-list__icon icon icon-th" aria-hidden="true"></i>
     <div class="menu-list--dropdown__wrapper">
-      <li class="menu-list__item">
-        <a class="menu-list__link" href="{% url 'discourse:colab_discourse' '' %}" title="Opine em temas que te afetam como cidadão">
-          <div class="logo logo--menu-list">
-            <div class="logo__icon--discourse">
-              <img class="logo__image" src="{% static 'img/logo-expressao-image.svg' %}" data-fallback="{% static 'img/logo-expressao-image.png' %}">
-            </div>
-          </div>
-          <span class="menu-list__text">Expressão</span>
-        </a>
-      </li>
-      <li class="menu-list__item">
-        <a class="menu-list__link" href="{% url 'wikilegis:colab_wikilegis' '' %}" title="Participe em Projetos de Lei">
-          <div class="logo logo--menu-list">
-            <div class="logo__icon--wikilegis">
-              <img class="logo__image" src="{% static 'img/logo-wikilegis-icon.svg' %}">
-            </div>
-          </div>
-          <span class="menu-list__text">Wikilegis</span>
-        </a>
-      </li>
-      <li class="menu-list__item">
-        <a class="menu-list__link" href="{% url 'audiencias:colab_audiencias' '' %}" title="Acompanhe ao vivo e participe enviando perguntas aos deputados!">
-          <div class="logo logo--menu-list">
-            <div class="logo__icon--audiencias">
-              <img class="logo__image" src="{% static 'img/logo-audiencias-icon.svg' %}">
-            </div>
-          </div>
-          <span class="menu-list__text">Audiências</span>
-        </a>
-      </li>
+      {% for widget in widgets_navigation_links %}
+        {{widget.get_body}}
+      {% endfor %}
     </div>
   </ul>
 

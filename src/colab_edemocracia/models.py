@@ -76,7 +76,6 @@ class UserProfile(models.Model):
     uf = models.CharField(max_length=2, choices=UF_CHOICES, null=True, blank=True)
     birthdate = models.DateField(blank=True, null=True)
     user = models.OneToOneField("accounts.User", related_name='profile')
-    prefered_themes = models.ManyToManyField('colab_discourse.DiscourseCategory')
     avatar = ImageCropField(upload_to="avatars/", null=True, blank=True,
                             validators=[avatar_validation])
     cropping = ImageRatioField('avatar', '140x140',)
