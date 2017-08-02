@@ -182,6 +182,30 @@
   }
 }
 
+.section--pauta {
+  background-color: whitesmoke;
+
+  & .section__info {
+    background-color: white;
+    color: #4c4c4c;
+
+    & .section__logo {
+      width: 20em;
+    }
+  }
+
+  & .section__title {
+    &::before {
+      background-color: #ace7e9;
+    }
+  }
+
+  & .section__button {
+    background-color: #ace7e9;
+    color: #2d5253;
+  }
+}
+
 .section--discourse {
   background-color: #dfdfdf;
 
@@ -229,7 +253,7 @@
   & .section__link {
     color: white;
   }
-  
+
   & .section__button {
     background-color: #f8c300;
     color: white;

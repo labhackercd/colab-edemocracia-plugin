@@ -150,7 +150,7 @@
 
   & .card-stats__value {
     color: #00d574;
-    
+
     &--closed {
       color: #bfbfbf;
     }
@@ -183,6 +183,38 @@
 
   & .card-stats__value {
     color: #1b9894;
+  }
+}
+
+.info-card--pauta {
+  & .card-stats__value {
+    color: darken(#afdee0, 10%);
+
+    &--closed {
+      color: #a2a2a2;
+    }
+  }
+
+  & .info-card__header {
+    justify-content: flex-start;
+    height: 3rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    color: #2d5253;
+
+    &--calendar {
+      background-color: #ace7e9;
+    }
+
+    &--closed {
+      background-color: #a2a2a2;
+      color: white;
+    }
+  }
+
+  & .info-card__icon {
+    margin-right: 0.8rem;
+    font-size: 1.5rem;
   }
 }
 
