@@ -7,10 +7,11 @@ from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import redirect, resolve_url
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.utils.http import is_safe_url
 from django.conf import settings
-from django.http import HttpResponseRedirect, HttpResponseBadRequest
+from django.http import (
+    HttpResponseRedirect, HttpResponseBadRequest, HttpResponse)
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME, login as auth_login, update_session_auth_hash
 )
@@ -25,6 +26,7 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from .forms.accounts import SignUpForm, UserProfileForm
 from .models import UserProfile
 from colab.accounts.models import EmailAddressValidation, EmailAddress
+import json
 
 
 User = get_user_model()
@@ -258,3 +260,18 @@ class WidgetSignUpView(View):
         mail = EmailMultiAlternatives(subject=subject, to=[email])
         mail.attach_alternative(html, 'text/html')
         mail.send()
+
+
+@csrf_exempt
+def ajax_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(None, request.POST)
+        response_data = {}
+        if form.is_valid():
+            login(request, form.get_user())
+            response_data['result'] = 'success'
+        else:
+            response_data['result'] = 'failed'
+            response_data['message'] = form.errors
+        return HttpResponse(
+            json.dumps(response_data), content_type="application/json")
