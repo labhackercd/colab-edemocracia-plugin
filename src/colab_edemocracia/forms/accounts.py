@@ -97,3 +97,70 @@ class PasswordResetForm(PasswordResetForm):
             )
 
         return email
+
+
+class SignUpValidationForm(forms.ModelForm):
+    uf = forms.CharField(required=False)
+    country = forms.CharField(required=False)
+    required = ('email', 'password')
+    error_messages = {
+        'empty_email': _(
+            u"Este campo é obrigatório."),
+        'exists_email': _(
+            u"Já existe um usuário cadastrado com este email."),
+        'length_password': _(
+            u"O campo senha deve possuir no mínimo 6 caracteres."),
+        'empty_uf_country': _(
+            u"Os campos estado ou país devem ser preenchidos."),
+        'empty_uf': _(
+            u'Selecione uma UF, caso seja estrangeiro,'
+            u' clique em "sou estrangeiro".'),
+        'empty_country': _(
+            u'Selecione um país, caso não seja estrangeiro,'
+            u' escolha uma UF.'),
+    }
+
+    class Meta:
+        fields = ('email', 'password')
+        model = User
+
+    def clean(self):
+        cleaned_data = super(SignUpValidationForm, self).clean()
+        uf = cleaned_data.get("uf", None)
+        country = cleaned_data.get("country", None)
+
+        if not uf and not country:
+            msg = self.error_messages.get('empty_uf_country')
+            raise forms.ValidationError(mark_safe(msg))
+
+    def clean_password(self):
+        password = self.cleaned_data.get("password", None)
+        if len(password) < 6:
+            raise forms.ValidationError(
+                mark_safe(self.error_messages.get('length_password')))
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email", None)
+        users = User.objects.filter(email__iexact=email, is_active=True)
+        if not email:
+            raise forms.ValidationError(
+                mark_safe(self.error_messages.get('empty_email')))
+        if not users.exists():
+            raise forms.ValidationError(
+                mark_safe(self.error_messages.get('exists_email')))
+
+    def clean_uf(self):
+        uf = self.cleaned_data.get("uf", None)
+        country = self.cleaned_data.get("country", None)
+
+        if not uf and not country:
+            raise forms.ValidationError(
+                mark_safe(self.error_messages.get('empty_uf')))
+
+    def clean_country(self):
+        uf = self.cleaned_data.get("uf", None)
+        country = self.cleaned_data.get("country", None)
+
+        if not uf and not country:
+            raise forms.ValidationError(
+                mark_safe(self.error_messages.get('empty_country')))

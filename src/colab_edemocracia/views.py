@@ -23,7 +23,7 @@ from django.template.loader import render_to_string
 from django.views.generic import UpdateView, FormView
 from django.views.decorators.clickjacking import xframe_options_exempt
 
-from .forms.accounts import SignUpForm, UserProfileForm
+from .forms.accounts import SignUpForm, UserProfileForm, SignUpValidationForm
 from .models import UserProfile
 from colab.accounts.models import EmailAddressValidation, EmailAddress
 import json
@@ -270,6 +270,21 @@ def ajax_login(request):
         if form.is_valid():
             login(request, form.get_user())
             response_data['result'] = 'success'
+        else:
+            response_data['result'] = 'failed'
+            response_data['message'] = form.errors
+        return HttpResponse(
+            json.dumps(response_data), content_type="application/json")
+
+
+@csrf_exempt
+def ajax_validation_signup(request):
+    if request.method == 'POST':
+        form = SignUpValidationForm(request.POST)
+        response_data = {}
+        if form.is_valid():
+            response_data['result'] = 'success'
+            response_data['data'] = form.cleaned_data
         else:
             response_data['result'] = 'failed'
             response_data['message'] = form.errors
