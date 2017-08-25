@@ -5,43 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from image_cropping import ImageCropField, ImageRatioField
 from easy_thumbnails.files import get_thumbnailer
-
-
-GENDER_CHOICES = (
-    ('male', 'Masculino'),
-    ('female', 'Feminino'),
-    ('other', 'Outro')
-)
-
-UF_CHOICES = (
-    ('AC', 'AC'),
-    ('AL', 'AL'),
-    ('AP', 'AP'),
-    ('AM', 'AM'),
-    ('BA', 'BA'),
-    ('CE', 'CE'),
-    ('DF', 'DF'),
-    ('ES', 'ES'),
-    ('GO', 'GO'),
-    ('MA', 'MA'),
-    ('MS', 'MS'),
-    ('MT', 'MT'),
-    ('MG', 'MG'),
-    ('PA', 'PA'),
-    ('PB', 'PB'),
-    ('PR', 'PR'),
-    ('PE', 'PE'),
-    ('PI', 'PI'),
-    ('RJ', 'RJ'),
-    ('RN', 'RN'),
-    ('RS', 'RS'),
-    ('RO', 'RO'),
-    ('RR', 'RR'),
-    ('SC', 'SC'),
-    ('SP', 'SP'),
-    ('SE', 'SE'),
-    ('TO', 'TO'),
-)
+from .choices import GENDER_CHOICES, UF_CHOICES, COUNTRY_CHOICES
 
 
 def sizeof_fmt(num, suffix='B'):
@@ -72,8 +36,12 @@ def avatar_validation(image):
 
 
 class UserProfile(models.Model):
-    gender = models.CharField(max_length=999, choices=GENDER_CHOICES, blank=True, null=True)
-    uf = models.CharField(max_length=2, choices=UF_CHOICES, null=True, blank=True)
+    gender = models.CharField(max_length=999, choices=GENDER_CHOICES,
+                              blank=True, null=True)
+    uf = models.CharField(max_length=2, choices=UF_CHOICES, null=True,
+                          blank=True)
+    country = models.CharField(max_length=2, choices=COUNTRY_CHOICES,
+                               null=True, blank=True)
     birthdate = models.DateField(blank=True, null=True)
     user = models.OneToOneField("accounts.User", related_name='profile')
     avatar = ImageCropField(upload_to="avatars/", null=True, blank=True,
