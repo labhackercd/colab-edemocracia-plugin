@@ -215,6 +215,12 @@
     margin-right: 0.8rem;
     font-size: 1.5rem;
   }
+
+  & .info-card__text {
+    & .text__highlight {
+      font-weight: 500;
+    }
+  }
 }
 
 .info-card--audiencias{
