@@ -31,4 +31,6 @@ urlpatterns = patterns(
         TemplateView.as_view(template_name='widget/redirect.html'),
         name='redirect_widget'),
     url(r'^ajax/login/?$', views.ajax_login, name="ajax_login"),
+    url(r'^ajax/validation/?$', views.ajax_validation_signup,
+        name="ajax_validation"),
 )
