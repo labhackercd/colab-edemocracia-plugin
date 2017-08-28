@@ -133,21 +133,30 @@ class SignUpValidationForm(forms.ModelForm):
             msg = self.error_messages.get('empty_uf_country')
             raise forms.ValidationError(mark_safe(msg))
 
+        return cleaned_data
+
     def clean_password(self):
         password = self.cleaned_data.get("password", None)
+
         if len(password) < 6:
             raise forms.ValidationError(
                 mark_safe(self.error_messages.get('length_password')))
 
+        return password
+
     def clean_email(self):
         email = self.cleaned_data.get("email", None)
-        users = User.objects.filter(email__iexact=email, is_active=True)
+        users = User.objects.filter(email=email)
+
         if not email:
             raise forms.ValidationError(
                 mark_safe(self.error_messages.get('empty_email')))
-        if not users.exists():
+
+        if users.exists():
             raise forms.ValidationError(
                 mark_safe(self.error_messages.get('exists_email')))
+
+        return email
 
     def clean_uf(self):
         uf = self.cleaned_data.get("uf", None)
@@ -157,6 +166,8 @@ class SignUpValidationForm(forms.ModelForm):
             raise forms.ValidationError(
                 mark_safe(self.error_messages.get('empty_uf')))
 
+        return uf
+
     def clean_country(self):
         uf = self.cleaned_data.get("uf", None)
         country = self.cleaned_data.get("country", None)
@@ -164,3 +175,5 @@ class SignUpValidationForm(forms.ModelForm):
         if not uf and not country:
             raise forms.ValidationError(
                 mark_safe(self.error_messages.get('empty_country')))
+
+        return country
