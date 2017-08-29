@@ -131,8 +131,12 @@ class SignUpValidationForm(forms.ModelForm):
         country = cleaned_data.get("country", None)
 
         if not uf and not country:
-            msg = self.error_messages.get('empty_uf_country')
-            raise forms.ValidationError(mark_safe(msg))
+            self.add_error('uf', mark_safe(
+                self.error_messages.get('empty_uf')))
+            self.add_error('country', mark_safe(
+                self.error_messages.get('empty_country')))
+            raise forms.ValidationError(mark_safe(
+                self.error_messages.get('empty_uf_country')))
 
         return cleaned_data
 
@@ -158,23 +162,3 @@ class SignUpValidationForm(forms.ModelForm):
                 mark_safe(self.error_messages.get('exists_email')))
 
         return email
-
-    def clean_uf(self):
-        uf = self.cleaned_data.get("uf", None)
-        country = self.cleaned_data.get("country", None)
-
-        if not uf and not country:
-            raise forms.ValidationError(
-                mark_safe(self.error_messages.get('empty_uf')))
-
-        return uf
-
-    def clean_country(self):
-        uf = self.cleaned_data.get("uf", None)
-        country = self.cleaned_data.get("country", None)
-
-        if not uf and not country:
-            raise forms.ValidationError(
-                mark_safe(self.error_messages.get('empty_country')))
-
-        return country
