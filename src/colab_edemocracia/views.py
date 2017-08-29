@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.utils.http import is_safe_url
 from django.conf import settings
 from django.http import (
-    HttpResponseRedirect, HttpResponseBadRequest, HttpResponse)
+    HttpResponseRedirect, HttpResponseBadRequest, JsonResponse)
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME, login as auth_login, update_session_auth_hash
 )
@@ -26,7 +26,6 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from .forms.accounts import SignUpForm, UserProfileForm, SignUpValidationForm
 from .models import UserProfile
 from colab.accounts.models import EmailAddressValidation, EmailAddress
-import json
 
 
 User = get_user_model()
@@ -273,12 +272,11 @@ def ajax_login(request):
         response_data = {}
         if form.is_valid():
             login(request, form.get_user())
-            response_data['result'] = 'success'
+            status_code = 200
         else:
-            response_data['result'] = 'failed'
-            response_data['message'] = form.errors
-        return HttpResponse(
-            json.dumps(response_data), content_type="application/json")
+            response_data['data'] = form.errors
+            status_code = 401
+        return JsonResponse(response_data, status=status_code)
 
 
 @csrf_exempt
@@ -287,10 +285,9 @@ def ajax_validation_signup(request):
         form = SignUpValidationForm(request.POST)
         response_data = {}
         if form.is_valid():
-            response_data['result'] = 'success'
+            status_code = 200
             response_data['data'] = form.cleaned_data
         else:
-            response_data['result'] = 'failed'
-            response_data['message'] = form.errors
-        return HttpResponse(
-            json.dumps(response_data), content_type="application/json")
+            status_code = 400
+            response_data['data'] = form.errors
+        return JsonResponse(response_data, status=status_code)
