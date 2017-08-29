@@ -26,6 +26,7 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from .forms.accounts import SignUpForm, UserProfileForm, SignUpValidationForm
 from .models import UserProfile
 from colab.accounts.models import EmailAddressValidation, EmailAddress
+from .utils import encrypt
 
 
 User = get_user_model()
@@ -285,6 +286,8 @@ def ajax_validation_signup(request):
         form = SignUpValidationForm(request.POST)
         response_data = {}
         if form.is_valid():
+            form.cleaned_data['password'] = encrypt(
+                form.cleaned_data['password'])
             status_code = 200
             response_data['data'] = form.cleaned_data
         else:
