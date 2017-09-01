@@ -117,7 +117,7 @@ class SignUpValidationForm(forms.ModelForm):
             u' clique em "sou estrangeiro".'),
         'empty_country': _(
             u'Selecione um país, caso não seja estrangeiro,'
-            u' escolha uma UF.'),
+            u' clique em "sou brasileiro".'),
     }
 
     class Meta:
@@ -159,5 +159,28 @@ class SignUpValidationForm(forms.ModelForm):
         if users.exists():
             raise forms.ValidationError(
                 mark_safe(self.error_messages.get('exists_email')))
+
+        return email
+
+
+class SignUpAjaxForm(forms.ModelForm):
+    uf = forms.CharField(required=False)
+    country = forms.CharField(required=False)
+    birthyear = forms.IntegerField(required=False)
+    gender = forms.CharField(required=False)
+
+    required = ('email', 'password', 'first_name')
+
+    class Meta:
+        fields = ('username', 'email', 'password')
+        model = User
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email", None)
+        users = User.objects.filter(email=email)
+
+        if users.exists():
+            raise forms.ValidationError(mark_safe(
+                _(u"Já existe um usuário cadastrado com este email.")))
 
         return email

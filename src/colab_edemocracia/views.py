@@ -22,12 +22,15 @@ from django.template.response import TemplateResponse
 from django.template.loader import render_to_string
 from django.views.generic import UpdateView, FormView
 from django.views.decorators.clickjacking import xframe_options_exempt
+from django.utils import slugify
 
-from .forms.accounts import SignUpForm, UserProfileForm, SignUpValidationForm
+from .forms.accounts import (
+    SignUpForm, UserProfileForm, SignUpValidationForm, SignUpAjaxForm)
 from .models import UserProfile
 from colab.accounts.models import EmailAddressValidation, EmailAddress
-from .utils import encrypt
-
+from .utils import encrypt, decrypt
+import string
+import random
 
 User = get_user_model()
 
@@ -114,6 +117,24 @@ def password_change(request,
     return TemplateResponse(request, template_name, context)
 
 
+def send_verification_email(self, email, verification_url):
+    html = render_to_string('emails/edemocracia_new_user.html',
+                            {'verification_url': verification_url})
+    subject = "Confirmação de cadastro"
+    mail = EmailMultiAlternatives(subject=subject, to=[email])
+    mail.attach_alternative(html, 'text/html')
+    mail.send()
+
+
+def generate_username(self, email):
+    username = slugify(email.split('@')[0])[:29]
+    if User.objects.get(username=username):
+        generate_username(
+            username + random.choice(string.letters + string.digits))
+    else:
+        return username
+
+
 class SignUpView(View):
     http_method_names = [u'post']
 
@@ -140,7 +161,7 @@ class SignUpView(View):
         location = reverse('email_view',
                            kwargs={'key': email.validation_key})
         verification_url = request.build_absolute_uri(location)
-        self.send_email(user.email, verification_url)
+        send_verification_email(user.email, verification_url)
 
         # Check if the user's email have been used previously in the mainling
         # lists to link the user to old messages
@@ -158,14 +179,6 @@ class SignUpView(View):
         email_addr.save()
 
         return redirect(reverse('colab_edemocracia:home'))
-
-    def send_email(self, email, verification_url):
-        html = render_to_string('emails/edemocracia_new_user.html',
-                                {'verification_url': verification_url})
-        subject = "Confirmação de cadastro"
-        mail = EmailMultiAlternatives(subject=subject, to=[email])
-        mail.attach_alternative(html, 'text/html')
-        mail.send()
 
 
 class ProfileView(UpdateView):
@@ -234,7 +247,7 @@ class WidgetSignUpView(View):
         location = reverse('email_view',
                            kwargs={'key': email.validation_key})
         verification_url = request.build_absolute_uri(location)
-        self.send_email(user.email, verification_url)
+        send_verification_email(user.email, verification_url)
 
         # Check if the user's email have been used previously in the mainling
         # lists to link the user to old messages
@@ -252,14 +265,6 @@ class WidgetSignUpView(View):
         email_addr.save()
 
         return redirect(reverse('colab_edemocracia:widget_login'))
-
-    def send_email(self, email, verification_url):
-        html = render_to_string('emails/edemocracia_new_user.html',
-                                {'verification_url': verification_url})
-        subject = "Confirmação de cadastro"
-        mail = EmailMultiAlternatives(subject=subject, to=[email])
-        mail.attach_alternative(html, 'text/html')
-        mail.send()
 
 
 @csrf_exempt
@@ -286,6 +291,44 @@ def ajax_validation_signup(request):
                 form.cleaned_data['password'])
             status_code = 200
             response_data['data'] = form.cleaned_data
+        else:
+            status_code = 400
+            response_data['data'] = form.errors
+        return JsonResponse(response_data, status=status_code)
+
+
+@csrf_exempt
+def ajax_signup(request):
+    if request.method == 'POST':
+        response_data = {}
+        form = SignUpAjaxForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create(
+                username=generate_username(form.cleaned_data['email']),
+                email=form.cleaned_data['email'],
+                first_name=form.cleaned_data['first_name'],
+                needs_update=False,
+                is_active=False,
+            )
+            user.set_password(decrypt(form.cleaned_data['password']))
+            user.save()
+
+            profile = UserProfile.objects.get(user=user)
+            profile.uf = form.cleaned_data['uf']
+            profile.country = form.cleaned_data['country']
+            profile.birthyear = form.cleaned_data['birthyear']
+            profile.gender = form.cleaned_data['gender']
+            profile.save()
+
+            email = EmailAddressValidation.create(user.email, user)
+            location = reverse('email_view',
+                               kwargs={'key': email.validation_key})
+            verification_url = request.build_absolute_uri(location)
+            send_verification_email(user.email, verification_url)
+
+            status_code = 200
+            response_data['data'] = u"Usuário criado com sucesso! Por favor, "
+            "verifique seu email para concluir seu cadastro."
         else:
             status_code = 400
             response_data['data'] = form.errors
