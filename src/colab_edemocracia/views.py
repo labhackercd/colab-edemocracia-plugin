@@ -22,7 +22,7 @@ from django.template.response import TemplateResponse
 from django.template.loader import render_to_string
 from django.views.generic import UpdateView, FormView
 from django.views.decorators.clickjacking import xframe_options_exempt
-from django.utils import slugify
+from django.template.defaultfilters import slugify
 
 from .forms.accounts import (
     SignUpForm, UserProfileForm, SignUpValidationForm, SignUpAjaxForm)
