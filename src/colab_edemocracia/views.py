@@ -280,7 +280,7 @@ def ajax_login(request):
             login(request, form.get_user())
             status_code = 200
         else:
-            response_data['data'] = form.errors
+            response_data['data'] = u"Usuário e/ou senha inválidos."
             status_code = 401
         return JsonResponse(response_data, status=status_code)
 
