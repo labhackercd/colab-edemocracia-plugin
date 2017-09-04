@@ -172,7 +172,7 @@ class SignUpAjaxForm(forms.ModelForm):
     required = ('email', 'password', 'first_name')
 
     class Meta:
-        fields = ('username', 'email', 'password')
+        fields = ('email', 'password', 'first_name')
         model = User
 
     def clean_email(self):

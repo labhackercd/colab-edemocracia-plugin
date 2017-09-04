@@ -117,7 +117,7 @@ def password_change(request,
     return TemplateResponse(request, template_name, context)
 
 
-def send_verification_email(self, email, verification_url):
+def send_verification_email(email, verification_url):
     html = render_to_string('emails/edemocracia_new_user.html',
                             {'verification_url': verification_url})
     subject = "Confirmação de cadastro"
@@ -126,9 +126,9 @@ def send_verification_email(self, email, verification_url):
     mail.send()
 
 
-def generate_username(self, email):
+def generate_username(email):
     username = slugify(email.split('@')[0])[:29]
-    if User.objects.get(username=username):
+    if User.objects.filter(username=username).exists():
         generate_username(
             username + random.choice(string.letters + string.digits))
     else:
@@ -327,8 +327,9 @@ def ajax_signup(request):
             send_verification_email(user.email, verification_url)
 
             status_code = 200
-            response_data['data'] = u"Usuário criado com sucesso! Por favor, "
-            "verifique seu email para concluir seu cadastro."
+            response_data['data'] = (u"Usuário criado com sucesso! Por favor, "
+                                     "verifique seu email para concluir seu "
+                                     "cadastro.")
         else:
             status_code = 400
             response_data['data'] = form.errors
