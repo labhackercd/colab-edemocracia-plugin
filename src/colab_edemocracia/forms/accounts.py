@@ -5,6 +5,7 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from colab_edemocracia.models import UserProfile
+from datetime import datetime
 
 
 User = get_user_model()
@@ -167,7 +168,8 @@ class SignUpValidationForm(forms.ModelForm):
 class SignUpAjaxForm(forms.ModelForm):
     uf = forms.CharField(required=False)
     country = forms.CharField(required=False)
-    birthyear = forms.IntegerField(required=False)
+    birthyear = forms.IntegerField(required=False, min_value=1905,
+                                   max_value=datetime.now().year)
     gender = forms.CharField(required=False)
 
     required = ('email', 'password', 'first_name')
