@@ -277,7 +277,7 @@ def ajax_login(request):
         form = AuthenticationForm(None, request.POST)
         response_data = {}
         if form.is_valid():
-            login(request, form.get_user())
+            auth_login(request, form.get_user())
             status_code = 200
         else:
             response_data['data'] = u"Usuário e/ou senha inválidos."
