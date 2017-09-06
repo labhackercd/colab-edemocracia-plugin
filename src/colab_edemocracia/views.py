@@ -309,7 +309,6 @@ def ajax_signup(request):
         form = SignUpAjaxForm(request.POST)
         captcha_response = captcha.verify(
             form.data['g-recaptcha-response'])
-        import ipdb; ipdb.set_trace()
         if captcha_response['success']:
             if form.is_valid():
                 user = User.objects.create(
@@ -336,9 +335,9 @@ def ajax_signup(request):
                 send_verification_email(user.email, verification_url)
 
                 status_code = 200
-                response_data['data'] = (u"Usuário criado com sucesso! Por favor, "
-                                         "verifique seu email para concluir seu "
-                                         "cadastro.")
+                response_data['data'] = (u"Usuário criado com sucesso! Por "
+                                         "favor, verifique seu email para "
+                                         "concluir seu cadastro.")
             else:
                 status_code = 400
                 response_data['data'] = form.errors
