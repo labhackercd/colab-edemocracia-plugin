@@ -29,6 +29,7 @@ from .forms.accounts import (
 from .models import UserProfile
 from colab.accounts.models import EmailAddressValidation, EmailAddress
 from .utils import encrypt, decrypt
+from colab_edemocracia import captcha
 import string
 import random
 
@@ -306,35 +307,46 @@ def ajax_signup(request):
     if request.method == 'POST':
         response_data = {}
         form = SignUpAjaxForm(request.POST)
-        if form.is_valid():
-            user = User.objects.create(
-                username=generate_username(form.cleaned_data['email']),
-                email=form.cleaned_data['email'],
-                first_name=form.cleaned_data['first_name'],
-                needs_update=False,
-                is_active=False,
-            )
-            user.set_password(decrypt(form.cleaned_data['password']))
-            user.save()
+        captcha_response = captcha.verify(
+            form.data['g-recaptcha-response'])
+        import ipdb; ipdb.set_trace()
+        if captcha_response['success']:
+            if form.is_valid():
+                user = User.objects.create(
+                    username=generate_username(form.cleaned_data['email']),
+                    email=form.cleaned_data['email'],
+                    first_name=form.cleaned_data['first_name'],
+                    needs_update=False,
+                    is_active=False,
+                )
+                user.set_password(decrypt(form.cleaned_data['password']))
+                user.save()
 
-            profile = UserProfile.objects.get(user=user)
-            profile.uf = form.cleaned_data['uf']
-            profile.country = form.cleaned_data['country']
-            profile.birthyear = form.cleaned_data['birthyear']
-            profile.gender = form.cleaned_data['gender']
-            profile.save()
+                profile = UserProfile.objects.get(user=user)
+                profile.uf = form.cleaned_data['uf']
+                profile.country = form.cleaned_data['country']
+                profile.birthyear = form.cleaned_data['birthyear']
+                profile.gender = form.cleaned_data['gender']
+                profile.save()
 
-            email = EmailAddressValidation.create(user.email, user)
-            location = reverse('email_view',
-                               kwargs={'key': email.validation_key})
-            verification_url = request.build_absolute_uri(location)
-            send_verification_email(user.email, verification_url)
+                email = EmailAddressValidation.create(user.email, user)
+                location = reverse('email_view',
+                                   kwargs={'key': email.validation_key})
+                verification_url = request.build_absolute_uri(location)
+                send_verification_email(user.email, verification_url)
 
-            status_code = 200
-            response_data['data'] = (u"Usuário criado com sucesso! Por favor, "
-                                     "verifique seu email para concluir seu "
-                                     "cadastro.")
+                status_code = 200
+                response_data['data'] = (u"Usuário criado com sucesso! Por favor, "
+                                         "verifique seu email para concluir seu "
+                                         "cadastro.")
+            else:
+                status_code = 400
+                response_data['data'] = form.errors
         else:
+            message = ' '.join(
+                map(lambda x: captcha.ERRORS[x],
+                    captcha_response['error-codes'])
+            )
             status_code = 400
-            response_data['data'] = form.errors
+            response_data['data'] = message
         return JsonResponse(response_data, status=status_code)
