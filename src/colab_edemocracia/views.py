@@ -307,10 +307,10 @@ def ajax_signup(request):
     if request.method == 'POST':
         response_data = {}
         form = SignUpAjaxForm(request.POST)
-        captcha_response = captcha.verify(
-            form.data['g-recaptcha-response'])
-        if captcha_response['success']:
-            if form.is_valid():
+        if form.is_valid():
+            captcha_response = captcha.verify(
+                form.data['g-recaptcha-response'])
+            if captcha_response['success']:
                 user = User.objects.create(
                     username=generate_username(form.cleaned_data['email']),
                     email=form.cleaned_data['email'],
@@ -339,13 +339,13 @@ def ajax_signup(request):
                                          "favor, verifique seu email para "
                                          "concluir seu cadastro.")
             else:
+                message = ' '.join(
+                    map(lambda x: captcha.ERRORS[x],
+                        captcha_response['error-codes'])
+                )
                 status_code = 400
-                response_data['data'] = form.errors
+                response_data['data'] = message
         else:
-            message = ' '.join(
-                map(lambda x: captcha.ERRORS[x],
-                    captcha_response['error-codes'])
-            )
             status_code = 400
-            response_data['data'] = message
+            response_data['data'] = form.errors
         return JsonResponse(response_data, status=status_code)
