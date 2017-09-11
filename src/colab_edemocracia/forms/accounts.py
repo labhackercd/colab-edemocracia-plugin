@@ -12,6 +12,7 @@ User = get_user_model()
 
 class SignUpForm(forms.ModelForm):
     confirm_password = forms.CharField()
+    uf = forms.CharField()
     error_messages = {
         'duplicate_email': _(u"Email já cadastrado."),
         'duplicate_username': _(u"Nome de usuário já cadastrado."),

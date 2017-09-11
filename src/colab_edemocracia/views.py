@@ -133,6 +133,10 @@ class SignUpView(View):
         user.set_password(user_form.cleaned_data['password'])
         user.save()
 
+        profile = UserProfile.objects.get(user=user)
+        profile.uf = user_form.cleaned_data['uf']
+        profile.save()
+
         email = EmailAddressValidation.create(user.email, user)
 
         location = reverse('email_view',
