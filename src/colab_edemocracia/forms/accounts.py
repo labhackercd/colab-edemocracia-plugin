@@ -19,7 +19,7 @@ class SignUpForm(forms.ModelForm):
         'wrong_password': _(u"As senhas não são iguais."),
     }
 
-    required = ('username', 'email', 'password')
+    required = ('username', 'email', 'password', 'uf')
 
     class Meta:
         fields = ('username', 'email', 'password')
