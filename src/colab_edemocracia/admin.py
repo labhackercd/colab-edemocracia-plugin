@@ -6,7 +6,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'uf')
     list_filter = ['uf', 'gender', 'birthdate', 'birthyear']
     search_fields = (
-        'user__first_name', 'user__email', 'user_username',
+        'user__first_name', 'user__email', 'user__username',
         'country', 'birthyear')
 
 
