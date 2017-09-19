@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django import forms
 from django.db import models
 from django.conf import settings
@@ -36,17 +37,21 @@ def avatar_validation(image):
 
 
 class UserProfile(models.Model):
-    gender = models.CharField(max_length=999, choices=GENDER_CHOICES,
+    gender = models.CharField("gênero", max_length=999, choices=GENDER_CHOICES,
                               blank=True, null=True)
     uf = models.CharField(max_length=2, choices=UF_CHOICES, null=True,
                           blank=True)
-    country = models.CharField(max_length=200, null=True, blank=True)
-    birthdate = models.DateField(blank=True, null=True)
-    birthyear = models.IntegerField(blank=True, null=True, max_length=4)
+    country = models.CharField("país", max_length=200, null=True, blank=True)
+    birthdate = models.DateField("data de nascimento", blank=True, null=True)
+    birthyear = models.IntegerField("ano de nascimento", blank=True, null=True, max_length=4)
     user = models.OneToOneField("accounts.User", related_name='profile')
     avatar = ImageCropField(upload_to="avatars/", null=True, blank=True,
                             validators=[avatar_validation])
     cropping = ImageRatioField('avatar', '140x140',)
+
+    class Meta:
+        verbose_name = 'perfil'
+        verbose_name_plural = 'perfis'
 
     def get_avatar_140x140(self):
         return get_thumbnailer(self.avatar).get_thumbnail({
@@ -55,6 +60,9 @@ class UserProfile(models.Model):
             'crop': True,
             'detail': True,
         }).url
+
+    def __unicode__(self):
+        return '%s <%s>' % (self.user.get_full_name(), self.user.email)
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
