@@ -25,7 +25,7 @@ class Command(BaseCommand):
         subject = "Nova ferramenta no e-Democracia!"
         html = render_to_string('emails/mail_marketing.html',
                                 {'domain': Site.objects.get_current().domain})
-        mail = EmailMultiAlternatives(subject=subject, to=email_to)
+        mail = EmailMultiAlternatives(subject=subject, cco=email_to)
         mail.attach_alternative(html, 'text/html')
         mail.send()
 
