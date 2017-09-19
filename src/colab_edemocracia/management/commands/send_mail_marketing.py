@@ -21,13 +21,15 @@ class Command(BaseCommand):
             help='Text file containing a list of emails (one email per line'),)
 
     def handle(self, *args, **options):
-        email_to = self.get_emails_list(options['emails'])
+        emails = self.get_emails_list(options['emails'])
         subject = "Nova ferramenta no e-Democracia!"
         html = render_to_string('emails/mail_marketing.html',
                                 {'domain': Site.objects.get_current().domain})
-        mail = EmailMultiAlternatives(subject=subject, cco=email_to)
-        mail.attach_alternative(html, 'text/html')
-        mail.send()
+        for email in emails:
+            print(email)
+            mail = EmailMultiAlternatives(subject=subject, to=[email, ])
+            mail.attach_alternative(html, 'text/html')
+            mail.send()
 
     def get_emails_list(self, emails_filename):
         if emails_filename:
