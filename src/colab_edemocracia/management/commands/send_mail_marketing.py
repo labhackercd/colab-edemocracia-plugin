@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth import get_user_model
+from django.contrib.sites.models import Site
 from django.template.loader import render_to_string
 from optparse import make_option
 
@@ -22,7 +23,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         email_to = self.get_emails_list(options['emails'])
         subject = "Nova ferramenta no e-Democracia!"
-        html = render_to_string('emails/mail_marketing.html')
+        html = render_to_string('emails/mail_marketing.html',
+                                {'domain': Site.objects.get_current().domain})
         mail = EmailMultiAlternatives(subject=subject, to=email_to)
         mail.attach_alternative(html, 'text/html')
         mail.send()
