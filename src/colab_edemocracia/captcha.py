@@ -1,17 +1,15 @@
-from django.utils.translation import ugettext_lazy as _
+# -*- coding: utf-8 -*-
 from django.conf import settings
 import requests
 
 
 ERRORS = {
-    'missing-input-secret': _('reCAPTCHA: The secret parameter is missing'),
-    'invalid-input-secret': _('reCAPTCHA: The secret parameter is invalid '
-                              'or malformed'),
-    'missing-input-response': _('reCAPTCHA: The response parameter is '
-                                'missing'),
-    'invalid-input-response': _('reCAPTCHA: The response parameter is '
-                                'invalid or malformed'),
-    'bad-request': _('reCAPTCHA: The request is invalid or malformed'),
+    'missing-input-secret': 'reCAPTCHA: O campo chave está vazio',
+    'invalid-input-secret': 'reCAPTCHA: O campo chave está errado ou inválido',
+    'missing-input-response': 'reCAPTCHA: O campo de resposta está vazio',
+    'invalid-input-response': 'reCAPTCHA: O campo de resposta está errado '
+                              'ou inválido',
+    'bad-request': 'reCAPTCHA: A requisição está errada ou inválida',
 }
 
 

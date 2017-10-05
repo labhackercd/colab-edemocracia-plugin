@@ -101,10 +101,15 @@ class PasswordResetForm(PasswordResetForm):
         return email
 
 
-class SignUpValidationForm(forms.ModelForm):
+class SignUpAjaxForm(forms.ModelForm):
     uf = forms.CharField(required=False)
     country = forms.CharField(required=False)
-    required = ('email', 'password')
+    birthyear = forms.IntegerField(required=False, min_value=1905,
+                                   max_value=datetime.now().year)
+    gender = forms.CharField(required=False)
+
+    required = ('email', 'password', 'first_name')
+
     error_messages = {
         'empty_email': _(
             u"Este campo é obrigatório."),
@@ -123,11 +128,11 @@ class SignUpValidationForm(forms.ModelForm):
     }
 
     class Meta:
-        fields = ('email', 'password')
+        fields = ('email', 'password', 'first_name')
         model = User
 
     def clean(self):
-        cleaned_data = super(SignUpValidationForm, self).clean()
+        cleaned_data = super(SignUpAjaxForm, self).clean()
         uf = cleaned_data.get("uf", None)
         country = cleaned_data.get("country", None)
 
@@ -161,29 +166,5 @@ class SignUpValidationForm(forms.ModelForm):
         if users.exists():
             raise forms.ValidationError(
                 mark_safe(self.error_messages.get('exists_email')))
-
-        return email
-
-
-class SignUpAjaxForm(forms.ModelForm):
-    uf = forms.CharField(required=False)
-    country = forms.CharField(required=False)
-    birthyear = forms.IntegerField(required=False, min_value=1905,
-                                   max_value=datetime.now().year)
-    gender = forms.CharField(required=False)
-
-    required = ('email', 'password', 'first_name')
-
-    class Meta:
-        fields = ('email', 'password', 'first_name')
-        model = User
-
-    def clean_email(self):
-        email = self.cleaned_data.get("email", None)
-        users = User.objects.filter(email=email)
-
-        if users.exists():
-            raise forms.ValidationError(mark_safe(
-                _(u"Já existe um usuário cadastrado com este email.")))
 
         return email
