@@ -25,10 +25,9 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.template.defaultfilters import slugify
 
 from .forms.accounts import (
-    SignUpForm, UserProfileForm, SignUpValidationForm, SignUpAjaxForm)
+    SignUpForm, UserProfileForm, SignUpAjaxForm)
 from .models import UserProfile
 from colab.accounts.models import EmailAddressValidation, EmailAddress
-from .utils import encrypt, decrypt
 from colab_edemocracia import captcha
 import string
 import random
@@ -287,22 +286,6 @@ def ajax_login(request):
 
 
 @csrf_exempt
-def ajax_validation_signup(request):
-    if request.method == 'POST':
-        form = SignUpValidationForm(request.POST)
-        response_data = {}
-        if form.is_valid():
-            form.cleaned_data['password'] = encrypt(
-                form.cleaned_data['password'])
-            status_code = 200
-            response_data['data'] = form.cleaned_data
-        else:
-            status_code = 400
-            response_data['data'] = form.errors
-        return JsonResponse(response_data, status=status_code)
-
-
-@csrf_exempt
 def ajax_signup(request):
     if request.method == 'POST':
         response_data = {}
@@ -318,7 +301,7 @@ def ajax_signup(request):
                     needs_update=False,
                     is_active=False,
                 )
-                user.set_password(decrypt(form.cleaned_data['password']))
+                user.set_password(form.cleaned_data['password'])
                 user.save()
 
                 profile = UserProfile.objects.get(user=user)
@@ -343,7 +326,7 @@ def ajax_signup(request):
                     map(lambda x: captcha.ERRORS[x],
                         captcha_response['error-codes'])
                 )
-                status_code = 400
+                status_code = 401
                 response_data['data'] = message
         else:
             status_code = 400

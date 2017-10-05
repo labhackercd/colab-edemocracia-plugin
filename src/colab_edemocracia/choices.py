@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+
 GENDER_CHOICES = (
     ('male', 'Masculino'),
     ('female', 'Feminino'),
-    ('other', 'Outro')
+    ('other', 'Outro'),
+    ('undisclosed', 'Prefiro não informar')
 )
 
 UF_CHOICES = (
