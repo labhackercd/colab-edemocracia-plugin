@@ -274,7 +274,7 @@ class WidgetSignUpView(View):
 @csrf_exempt
 def ajax_login(request):
     if request.method == 'POST':
-        form = AuthenticationForm(None, request.POST)
+        form = AuthenticationForm(request, request.POST)
         response_data = {}
         if form.is_valid():
             auth_login(request, form.get_user())
