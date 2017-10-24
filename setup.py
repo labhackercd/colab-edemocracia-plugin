@@ -14,7 +14,8 @@ install_requires = [
     'django-widget-tweaks==1.4.1',
     'django-appconf<1.0.2',
     'django-image-cropping<1.0.',
-    'easy_thumbnails'
+    'easy_thumbnails',
+    'django-macros>=0.4.0'
 ]
 
 tests_require = ['mock']
