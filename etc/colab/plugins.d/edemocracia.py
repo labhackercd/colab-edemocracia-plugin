@@ -11,7 +11,8 @@ urls = {
 middlewares = ['colab_edemocracia.middlewares.ForceLangMiddleware']
 
 dependencies = ['djangobower', 'compressor', 'easy_thumbnails',
-                'image_cropping', 'widget_tweaks']
+                'image_cropping', 'widget_tweaks', 'macros']
+
 context_processors = ['colab_edemocracia.processors.recaptcha_site_key']
 
 settings_variables = {
