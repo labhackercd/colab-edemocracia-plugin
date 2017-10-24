@@ -12,6 +12,7 @@ middlewares = ['colab_edemocracia.middlewares.ForceLangMiddleware']
 
 dependencies = ['djangobower', 'compressor', 'easy_thumbnails',
                 'image_cropping', 'widget_tweaks']
+context_processors = ['colab_edemocracia.processors.recaptcha_site_key']
 
 settings_variables = {
     'STATICFILES_FINDERS': (
@@ -36,4 +37,6 @@ settings_variables = {
     'COLAB_STATICS': [
         '/colab-plugins/edemocracia/src/colab_edemocracia/static'
     ]
+    'RECAPTCHA_SITE_KEY': 'captchakey',
+    'RECAPTCHA_PRIVATE_KEY': 'privatekey',
 }
