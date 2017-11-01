@@ -15,7 +15,7 @@ install_requires = [
     'django-appconf<1.0.2',
     'django-image-cropping<1.0.',
     'easy_thumbnails',
-    'django-macros>=0.4.0'
+    'django-macros>=0.4.0',
     'pycrypto>=2.6.1'
 ]
 
