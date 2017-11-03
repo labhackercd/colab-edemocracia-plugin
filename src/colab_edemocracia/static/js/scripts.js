@@ -1,98 +1,9 @@
-// Quick proof of concept for search form toggle
-// Would like to make CSS only
-
-var searchWrapper = $('.search-form');
-var searchInput = $('.search-form__input');
-    navBar = $('.navigation');
-
-$(document).click(function(e){
-  if (~e.target.className.indexOf('search-form')) {
-    $(searchWrapper).addClass('focused');
-    $(navBar).addClass('search-on');
-    searchInput.focus();
-  } else {
-    $(searchWrapper).removeClass('focused');
-    $(navBar).removeClass('search-on');
-  }
-});
-
-// Hide nav on scroll
-
-// grab an element
-var myElement = document.querySelector('body');
-// construct an instance of Headroom, passing the element
-var headroom  = new Headroom(myElement, {
-  "tolerance" : {
-        up : 15,
-        down : 0
-    }
-});
-// initialise
-headroom.init();
-$('body').addClass('headroom--pinned');
-
-$('.menu-list--dropdown')
-  .click(function() {
-    $('.menu-list--dropdown, .menu-list--dropdown__wrapper')
-      .not(this)
-      .removeClass('toggled');
-
-    $(this)
-      .toggleClass('toggled');
-
-    $(this)
-      .find('.menu-list--dropdown__wrapper')
-      .addClass('toggled');
-});
-
-$('.menu-list--dropdown__wrapper')
-  .click(function() {
-    event.stopPropagation();
-});
-
 $(document).click(function(e) {
     var target = e.target
     if (!$(target).closest('.toggled').length) {
 
       $('.toggled')
         .removeClass('toggled');
-    }
-});
-
-$('.login-box__option')
-  .click(function() {
-    var selectedOption = $(this);
-
-    if (!selectedOption.hasClass('active')) {
-
-      $('.login-box__form-wrapper.active')
-        .addClass('transition')
-        .bind('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
-
-          $('.login-box__form-wrapper')
-            .toggleClass('active')
-            .toggleClass('inactive');
-
-          $('.login-box__form-wrapper')
-          .unbind()
-          .removeClass('transition');
-
-        });
-
-      $('.login-box__yellow-bar')
-        .addClass('active')
-        .bind('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
-
-          $('.login-box__option')
-            .removeClass('active');
-
-          selectedOption
-            .addClass('active');
-
-          $('.login-box__yellow-bar')
-            .unbind()
-            .removeClass('active');
-      });
     }
 });
 
@@ -109,20 +20,6 @@ $.ajaxSetup({
         }
     }
 });
-
-$('.show-filters')
-  .click(function() {
-    $(this).toggleClass('active');
-    $('.section--filter-select').slideToggle();
-    return false;
-})
-
-$('.c-hamburger')
-  .click(function() {
-    $(this).toggleClass('toggled');
-    $('.navigation-wrapper').toggleClass('toggled');
-});
-
 
 // Input file name show
 
