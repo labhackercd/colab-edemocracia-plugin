@@ -1,98 +1,9 @@
-// Quick proof of concept for search form toggle
-// Would like to make CSS only
-
-var searchWrapper = $('.search-form');
-var searchInput = $('.search-form__input');
-    navBar = $('.navigation');
-
-$(document).click(function(e){
-  if (~e.target.className.indexOf('search-form')) {
-    $(searchWrapper).addClass('focused');
-    $(navBar).addClass('search-on');
-    searchInput.focus();
-  } else {
-    $(searchWrapper).removeClass('focused');
-    $(navBar).removeClass('search-on');
-  }
-});
-
-// Hide nav on scroll
-
-// grab an element
-var myElement = document.querySelector('body');
-// construct an instance of Headroom, passing the element
-var headroom  = new Headroom(myElement, {
-  "tolerance" : {
-        up : 15,
-        down : 0
-    }
-});
-// initialise
-headroom.init();
-$('body').addClass('headroom--pinned');
-
-$('.menu-list--dropdown')
-  .click(function() {
-    $('.menu-list--dropdown, .menu-list--dropdown__wrapper')
-      .not(this)
-      .removeClass('toggled');
-
-    $(this)
-      .toggleClass('toggled');
-
-    $(this)
-      .find('.menu-list--dropdown__wrapper')
-      .addClass('toggled');
-});
-
-$('.menu-list--dropdown__wrapper')
-  .click(function() {
-    event.stopPropagation();
-});
-
 $(document).click(function(e) {
     var target = e.target
     if (!$(target).closest('.toggled').length) {
 
       $('.toggled')
         .removeClass('toggled');
-    }
-});
-
-$('.login-box__option')
-  .click(function() {
-    var selectedOption = $(this);
-
-    if (!selectedOption.hasClass('active')) {
-
-      $('.login-box__form-wrapper.active')
-        .addClass('transition')
-        .bind('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
-
-          $('.login-box__form-wrapper')
-            .toggleClass('active')
-            .toggleClass('inactive');
-
-          $('.login-box__form-wrapper')
-          .unbind()
-          .removeClass('transition');
-
-        });
-
-      $('.login-box__yellow-bar')
-        .addClass('active')
-        .bind('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
-
-          $('.login-box__option')
-            .removeClass('active');
-
-          selectedOption
-            .addClass('active');
-
-          $('.login-box__yellow-bar')
-            .unbind()
-            .removeClass('active');
-      });
     }
 });
 
@@ -109,20 +20,6 @@ $.ajaxSetup({
         }
     }
 });
-
-$('.show-filters')
-  .click(function() {
-    $(this).toggleClass('active');
-    $('.section--filter-select').slideToggle();
-    return false;
-})
-
-$('.c-hamburger')
-  .click(function() {
-    $(this).toggleClass('toggled');
-    $('.navigation-wrapper').toggleClass('toggled');
-});
-
 
 // Input file name show
 
@@ -190,3 +87,166 @@ $('.user-profile__action--clear-picture').change(function(){
     $('.user-profile--profile-page').removeClass('no-bg');
   }
 });
+
+
+// eDemocracia open/close edem-access
+
+$('.js-access-link').click(function() {
+
+  $('.edem-access').removeClass('-open');
+
+  if ($(this).parent().hasClass('-active')) {
+    $(this).parent().removeClass('-active');
+  } else {
+    $('.js-access-link').parent().removeClass('-active');
+    $(this).parent().addClass('-active');
+
+    if ($(this).hasClass('js-login-link')) {
+      $('.js-edem-login').addClass('-open');
+    }
+
+    else if ($(this).hasClass('js-signup-link')) {
+      $('.js-edem-signup').addClass('-open');
+    }
+
+  }
+
+});
+
+
+// eDemocracia edem-access input status
+
+$('.form__field').focus(function() {
+  $(this).addClass('form__field--filled');
+});
+
+$('.form__field').blur(function() {
+  if (!$(this).val() == '') {
+    $(this).addClass('form__field--filled');
+  } else {
+    $(this).removeClass('form__field--filled')
+  }
+});
+
+$('#id_form_login').submit(function(event) {
+  event.preventDefault();
+  $.ajax({
+    type:"POST",
+    url: '/ajax/login/',
+    data: $(event.target).serialize(),
+    success: function(response){
+      location.reload();
+    },
+    error: function(jqXRH){
+      $('.form__input-error').text('');
+      $('.form__input-error')
+        .text(jqXRH.responseJSON['data'])
+        .removeAttr('hidden');
+    }
+  });
+});
+
+// Go back function inside signup
+
+$('.login-box__button--prev').click(function(){
+  $('.login-box__signup-wrapper').removeClass('step-2');
+});
+
+// Toggle country/state input
+
+$('.form__input-action.-state').click(function(){
+  $(this)
+    .closest('.form__input')
+    .attr('hidden','');
+  $('.form__input-action.-country')
+    .closest('.form__input')
+    .removeAttr('hidden');
+  $('#id_uf')
+    .val('')
+    .removeClass('form__field--filled');
+});
+
+$('.form__input-action.-country').click(function(){
+  $(this).closest('.form__input').attr('hidden','');
+  $('.form__input-action.-state').closest('.form__input').removeAttr('hidden');
+  $('#id_country').val('').removeClass('form__field--filled');
+});
+
+// Toggle show password
+
+$('.form__field-action.-showpassword').click(function(){
+  var input = $(this).closest('.form__field-container').find('.form__field');
+  if (input.attr('type') === 'text') {
+    input.attr('type', 'password');
+    $(this).children('span').text('Mostrar Senha');
+    $(this).children('i').addClass('icon-eye').removeClass('icon-eye-slash');
+  } else {
+    input.attr('type', 'text');
+    $(this).children('span').text('Esconder Senha');
+    $(this).children('i').addClass('icon-eye-slash').removeClass('icon-eye');
+  }
+});
+
+$('#id_form_validation').submit(function(event) {
+  event.preventDefault();
+  $.ajax({
+    type:"POST",
+    url: '/ajax/validation/',
+    data: $(event.target).serialize(),
+    success: function(response){
+      window.sessionStorage
+        .setItem('userData', JSON.stringify(response['data']));
+      $('.login-box__signup-wrapper').addClass('step-2');
+    },
+    error: function(jqXRH) {
+      $('.form__input-error').text('');
+      $.each(jqXRH.responseJSON["data"], function(key, value) {
+        if (key != '__all__') {
+          $(event.target)
+            .find('[data-input-name="'+key+'"]')
+            .text(value)
+            .removeAttr('hidden');
+        }
+      });
+    }
+  });
+});
+
+$('#id_form_signup').submit(function(event) {
+  event.preventDefault();
+  var signup_form = {}
+  $.map($(event.target).serializeArray(), function(n, i){
+    signup_form[n['name']] = n['value'];
+  });
+  var user_data = $.extend(JSON.parse(sessionStorage.userData), signup_form);
+  if (grecaptcha.getResponse() == ""){
+    alert("Por favor preencha o reCAPTCHA.");
+  } else {
+    $.ajax({
+      type:"POST",
+      url: '/ajax/signup/',
+      data: user_data,
+      success: function(response){
+        console.log(response["data"]);
+      },
+      error: function(jqXRH) {
+        $('.form__input-error').text('');
+        $.each(jqXRH.responseJSON["data"], function(key, value) {
+          if (key == 'email') {
+            $('.login-box__signup-wrapper').removeClass('step-2');
+            $('#id_form_validation')
+              .find('[data-input-name="'+key+'"]')
+              .text(value)
+              .removeAttr('hidden');
+          } else if (key != '__all__') {
+            $(event.target)
+              .find('[data-input-name="'+key+'"]')
+              .text(value)
+              .removeAttr('hidden');
+          }
+        });
+      }
+    });
+  }
+});
+
