@@ -16,7 +16,8 @@ install_requires = [
     'django-image-cropping<1.0.',
     'easy_thumbnails',
     'django-macros>=0.4.0',
-    'pycrypto>=2.6.1'
+    'pycrypto>=2.6.1',
+    'django-macros >=0.4.0',
 ]
 
 tests_require = ['mock']
@@ -24,7 +25,7 @@ tests_require = ['mock']
 
 setup(
     name="colab-edemocracia",
-    version='0.2.1',
+    version='0.2.2',
     author='labhackercd',
     author_email='labhackercd@gmail.com',
     url='https://github.com/labhackercd/colab-edemocracia-plugin',
