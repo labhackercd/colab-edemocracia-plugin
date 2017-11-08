@@ -6,5 +6,4 @@ def recaptcha_site_key(request):
 
 
 def home_customization(request):
-    return {'site_name': settings.SITE_NAME, 'site_logo': settings.SITE_LOGO,
-            'site_background_image': settings.SITE_BACKGROUND_IMAGE}
+    return {'site_name': settings.SITE_NAME, 'site_logo': settings.SITE_LOGO}

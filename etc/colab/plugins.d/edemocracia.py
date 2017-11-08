@@ -48,6 +48,5 @@ settings_variables = {
     'RECAPTCHA_SITE_KEY': config('RECAPTCHA_SITE_KEY', default=''),
     'RECAPTCHA_PRIVATE_KEY': config('RECAPTCHA_PRIVATE_KEY', default=''),
     'SITE_NAME': config('SITE_NAME', default='Nome do site'),
-    'SITE_LOGO': config('SITE_LOGO', default='https://dev.edemocracia.labhackercd.net/static/img/edem-logo-text.png'),
-    'SITE_BACKGROUND_IMAGE': config('SITE_BACKGROUND_IMAGE', default='http://blog.labhackercd.leg.br/static/themes/casper-child/img/header.jpg'),
+    'SITE_LOGO': config('SITE_LOGO', default='https://exemple.com/img.png'),
 }
