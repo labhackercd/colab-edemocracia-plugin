@@ -444,3 +444,111 @@
     color: #2c383a;
   }
 }
+
+// XXX RSCSS code
+
+.owner-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 15rem;
+  @include breakpoint(large up) {
+    flex-direction: row;
+    min-height: 22rem;
+  }
+
+  > .firsthalf {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    @include breakpoint(large up) {
+      flex: 0 0 60%;
+      padding: 3rem 0;
+    }
+
+    > .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 18rem;
+      height: 12rem;
+      margin: 0 2rem;
+      margin-bottom: 60px;
+      @include breakpoint(large up) {
+        margin-right: 118px;
+        margin-bottom: 0;
+        width: 24rem;
+        height: 16rem;
+      }
+
+      @include breakpoint(medium only) {
+        margin-bottom: 6.5rem;
+      }
+
+      > .image {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+  }
+
+  > .secondhalf {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+    align-items: center;
+    background-color: #002222;
+
+    @include breakpoint(large up) {
+      flex: 0 0 40%;
+      padding: 3rem 0;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+
+      @include breakpoint(small medium only) {
+        bottom: 100%;
+        width: 100%;
+        height: 12rem;
+        background-image: url(../img/topleak.svg);
+        background-size: calc(100% + 8px) auto;
+        background-repeat: no-repeat;
+        background-position: -4px calc(100% + 2px);
+      }
+
+      @include breakpoint(large up) {
+        bottom: initial;
+        right: 100%;
+        height: 100%;
+        width: 15rem;
+        background-image: url(../img/leftleak.svg);
+        background-size: auto calc(100% + 2px);
+        background-repeat: no-repeat;
+        background-position: calc(100% + 1px) -1px;
+      }
+    }
+
+    > .briefing {
+      max-width: 40rem;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0;
+      padding: 0 1.5rem;
+      text-align: center;
+      @include breakpoint(large up) {
+        margin-right: 64px;
+        text-align: left;
+        padding: 0;
+      }
+
+      > .owner {
+        color:#66a23b;
+        font-weight: 700;
+      }
+    }
+  }
+}

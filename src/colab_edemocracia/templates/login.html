@@ -1,15 +1,11 @@
 {% load staticfiles widget_tweaks %}
-<section class="section section--login" id="login">
-  <div class="e-row align-middle align-center">
-    <div class="e-columns small-12 medium-10 large-8">
-      <div class="section__info">
-        <img class="section__logo section__logo--icon" src="{% static 'img/edem-logo.png' %}">
-        <img class="section__logo section__logo--text" src="{% static 'img/edem-logo-text.png' %}">
-        <p class="section__text">
-        O portal e-Democracia é uma iniciativa da Câmara dos Deputados que visa ampliar a participação social no processo legislativo e aproximar cidadãos e seus representantes por meio da interação digital.<br>
-         Esta versão do portal está em fase de testes. Você pode encaminhar sugestões, indicar erros e ainda, acessar o arquivo de nossa <a class="section__link section__link--login" href="http://arquivo.edemocracia.camara.leg.br/">versão anterior</a>
-        </p>
-      </div>
+<section class="owner-section">
+  <div class="firsthalf">
+    <div class="logo">
+      <img class="image" src="{{site_logo}}" alt="e-Democracia da {{site_name}}">
     </div>
+  </div>
+  <div class="secondhalf">
+    <p class="briefing">Esse é o e-Democracia da <span class="owner">{{site_name}}</span>. <br> O objetivo deste portal é aumentar e melhorar a participação social e interação de todos.</p>
   </div>
 </section>

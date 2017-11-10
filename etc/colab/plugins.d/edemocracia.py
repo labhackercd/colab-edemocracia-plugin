@@ -1,3 +1,5 @@
+from decouple import config
+
 name = 'colab_edemocracia'
 verbose_name = 'Colab eDemocracia Plugin'
 
@@ -13,7 +15,8 @@ middlewares = ['colab_edemocracia.middlewares.ForceLangMiddleware']
 dependencies = ['djangobower', 'compressor', 'easy_thumbnails',
                 'image_cropping', 'widget_tweaks', 'macros']
 
-context_processors = ['colab_edemocracia.processors.recaptcha_site_key']
+context_processors = ['colab_edemocracia.processors.recaptcha_site_key',
+                      'colab_edemocracia.processors.home_customization']
 
 settings_variables = {
     'STATICFILES_FINDERS': (
@@ -42,6 +45,8 @@ settings_variables = {
         '/colab-plugins/edemocracia/src/colab_edemocracia/templates'
         '/components/edem-navigation/static',
     ],
-    'RECAPTCHA_SITE_KEY': 'captchakey',
-    'RECAPTCHA_PRIVATE_KEY': 'privatekey',
+    'RECAPTCHA_SITE_KEY': config('RECAPTCHA_SITE_KEY', default=''),
+    'RECAPTCHA_PRIVATE_KEY': config('RECAPTCHA_PRIVATE_KEY', default=''),
+    'SITE_NAME': config('SITE_NAME', default='Nome do site'),
+    'SITE_LOGO': config('SITE_LOGO', default='https://exemple.com/img.png'),
 }
