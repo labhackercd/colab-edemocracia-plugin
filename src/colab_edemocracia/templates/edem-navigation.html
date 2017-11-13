@@ -7,7 +7,7 @@
 {% block edem_logout_url %}/account/logout{% endblock %}
 {% block edem_root_url %}/{% endblock %}
 {% block edem_tos_url %}/sobre/tos/{% endblock %}
-{% block edem_avatar %}{{ user.profile.avatar_url }}{% endblock %}
+{% block edem_avatar %}{{ user.profile.get_avatar_140x140 }}{% endblock %}
 {% block edem_username %}{{ user.first_name }}{% endblock %}
 {% block edem_recaptcha %}{{ RECAPTCHA_SITE_KEY }}{% endblock %}
 
