@@ -2,7 +2,7 @@
 from django import forms
 from django.db import models
 from django.conf import settings
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 from image_cropping import ImageCropField, ImageRatioField
 from easy_thumbnails.files import get_thumbnailer
@@ -43,7 +43,6 @@ class UserProfile(models.Model):
                           blank=True)
     country = models.CharField("país", max_length=200, null=True, blank=True)
     birthdate = models.DateField("data de nascimento", blank=True, null=True)
-    birthyear = models.IntegerField("ano de nascimento", blank=True, null=True, max_length=4)
     user = models.OneToOneField("accounts.User", related_name='profile')
     avatar = ImageCropField(upload_to="avatars/", null=True, blank=True,
                             validators=[avatar_validation])
@@ -68,9 +67,3 @@ class UserProfile(models.Model):
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_user_profile(sender, instance, **kwargs):
     UserProfile.objects.get_or_create(user=instance)
-
-
-@receiver(pre_save, sender=UserProfile)
-def update_birth_year(sender, instance, **kwargs):
-    if instance.birthdate and not instance.birthyear:
-        instance.birthyear = instance.birthdate.year
