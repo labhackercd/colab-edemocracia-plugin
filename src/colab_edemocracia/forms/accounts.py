@@ -104,8 +104,7 @@ class PasswordResetForm(PasswordResetForm):
 class SignUpAjaxForm(forms.ModelForm):
     uf = forms.CharField(required=False)
     country = forms.CharField(required=False)
-    birthyear = forms.IntegerField(required=False, min_value=1905,
-                                   max_value=datetime.now().year)
+    birthdate = forms.DateField(required=False)
     gender = forms.CharField(required=False)
 
     required = ('email', 'password', 'first_name')

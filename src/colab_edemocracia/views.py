@@ -307,7 +307,7 @@ def ajax_signup(request):
                 profile = UserProfile.objects.get(user=user)
                 profile.uf = form.cleaned_data['uf']
                 profile.country = form.cleaned_data['country']
-                profile.birthyear = form.cleaned_data['birthyear']
+                profile.birthdate = form.cleaned_data['birthdate']
                 profile.gender = form.cleaned_data['gender']
                 profile.save()
 
