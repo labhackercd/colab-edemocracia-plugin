@@ -20,11 +20,11 @@
 
     <body {% block body_properties %}{% endblock %}>
 
-      {% block edem_navigation %}
-        {% include "edem-navigation.html" %}
-      {% endblock edem_navigation %}
+      <div class="edem-content-wrapper">
 
-      <div id="template-body-content">
+        {% block edem_navigation %}
+          {% include "edem-navigation.html" %}
+        {% endblock edem_navigation %}
 
       </div>
 
@@ -78,7 +78,7 @@
 
     <head></head>
     <body>
-      <div id="template-body-content">
+      <div class="edem-content-wrapper">
 
       </div>
     </body>

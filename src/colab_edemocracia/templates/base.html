@@ -35,30 +35,33 @@
 		</head>
 
 		<body>
+			<div class="edem-content-wrapper">
 
-			{# Navigation #}
-			{% include "edem-navigation.html" %}
+				{# Navigation #}
+				{% include "edem-navigation.html" %}
 
-			{# Feedback Messages #}
-			{% block messages %}
-			<script>
-				{% if messages %}
-					{% for message in messages %}
-						alert("{{message}}");
-					{% endfor %}
-				{% endif %}
-			</script>
-			{% endblock messages %}
+				{# Feedback Messages #}
+				{% block messages %}
+				<script>
+					{% if messages %}
+						{% for message in messages %}
+							alert("{{message}}");
+						{% endfor %}
+					{% endif %}
+				</script>
+				{% endblock messages %}
 
-			{# Main Content #}
-			<main class="main">
-				{% block main %}
+				{# Main Content #}
+				<main class="main">
+					{% block main %}
 
-				{% endblock main %}
-			</main>
+					{% endblock main %}
+				</main>
 
-			{# Footer #}
-			{% include "footer.html" %}
+				{# Footer #}
+				{% include "footer.html" %}
+
+			</div>
 
 			{# Scripts #}
 			{% block foot_js %}
