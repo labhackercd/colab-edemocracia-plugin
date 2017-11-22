@@ -57,5 +57,10 @@ settings_variables = {
             'rest_framework.renderers.JSONRenderer',
         ),
         'PAGE_SIZE': 20
-    }
+    },
+    'AUTHENTICATION_BACKENDS': (
+        'colab_edemocracia.backends.CamaraOAuth2',
+    ),
+    'SOCIAL_AUTH_CAMARA_DEPUTADOS_KEY': '',
+    'SOCIAL_AUTH_CAMARA_DEPUTADOS_SECRET': '',
 }
