@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 from colab_edemocracia.forms import accounts
+from colab_edemocracia.api import UserListAPI
 
 from . import views
 
@@ -33,4 +34,5 @@ urlpatterns = patterns(
     url(r'^ajax/login/?$', views.ajax_login, name="ajax_login"),
     url(r'^ajax/signup/?$', views.ajax_signup,
         name="ajax_signup"),
+    url(r'^api/v1/user/?$', UserListAPI.as_view(), name='user_list_api'),
 )
