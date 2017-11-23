@@ -18,6 +18,8 @@ install_requires = [
     'django-macros>=0.4.0',
     'pycrypto>=2.6.1',
     'django-macros >=0.4.0',
+    'djangorestframework==3.3.3',
+    'django-filter==0.11.0',
 ]
 
 tests_require = ['mock']
