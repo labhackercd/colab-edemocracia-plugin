@@ -64,17 +64,29 @@
     @include transition-default(color);
   }
 
+  &__button {
+    align-self: flex-end;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-bottom: 0.2rem;
+    background-position: 50% 100%;
+    background-size: 100% 0.2rem;
+    background-repeat: no-repeat;
+    @include breakpoint(medium down) {
+      order: 2;
+    }
+  }
+
   &__title {
     position: relative;
     font-size: 2.5rem;
     font-weight: 700;
     text-transform: uppercase;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     padding-top: 1rem;
     text-indent: -0.2rem;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
     &::before {
       content: '';
       position: absolute;
@@ -177,7 +189,7 @@
   }
 
   & .section__button {
-    background-color: #00d574;
+    background-image: linear-gradient(#00d574, #00d574);
     color: white;
   }
 }
@@ -201,8 +213,8 @@
   }
 
   & .section__button {
-    background-color: #b0dcf7;
-    color: #2d5253;
+    background-image: linear-gradient(#b0dcf7, #b0dcf7);
+    color: #2c383a;
   }
 }
 
@@ -228,8 +240,8 @@
   }
 
   & .section__button {
-    background-color: #4e9b95;
-    color: white;
+    background-image: linear-gradient(#4e9b95, #4e9b95);
+    color: #2c383a;
   }
 }
 
@@ -255,7 +267,7 @@
   }
 
   & .section__button {
-    background-color: #f8c300;
+    background-image: linear-gradient(#f8c300, #f8c300);
     color: white;
   }
 }
