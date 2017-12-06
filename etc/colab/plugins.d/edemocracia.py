@@ -13,7 +13,7 @@ urls = {
 middlewares = ['colab_edemocracia.middlewares.ForceLangMiddleware']
 
 dependencies = ['djangobower', 'compressor', 'easy_thumbnails',
-                'image_cropping', 'widget_tweaks', 'macros', 'rest_framework']
+                'image_cropping', 'widget_tweaks', 'macros', 'rest_framework', 'compressor_toolkit']
 
 context_processors = ['colab_edemocracia.processors.recaptcha_site_key',
                       'colab_edemocracia.processors.home_customization']
@@ -33,10 +33,13 @@ settings_variables = {
         'https://github.com/labhackercd/fontastic-labhacker.git',
     ),
     'COMPRESS_PRECOMPILERS': (
-        ('text/x-scss', 'django_libsass.SassCompiler'),
+        ('text/x-scss', 'compressor_toolkit.precompilers.SCSSCompiler'),
     ),
     'LIBSASS_SOURCEMAPS': 'DEBUG',
     'COMPRESS_ROOT': "/colab-plugins/edemocracia/src/colab_edemocracia/static",
+    'COMPRESS_NODE_MODULES': "/colab-plugins/edemocracia/src/colab_edemocracia/node_modules",
+    "COMPRESS_NODE_SASS_BIN": "/colab-plugins/edemocracia/src/colab_edemocracia/node_modules/.bin/node-sass",
+    "COMPRESS_POSTCSS_BIN": "/colab-plugins/edemocracia/src/colab_edemocracia/node_modules/.bin/postcss",
     'COLAB_TEMPLATES': (
         "/colab-plugins/edemocracia/src/colab_edemocracia/templates",
     ),
