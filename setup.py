@@ -28,7 +28,7 @@ tests_require = ['mock']
 
 setup(
     name="colab-edemocracia",
-    version='1.1.1',
+    version='1.2.0',
     author='labhackercd',
     author_email='labhackercd@gmail.com',
     url='https://github.com/labhackercd/colab-edemocracia-plugin',
