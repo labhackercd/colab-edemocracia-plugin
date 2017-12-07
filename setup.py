@@ -9,6 +9,7 @@ install_requires = [
     'colab',
     'django-bower',
     'django-compressor==1.6',
+    'compressor_toolkit==0.6.0',
     'django-libsass',
     'validate_email',
     'django-widget-tweaks==1.4.1',
