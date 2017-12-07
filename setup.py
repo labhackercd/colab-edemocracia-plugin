@@ -9,7 +9,7 @@ install_requires = [
     'colab',
     'django-bower',
     'django-compressor==1.6',
-    'compressor_toolkit==0.6.0',
+    'django-compressor-toolkit==0.6.0',
     'django-libsass',
     'validate_email',
     'django-widget-tweaks==1.4.1',
@@ -28,7 +28,7 @@ tests_require = ['mock']
 
 setup(
     name="colab-edemocracia",
-    version='1.2.0',
+    version='1.2.1',
     author='labhackercd',
     author_email='labhackercd@gmail.com',
     url='https://github.com/labhackercd/colab-edemocracia-plugin',
