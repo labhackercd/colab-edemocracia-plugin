@@ -7,6 +7,7 @@ class CamaraOAuth2(BaseOAuth2):
     AUTHORIZATION_URL = settings.CAMARA_DEPUTADOS_AUTHORIZATION_URL
     ACCESS_TOKEN_URL = settings.CAMARA_DEPUTADOS_ACCESS_TOKEN_URL
     METADATA_URL = settings.CAMARA_DEPUTADOS_METADATA_URL
+    ACCESS_TOKEN_METHOD = 'POST'
 
     def get_user_details(self, response):
         return {'email': response.get('email'),
