@@ -11,7 +11,7 @@ class FormContact(forms.Form):
 
     def send(self):
         title = 'e-Democracia - Contato'
-        target = 'erivanio.vanin@gmail.com'
+        target = 'edemocracia@camara.leg.br'
         text = """
         Site de origem: %(site)s
         Nome: %(name)s
