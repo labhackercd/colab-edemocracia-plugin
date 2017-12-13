@@ -31,6 +31,7 @@ from colab.accounts.models import EmailAddressValidation, EmailAddress
 from colab_edemocracia import captcha
 import string
 import random
+from colab_edemocracia.forms.contact import FormContact
 
 User = get_user_model()
 
@@ -332,3 +333,23 @@ def ajax_signup(request):
             status_code = 400
             response_data['data'] = form.errors
         return JsonResponse(response_data, status=status_code)
+
+
+@csrf_exempt
+def contact_us(request):
+    response_data = {}
+    if request.method == 'POST':
+        form = FormContact(request.POST)
+        if form.is_valid():
+            site = request.META.get('HTTP_REFERER', '')
+            form.cleaned_data['site'] = site
+            form.send()
+            response_data['data'] = 'Mensagem enviada com sucesso'
+            status_code = 200
+        else:
+            response_data['data'] = form.errors
+            status_code = 400
+    else:
+        status_code = 400
+        response_data['data'] = form.errors
+    return JsonResponse(response_data, status=status_code)
