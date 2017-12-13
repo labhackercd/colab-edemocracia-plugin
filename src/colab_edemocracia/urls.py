@@ -34,5 +34,6 @@ urlpatterns = patterns(
     url(r'^ajax/login/?$', views.ajax_login, name="ajax_login"),
     url(r'^ajax/signup/?$', views.ajax_signup,
         name="ajax_signup"),
+    url(r'^contact-us/?$', views.contact_us, name="contact_us"),
     url(r'^api/v1/user/?$', UserListAPI.as_view(), name='user_list_api'),
 )
