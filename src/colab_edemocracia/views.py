@@ -127,13 +127,16 @@ def send_verification_email(email, verification_url):
     mail.send()
 
 
-def generate_username(name):
-    name = slugify(name.split('@')[0])[:29]
-    if User.objects.filter(username=name).exists():
-        return generate_username(
-            name + random.choice(string.letters + string.digits))
+def generate_username(email):
+    if User.objects.filter(email=email).exists():
+        return User.objects.get(email=email).username
     else:
-        return name
+        name = slugify(email.split('@')[0])[:29]
+        if User.objects.filter(username=name).exists():
+            return generate_username(
+                name + random.choice(string.letters + string.digits))
+        else:
+            return name
 
 
 class SignUpView(View):

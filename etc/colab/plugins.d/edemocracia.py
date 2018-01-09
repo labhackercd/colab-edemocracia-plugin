@@ -61,6 +61,11 @@ settings_variables = {
     'AUTHENTICATION_BACKENDS': (
         'colab_edemocracia.backends.CamaraOAuth2',
     ),
+    'SOCIAL_AUTH_PIPELINE': (
+        'colab_edemocracia.pipeline.save_profile',
+    ),
+    'SOCIAL_AUTH_REDIRECT_IS_HTTPS': True,
+    'SOCIAL_AUTH_CAMARA_DEPUTADOS_VERIFY_SSL': True,
     'SOCIAL_AUTH_CAMARA_DEPUTADOS_KEY': '',
     'SOCIAL_AUTH_CAMARA_DEPUTADOS_SECRET': '',
     'CAMARA_DEPUTADOS_AUTHORIZATION_URL': '',
